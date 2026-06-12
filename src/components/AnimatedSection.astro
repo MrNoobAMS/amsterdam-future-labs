@@ -1,0 +1,22 @@
+---
+/**
+ * Wraps content in a scroll-triggered reveal. `delay` staggers children
+ * of the same viewport batch (seconds). Set `as` to change the tag.
+ */
+interface Props {
+  as?: string;
+  delay?: number;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', delay = 0, class: className = '', ...rest } = Astro.props;
+---
+
+<Tag
+  class:list={['reveal', className]}
+  style={delay ? `--reveal-delay:${delay}s` : undefined}
+  {...rest}
+>
+  <slot />
+</Tag>

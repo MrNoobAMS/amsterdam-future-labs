@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import CTAButton from '../components/CTAButton.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import { apps, SUPPORT_EMAIL } from '../data/apps';
+
+const generalFaq = [
+  {
+    question: 'Who is behind these apps?',
+    answer:
+      'Amsterdam Future Labs is a small independent studio in Amsterdam, run by Pieter Thurkow. Every app is designed and developed in-house.',
+  },
+  {
+    question: 'Are the apps free?',
+    answer:
+      'Most apps are free to download and use. Some offer an optional Pro upgrade — a fair one-time purchase or simple subscription, always clearly communicated and never required for core functionality.',
+  },
+  {
+    question: 'Do the apps work offline?',
+    answer:
+      'Yes. Every app is built offline-first: recipes, breathing sessions, puzzles and timers all work without an internet connection.',
+  },
+  {
+    question: 'Is my data stored or shared?',
+    answer:
+      'No. Our apps store everything locally on your device. There are no accounts, no analytics and no tracking SDKs. Deleting an app deletes its data.',
+  },
+  {
+    question: 'Are there ads?',
+    answer:
+      'Most apps are completely ad-free. Kamado Companion is free and ad-supported — clearly disclosed on its page and in its privacy policy.',
+  },
+  {
+    question: 'Do I need an account?',
+    answer: 'Never. None of our apps require sign-up, login or any personal details.',
+  },
+  {
+    question: 'Which devices are supported?',
+    answer:
+      'All apps are designed for iPhone and require iOS 17 or later. Several are localized in English and Dutch, following your iOS language setting.',
+  },
+  {
+    question: 'How do I get support?',
+    answer: `Email ${SUPPORT_EMAIL} for any app. We read every message and aim to reply within two business days.`,
+  },
+  {
+    question: 'How do refunds work?',
+    answer:
+      'Purchases are processed by Apple, so refunds go through Apple as well: visit reportaproblem.apple.com, sign in and select the purchase. Apple handles the request directly.',
+  },
+];
+---
+
+<BaseLayout
+  title="FAQ — Amsterdam Future Labs"
+  description="Frequently asked questions about Amsterdam Future Labs apps: pricing, offline use, privacy, supported devices and support."
+>
+  <PageHero
+    eyebrow="FAQ"
+    title="Questions, answered"
+    lead="Everything people ask about our apps — pricing, privacy, offline use and more. Looking for app-specific answers? Jump straight to an app below."
+  />
+
+  <section class="section">
+    <div class="container faq-layout">
+      <AnimatedSection class="faq-side">
+        <h2 class="h3">Per-app FAQ</h2>
+        <p class="faq-side-note">Each app has its own detailed FAQ on its page.</p>
+        <nav class="faq-side-links" aria-label="App FAQs">
+          {apps.map((app) => (
+            <a href={`/apps/${app.slug}/#faq`} class="faq-side-link card">
+              <img src={app.icon} alt="" width="36" height="36" loading="lazy" />
+              <span>{app.name}</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+            </a>
+          ))}
+        </nav>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.08}>
+        <h2 class="h3 faq-main-title">General questions</h2>
+        <FAQAccordion items={generalFaq} />
+        <div class="faq-cta">
+          <p>Can’t find your answer?</p>
+          <CTAButton href="/support/" variant="primary" arrow>Contact support</CTAButton>
+        </div>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .faq-layout {
+    display: grid;
+    gap: 3.5rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .faq-layout {
+      grid-template-columns: 0.8fr 1.4fr;
+      gap: 5rem;
+    }
+  }
+
+  .faq-side-note {
+    margin: 0.6rem 0 1.4rem;
+    font-size: 0.92rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .faq-side-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .faq-side-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.85rem 1.1rem;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .faq-side-link:hover {
+    transform: translateX(4px);
+  }
+
+  .faq-side-link img {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.6rem;
+  }
+
+  .faq-side-link svg {
+    width: 1rem;
+    height: 1rem;
+    margin-left: auto;
+    opacity: 0.4;
+  }
+
+  .faq-main-title {
+    margin-bottom: 1.2rem;
+  }
+
+  .faq-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.4rem;
+    font-weight: 550;
+  }
+</style>

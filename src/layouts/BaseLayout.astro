@@ -1,0 +1,175 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_NAME } from '../data/apps';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path to an Open Graph image, defaults to the site-wide card. */
+  ogImage?: string;
+  ogType?: string;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/og/default.png',
+  ogType = 'website',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b0c10" />
+
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // ---------- Reveal on scroll ----------
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealEls = document.querySelectorAll<HTMLElement>('.reveal');
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // ---------- Header scroll state ----------
+      const header = document.getElementById('site-header');
+      let headerTicking = false;
+      const updateHeader = () => {
+        header?.classList.toggle('is-scrolled', window.scrollY > 24);
+        headerTicking = false;
+      };
+      updateHeader();
+      window.addEventListener(
+        'scroll',
+        () => {
+          if (!headerTicking) {
+            headerTicking = true;
+            requestAnimationFrame(updateHeader);
+          }
+        },
+        { passive: true }
+      );
+
+      // ---------- Mobile menu ----------
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+
+      const setMenu = (open: boolean) => {
+        toggle?.setAttribute('aria-expanded', String(open));
+        toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        menu?.classList.toggle('is-open', open);
+        menu?.setAttribute('aria-hidden', String(!open));
+        document.body.classList.toggle('no-scroll', open);
+      };
+
+      toggle?.addEventListener('click', () => {
+        setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+      menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') setMenu(false);
+      });
+
+      // ---------- Hero parallax (subtle depth) ----------
+      const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax]');
+      if (!reduceMotion && parallaxEls.length) {
+        let ticking = false;
+        const apply = () => {
+          const y = window.scrollY;
+          parallaxEls.forEach((el) => {
+            const speed = parseFloat(el.dataset.parallax || '0.12');
+            el.style.transform = `translate3d(0, ${Math.round(y * speed * 100) / 100}px, 0)`;
+          });
+          ticking = false;
+        };
+        window.addEventListener(
+          'scroll',
+          () => {
+            if (!ticking) {
+              ticking = true;
+              requestAnimationFrame(apply);
+            }
+          },
+          { passive: true }
+        );
+      }
+
+      // ---------- FAQ accordion: smooth open/close ----------
+      document.querySelectorAll<HTMLElement>('[data-accordion] details').forEach((details) => {
+        const summary = details.querySelector('summary');
+        const content = details.querySelector<HTMLElement>('.faq-answer');
+        if (!summary || !content) return;
+
+        summary.addEventListener('click', (e) => {
+          if (reduceMotion) return; // let native toggle handle it
+          e.preventDefault();
+
+          if (details.open) {
+            const closing = content.animate(
+              { height: [`${content.offsetHeight}px`, '0px'], opacity: [1, 0] },
+              { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+            );
+            closing.onfinish = () => {
+              details.open = false;
+            };
+          } else {
+            details.open = true;
+            content.animate(
+              { height: ['0px', `${content.scrollHeight}px`], opacity: [0, 1] },
+              { duration: 320, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

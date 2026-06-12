@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f7f8fe"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#1c1e2e">9:41</text>
+
+  <text x="30" y="106" font-size="20" font-weight="700" fill="#1c1e2e">Level 42</text>
+  <text x="30" y="128" font-size="13" fill="#8a8fa8">Medium</text>
+  <text x="352" y="106" font-size="20" font-weight="700" fill="#5b6bf5">12:48</text>
+  <text x="362" y="128" font-size="13" fill="#8a8fa8">0 errors</text>
+
+  <!-- board -->
+  <g>
+    <rect x="31" y="152" width="378" height="378" rx="10" fill="#fff" stroke="#d9dcf0" stroke-width="1.5"/>
+    <!-- selected cell + cross highlight -->
+    <rect x="157" y="278" width="42" height="42" fill="#5b6bf5" opacity="0.22"/>
+    <rect x="31" y="278" width="378" height="42" fill="#5b6bf5" opacity="0.06"/>
+    <rect x="157" y="152" width="42" height="378" fill="#5b6bf5" opacity="0.06"/>
+    <!-- thin grid -->
+    <path d="M73 152v378M115 152v378M199 152v378M241 152v378M325 152v378M367 152v378M31 194h378M31 236h378M31 320h378M31 362h378M31 446h378M31 488h378" stroke="#e8eaf6" stroke-width="1"/>
+    <!-- thick grid -->
+    <path d="M157 152v378M283 152v378M31 278h378M31 404h378" stroke="#aeb4d6" stroke-width="2"/>
+    <!-- givens (dark) -->
+    <g font-size="22" font-weight="600" fill="#1c1e2e" text-anchor="middle">
+      <text x="52" y="182">5</text><text x="136" y="182">7</text><text x="220" y="182">1</text><text x="346" y="182">9</text>
+      <text x="94" y="224">3</text><text x="262" y="224">6</text><text x="388" y="224">2</text>
+      <text x="52" y="266">8</text><text x="178" y="266">4</text><text x="304" y="266">5</text>
+      <text x="94" y="308">9</text><text x="220" y="308">8</text><text x="388" y="308">4</text>
+      <text x="52" y="350">2</text><text x="262" y="350">3</text><text x="346" y="350">7</text>
+      <text x="136" y="392">6</text><text x="304" y="392">9</text>
+      <text x="94" y="434">1</text><text x="220" y="434">5</text><text x="346" y="434">3</text>
+      <text x="52" y="476">4</text><text x="178" y="476">2</text><text x="388" y="476">8</text>
+      <text x="136" y="518">8</text><text x="262" y="518">7</text><text x="304" y="518">1</text>
+    </g>
+    <!-- user entries (indigo) -->
+    <g font-size="22" font-weight="600" fill="#5b6bf5" text-anchor="middle">
+      <text x="304" y="182">3</text>
+      <text x="136" y="266">6</text>
+      <text x="178" y="350">1</text>
+      <text x="262" y="434">7</text>
+    </g>
+    <!-- pencil notes in selected cell -->
+    <g font-size="10" fill="#8a8fa8" text-anchor="middle">
+      <text x="167" y="291">2</text><text x="189" y="291">7</text><text x="178" y="313">9</text>
+    </g>
+  </g>
+
+  <!-- controls row -->
+  <g>
+    <rect x="31" y="560" width="86" height="56" rx="16" fill="#fff" stroke="#d9dcf0"/>
+    <text x="56" y="588" font-size="11" fill="#8a8fa8">Undo</text>
+    <path d="M62 600c8-6 18-2 19 6" fill="none" stroke="#8a8fa8" stroke-width="2" stroke-linecap="round" opacity="0"/>
+    <rect x="128" y="560" width="86" height="56" rx="16" fill="#fff" stroke="#d9dcf0"/>
+    <text x="150" y="588" font-size="11" fill="#8a8fa8">Erase</text>
+    <rect x="225" y="560" width="86" height="56" rx="16" fill="#fff" stroke="#d9dcf0"/>
+    <text x="246" y="588" font-size="11" fill="#8a8fa8">Notes</text>
+    <rect x="322" y="560" width="87" height="56" rx="16" fill="#eef0ff"/>
+    <text x="348" y="588" font-size="11" font-weight="600" fill="#5b6bf5">Hint</text>
+  </g>
+
+  <!-- number pad -->
+  <g font-size="26" font-weight="600" fill="#1c1e2e" text-anchor="middle">
+    <rect x="31" y="648" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="68" y="694">1</text>
+    <rect x="117" y="648" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="154" y="694">2</text>
+    <rect x="203" y="648" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="240" y="694">3</text>
+    <rect x="289" y="648" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="326" y="694">4</text>
+    <rect x="31" y="734" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="68" y="780">5</text>
+    <rect x="117" y="734" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="154" y="780">6</text>
+    <rect x="203" y="734" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="240" y="780">7</text>
+    <rect x="289" y="734" width="74" height="74" rx="18" fill="#fff" stroke="#d9dcf0"/><text x="326" y="780">8</text>
+    <rect x="31" y="820" width="74" height="74" rx="18" fill="#5b6bf5"/><text x="68" y="866" fill="#fff">9</text>
+  </g>
+  <text x="122" y="864" font-size="12" fill="#8a8fa8">Tap a number to fill the selected cell</text>
+</svg>

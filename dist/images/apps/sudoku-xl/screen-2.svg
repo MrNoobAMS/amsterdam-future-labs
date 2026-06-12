@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f7f8fe"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#1c1e2e">9:41</text>
+
+  <text x="30" y="112" font-size="27" font-weight="700" fill="#1c1e2e">Levels</text>
+  <text x="30" y="140" font-size="14" fill="#8a8fa8">Medium · 41 of 100 solved</text>
+
+  <!-- difficulty tabs -->
+  <rect x="30" y="164" width="380" height="44" rx="22" fill="#eceef8"/>
+  <rect x="126" y="168" width="92" height="36" rx="18" fill="#fff"/>
+  <text x="52" y="191" font-size="13" fill="#8a8fa8">Easy</text>
+  <text x="144" y="191" font-size="13" font-weight="700" fill="#5b6bf5">Medium</text>
+  <text x="240" y="191" font-size="13" fill="#8a8fa8">Hard</text>
+  <text x="330" y="191" font-size="13" fill="#8a8fa8">Expert</text>
+
+  <!-- level grid 4 cols -->
+  <g text-anchor="middle">
+    <!-- row 1: solved -->
+    <rect x="30" y="236" width="84" height="84" rx="20" fill="#5b6bf5"/><text x="72" y="276" font-size="18" font-weight="700" fill="#fff">37</text><text x="72" y="298" font-size="10" fill="#c3c9ff">08:12</text>
+    <rect x="129" y="236" width="84" height="84" rx="20" fill="#5b6bf5"/><text x="171" y="276" font-size="18" font-weight="700" fill="#fff">38</text><text x="171" y="298" font-size="10" fill="#c3c9ff">11:47</text>
+    <rect x="228" y="236" width="84" height="84" rx="20" fill="#5b6bf5"/><text x="270" y="276" font-size="18" font-weight="700" fill="#fff">39</text><text x="270" y="298" font-size="10" fill="#c3c9ff">09:55</text>
+    <rect x="327" y="236" width="84" height="84" rx="20" fill="#5b6bf5"/><text x="369" y="276" font-size="18" font-weight="700" fill="#fff">40</text><text x="369" y="298" font-size="10" fill="#c3c9ff">14:20</text>
+    <!-- row 2 -->
+    <rect x="30" y="334" width="84" height="84" rx="20" fill="#5b6bf5"/><text x="72" y="374" font-size="18" font-weight="700" fill="#fff">41</text><text x="72" y="396" font-size="10" fill="#c3c9ff">12:03</text>
+    <rect x="129" y="334" width="84" height="84" rx="20" fill="#fff" stroke="#5b6bf5" stroke-width="2.5"/><text x="171" y="374" font-size="18" font-weight="700" fill="#5b6bf5">42</text><text x="171" y="396" font-size="10" fill="#8a8fa8">In progress</text>
+    <rect x="228" y="334" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="270" y="380" font-size="18" font-weight="600" fill="#aab0cc">43</text>
+    <rect x="327" y="334" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="369" y="380" font-size="18" font-weight="600" fill="#aab0cc">44</text>
+    <!-- row 3 -->
+    <rect x="30" y="432" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="72" y="478" font-size="18" font-weight="600" fill="#aab0cc">45</text>
+    <rect x="129" y="432" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="171" y="478" font-size="18" font-weight="600" fill="#aab0cc">46</text>
+    <rect x="228" y="432" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="270" y="478" font-size="18" font-weight="600" fill="#aab0cc">47</text>
+    <rect x="327" y="432" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="369" y="478" font-size="18" font-weight="600" fill="#aab0cc">48</text>
+    <!-- row 4 -->
+    <rect x="30" y="530" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="72" y="576" font-size="18" font-weight="600" fill="#aab0cc">49</text>
+    <rect x="129" y="530" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="171" y="576" font-size="18" font-weight="600" fill="#aab0cc">50</text>
+    <rect x="228" y="530" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="270" y="576" font-size="18" font-weight="600" fill="#aab0cc">51</text>
+    <rect x="327" y="530" width="84" height="84" rx="20" fill="#fff" stroke="#d9dcf0"/><text x="369" y="576" font-size="18" font-weight="600" fill="#aab0cc">52</text>
+  </g>
+
+  <!-- continue card -->
+  <rect x="30" y="654" width="380" height="120" rx="24" fill="#1c1e2e"/>
+  <text x="56" y="700" font-size="13" fill="#8a8fa8">CONTINUE</text>
+  <text x="56" y="730" font-size="19" font-weight="700" fill="#fff">Level 42 · Medium</text>
+  <text x="56" y="752" font-size="12" fill="#8a8fa8">12:48 elapsed · 31 cells left</text>
+  <circle cx="362" cy="714" r="26" fill="#5b6bf5"/>
+  <path d="M354 702l18 12-18 12z" fill="#fff"/>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#fff"/>
+  <line x1="0" y1="868" x2="440" y2="868" stroke="#e3e6f4"/>
+  <text x="62" y="932" font-size="10" fill="#8a8fa8">Home</text>
+  <circle cx="180" cy="904" r="4" fill="#5b6bf5"/>
+  <text x="162" y="932" font-size="10" fill="#5b6bf5">Levels</text>
+  <text x="268" y="932" font-size="10" fill="#8a8fa8">Stats</text>
+  <text x="352" y="932" font-size="10" fill="#8a8fa8">Settings</text>
+</svg>

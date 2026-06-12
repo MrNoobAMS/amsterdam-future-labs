@@ -1,0 +1,235 @@
+---
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/apps/', label: 'Apps' },
+  { href: '/privacy/', label: 'Privacy' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/support/', label: 'Support' },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="Amsterdam Future Labs — home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Amsterdam<br />Future Labs</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Main">
+      {links.map((l) => (
+        <a href={l.href} class:list={['nav-link', { 'is-active': isActive(l.href) }]}>
+          {l.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Open menu"
+    >
+      <span class="menu-line"></span>
+      <span class="menu-line"></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav class="mobile-nav on-dark" aria-label="Mobile">
+    {links.map((l, i) => (
+      <a
+        href={l.href}
+        class:list={['mobile-link', { 'is-active': isActive(l.href) }]}
+        style={`--i:${i}`}
+      >
+        {l.label}
+      </a>
+    ))}
+    <p class="mobile-menu-footer" style={`--i:${links.length}`}>
+      support@amsterdamfuturelabs.com
+    </p>
+  </nav>
+</div>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    transition: background-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+  }
+
+  /* Filled state once the page is scrolled (toggled from BaseLayout script) */
+  .site-header.is-scrolled {
+    background: rgba(11, 12, 16, 0.72);
+    -webkit-backdrop-filter: blur(18px) saturate(1.4);
+    backdrop-filter: blur(18px) saturate(1.4);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--text-light);
+  }
+
+  .brand-mark {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.6rem;
+    background: var(--gradient-brand);
+    box-shadow: 0 4px 14px -4px rgba(99, 102, 241, 0.7);
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .nav-desktop {
+    display: none;
+    gap: 0.35rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 550;
+    color: var(--text-light-secondary);
+    text-decoration: none;
+    transition: color 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+  }
+
+  .nav-link:hover {
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-link.is-active {
+    color: var(--text-light);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* --- Hamburger --- */
+  .menu-toggle {
+    display: grid;
+    place-content: center;
+    gap: 5px;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.5rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .menu-line {
+    width: 1.35rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text-light);
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .menu-toggle[aria-expanded='true'] .menu-line:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  .menu-toggle[aria-expanded='true'] .menu-line:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  /* --- Mobile overlay --- */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(11, 12, 16, 0.96);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s var(--ease-out), visibility 0s linear 0.4s;
+  }
+
+  .mobile-menu.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .mobile-nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0 2rem;
+  }
+
+  .mobile-link {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    font-weight: 650;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 0.35rem 0;
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.5s var(--ease-out),
+      transform 0.5s var(--ease-out),
+      color 0.25s var(--ease-out);
+  }
+
+  .mobile-menu.is-open .mobile-link,
+  .mobile-menu.is-open .mobile-menu-footer {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.06s + var(--i) * 0.055s);
+  }
+
+  .mobile-link:hover,
+  .mobile-link.is-active {
+    color: var(--brand-c);
+  }
+
+  .mobile-menu-footer {
+    margin-top: 2.2rem;
+    font-size: 0.85rem;
+    color: var(--text-light-secondary);
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: flex;
+    }
+    .menu-toggle,
+    .mobile-menu {
+      display: none;
+    }
+  }
+</style>

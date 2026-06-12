@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f7f8fe"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#1c1e2e">9:41</text>
+
+  <text x="30" y="106" font-size="20" font-weight="700" fill="#1c1e2e">Level 42</text>
+  <text x="352" y="106" font-size="20" font-weight="700" fill="#5b6bf5">13:05</text>
+
+  <!-- board (dimmed) -->
+  <g opacity="0.92">
+    <rect x="31" y="152" width="378" height="378" rx="10" fill="#fff" stroke="#d9dcf0" stroke-width="1.5"/>
+    <!-- hint highlights: row -->
+    <rect x="31" y="236" width="378" height="42" fill="#ffd166" opacity="0.3"/>
+    <rect x="241" y="236" width="42" height="42" fill="#5b6bf5" opacity="0.3"/>
+    <path d="M73 152v378M115 152v378M199 152v378M241 152v378M325 152v378M367 152v378M31 194h378M31 236h378M31 320h378M31 362h378M31 446h378M31 488h378" stroke="#e8eaf6" stroke-width="1"/>
+    <path d="M157 152v378M283 152v378M31 278h378M31 404h378" stroke="#aeb4d6" stroke-width="2"/>
+    <g font-size="22" font-weight="600" fill="#1c1e2e" text-anchor="middle">
+      <text x="52" y="182">5</text><text x="136" y="182">7</text><text x="220" y="182">1</text><text x="346" y="182">9</text>
+      <text x="52" y="266">8</text><text x="94" y="266">3</text><text x="136" y="266">6</text><text x="178" y="266">4</text><text x="304" y="266">5</text><text x="346" y="266">1</text><text x="388" y="266">2</text>
+      <text x="94" y="308">9</text><text x="220" y="308">8</text><text x="388" y="308">4</text>
+      <text x="52" y="350">2</text><text x="262" y="350">3</text><text x="346" y="350">7</text>
+      <text x="136" y="392">6</text><text x="304" y="392">9</text>
+      <text x="94" y="434">1</text><text x="220" y="434">5</text><text x="346" y="434">3</text>
+      <text x="52" y="476">4</text><text x="178" y="476">2</text><text x="388" y="476">8</text>
+    </g>
+    <text x="262" y="266" font-size="22" font-weight="700" fill="#5b6bf5" text-anchor="middle">9</text>
+  </g>
+
+  <!-- hint card -->
+  <rect x="30" y="572" width="380" height="244" rx="26" fill="#fff" stroke="#d9dcf0"/>
+  <rect x="30" y="572" width="380" height="6" rx="3" fill="#5b6bf5"/>
+  <circle cx="70" cy="630" r="22" fill="#eef0ff"/>
+  <path d="M64 638h12m-10 6h8m-4-26a8 8 0 0 1 4.7 14.5c-1 .8-2 1.7-2 2.5h-5.4c0-.8-1-1.7-2-2.5A8 8 0 0 1 70 618z" fill="none" stroke="#5b6bf5" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="108" y="624" font-size="16" font-weight="700" fill="#1c1e2e">Hidden single</text>
+  <text x="108" y="646" font-size="12" fill="#8a8fa8">Technique · Row 3</text>
+  <text x="56" y="692" font-size="14" fill="#4a4e63">In this row, 9 can only go in one cell —</text>
+  <text x="56" y="714" font-size="14" fill="#4a4e63">every other cell already sees a 9 in its</text>
+  <text x="56" y="736" font-size="14" fill="#4a4e63">column or box.</text>
+  <rect x="56" y="760" width="150" height="40" rx="20" fill="#5b6bf5"/>
+  <text x="90" y="785" font-size="14" font-weight="600" fill="#fff">Place the 9</text>
+  <text x="240" y="785" font-size="14" font-weight="600" fill="#8a8fa8">Show me why</text>
+</svg>

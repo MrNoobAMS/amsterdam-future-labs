@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#15100d"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#f2e9e2">9:41</text>
+
+  <text x="30" y="116" font-size="27" font-weight="700" fill="#f2e9e2">Plan your BBQ</text>
+  <text x="30" y="146" font-size="14" fill="#a89a8e">Pulled Pork · eat at 19:00</text>
+
+  <!-- timeline -->
+  <line x1="58" y1="220" x2="58" y2="700" stroke="#3a2317" stroke-width="3"/>
+
+  <g>
+    <circle cx="58" cy="220" r="12" fill="#f08a3c"/>
+    <rect x="92" y="190" width="318" height="62" rx="16" fill="#221913"/>
+    <text x="112" y="216" font-size="15" font-weight="700" fill="#f2e9e2">08:30 — Start prepping</text>
+    <text x="112" y="238" font-size="12" fill="#a89a8e">Trim, rub and bring to room temp</text>
+  </g>
+  <g>
+    <circle cx="58" cy="340" r="12" fill="#e2552c"/>
+    <rect x="92" y="310" width="318" height="62" rx="16" fill="#33180c"/>
+    <text x="112" y="336" font-size="15" font-weight="700" fill="#f08a3c">09:15 — Light the kamado</text>
+    <text x="112" y="358" font-size="12" fill="#c9b8aa">Reminder scheduled · 45 min heat-up</text>
+  </g>
+  <g>
+    <circle cx="58" cy="460" r="12" fill="#a89a8e"/>
+    <rect x="92" y="430" width="318" height="62" rx="16" fill="#221913"/>
+    <text x="112" y="456" font-size="15" font-weight="700" fill="#f2e9e2">10:00 — Food goes on</text>
+    <text x="112" y="478" font-size="12" fill="#a89a8e">110°C dome, stable and clean smoke</text>
+  </g>
+  <g>
+    <circle cx="58" cy="580" r="12" fill="#a89a8e"/>
+    <rect x="92" y="550" width="318" height="62" rx="16" fill="#221913"/>
+    <text x="112" y="576" font-size="15" font-weight="700" fill="#f2e9e2">18:30 — Rest &amp; pull</text>
+    <text x="112" y="598" font-size="12" fill="#a89a8e">Wrap in towel, rest 30 minutes</text>
+  </g>
+  <g>
+    <circle cx="58" cy="700" r="12" fill="#4caf6e"/>
+    <rect x="92" y="670" width="318" height="62" rx="16" fill="#16241b"/>
+    <text x="112" y="696" font-size="15" font-weight="700" fill="#7dd49b">19:00 — Dinner is served</text>
+    <text x="112" y="718" font-size="12" fill="#88a892">Right on time, every time</text>
+  </g>
+
+  <rect x="30" y="790" width="380" height="56" rx="28" fill="#e2552c"/>
+  <text x="124" y="824" font-size="16" font-weight="700" fill="#fff">Remind me at fire-up time</text>
+
+  <text x="146" y="894" font-size="12" fill="#7a6c60">Notification at 09:15 · local only</text>
+</svg>

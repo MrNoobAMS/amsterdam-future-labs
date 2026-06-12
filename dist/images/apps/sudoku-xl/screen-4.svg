@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f7f8fe"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#1c1e2e">9:41</text>
+
+  <text x="30" y="112" font-size="27" font-weight="700" fill="#1c1e2e">Statistics</text>
+
+  <!-- summary cards -->
+  <g>
+    <rect x="30" y="142" width="183" height="100" rx="20" fill="#fff" stroke="#d9dcf0"/>
+    <text x="52" y="176" font-size="12" fill="#8a8fa8">PUZZLES SOLVED</text>
+    <text x="52" y="216" font-size="30" font-weight="700" fill="#1c1e2e">128</text>
+  </g>
+  <g>
+    <rect x="227" y="142" width="183" height="100" rx="20" fill="#fff" stroke="#d9dcf0"/>
+    <text x="249" y="176" font-size="12" fill="#8a8fa8">DAY STREAK</text>
+    <text x="249" y="216" font-size="30" font-weight="700" fill="#5b6bf5">14</text>
+  </g>
+  <g>
+    <rect x="30" y="256" width="183" height="100" rx="20" fill="#fff" stroke="#d9dcf0"/>
+    <text x="52" y="290" font-size="12" fill="#8a8fa8">BEST TIME</text>
+    <text x="52" y="330" font-size="30" font-weight="700" fill="#1c1e2e">4:51</text>
+  </g>
+  <g>
+    <rect x="227" y="256" width="183" height="100" rx="20" fill="#fff" stroke="#d9dcf0"/>
+    <text x="249" y="290" font-size="12" fill="#8a8fa8">ACCURACY</text>
+    <text x="249" y="330" font-size="30" font-weight="700" fill="#1c1e2e">97%</text>
+  </g>
+
+  <!-- average time per difficulty -->
+  <rect x="30" y="384" width="380" height="300" rx="24" fill="#fff" stroke="#d9dcf0"/>
+  <text x="56" y="424" font-size="16" font-weight="700" fill="#1c1e2e">Average solve time</text>
+
+  <g font-size="13" fill="#4a4e63">
+    <text x="56" y="472">Easy</text>
+    <rect x="140" y="458" width="160" height="18" rx="9" fill="#c9d0ff"/>
+    <text x="316" y="472" fill="#8a8fa8">5:42</text>
+
+    <text x="56" y="520">Medium</text>
+    <rect x="140" y="506" width="210" height="18" rx="9" fill="#9aa5ff"/>
+    <text x="362" y="520" fill="#8a8fa8">11:18</text>
+
+    <text x="56" y="568">Hard</text>
+    <rect x="140" y="554" width="248" height="18" rx="9" fill="#5b6bf5"/>
+    <text x="56" y="568" opacity="0"></text>
+    <text x="398" y="568" fill="#8a8fa8" text-anchor="end">19:04</text>
+
+    <text x="56" y="616">Expert</text>
+    <rect x="140" y="602" width="120" height="18" rx="9" fill="#3a47b8"/>
+    <text x="276" y="616" fill="#8a8fa8">31:27</text>
+  </g>
+  <text x="56" y="656" font-size="12" fill="#aab0cc">Based on your last 50 puzzles</text>
+
+  <!-- weekly activity -->
+  <rect x="30" y="704" width="380" height="130" rx="24" fill="#1c1e2e"/>
+  <text x="56" y="744" font-size="14" font-weight="700" fill="#fff">This week</text>
+  <g>
+    <rect x="56" y="766" width="30" height="40" rx="6" fill="#3a47b8"/>
+    <rect x="100" y="778" width="30" height="28" rx="6" fill="#3a47b8"/>
+    <rect x="144" y="760" width="30" height="46" rx="6" fill="#5b6bf5"/>
+    <rect x="188" y="784" width="30" height="22" rx="6" fill="#3a47b8"/>
+    <rect x="232" y="756" width="30" height="50" rx="6" fill="#5b6bf5"/>
+    <rect x="276" y="770" width="30" height="36" rx="6" fill="#3a47b8"/>
+    <rect x="320" y="748" width="30" height="58" rx="6" fill="#8b95ff"/>
+  </g>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#fff"/>
+  <line x1="0" y1="868" x2="440" y2="868" stroke="#e3e6f4"/>
+  <text x="62" y="932" font-size="10" fill="#8a8fa8">Home</text>
+  <text x="162" y="932" font-size="10" fill="#8a8fa8">Levels</text>
+  <circle cx="282" cy="904" r="4" fill="#5b6bf5"/>
+  <text x="268" y="932" font-size="10" fill="#5b6bf5">Stats</text>
+  <text x="352" y="932" font-size="10" fill="#8a8fa8">Settings</text>
+</svg>

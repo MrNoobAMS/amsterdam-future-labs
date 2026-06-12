@@ -1,0 +1,102 @@
+---
+import type { AppFAQ } from '../data/apps';
+
+/**
+ * Accessible accordion built on <details>, with smooth height animation
+ * handled by the global script (data-accordion hook).
+ */
+interface Props {
+  items: AppFAQ[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+---
+
+<div class:list={['faq', className]} data-accordion>
+  {items.map((item) => (
+    <details class="faq-item">
+      <summary class="faq-question">
+        <span>{item.question}</span>
+        <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </summary>
+      <div class="faq-answer">
+        <p>{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line-dark);
+  }
+
+  :global(.section--dark) .faq {
+    border-color: var(--line-light);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  :global(.section--dark) .faq-item {
+    border-color: var(--line-light);
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.25rem 0.25rem;
+    font-weight: 600;
+    font-size: 1.02rem;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    list-style: none;
+    transition: color 0.25s var(--ease-out);
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-question:hover {
+    color: var(--brand-a);
+  }
+
+  :global(.section--dark) .faq-question:hover {
+    color: var(--brand-c);
+  }
+
+  .faq-chevron {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex-shrink: 0;
+    opacity: 0.55;
+    transition: transform 0.35s var(--ease-out);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    overflow: hidden;
+  }
+
+  .faq-answer p {
+    padding: 0 0.25rem 1.4rem;
+    max-width: 60ch;
+    color: var(--text-dark-secondary);
+  }
+
+  :global(.section--dark) .faq-answer p {
+    color: var(--text-light-secondary);
+  }
+</style>

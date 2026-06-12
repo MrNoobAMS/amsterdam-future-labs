@@ -1,0 +1,501 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AnimatedSection from '../../../components/AnimatedSection.astro';
+import CTAButton from '../../../components/CTAButton.astro';
+import PhoneFrame from '../../../components/PhoneFrame.astro';
+import FeatureIcon from '../../../components/FeatureIcon.astro';
+import FAQAccordion from '../../../components/FAQAccordion.astro';
+import PrivacySection from '../../../components/PrivacySection.astro';
+import { apps, SUPPORT_EMAIL } from '../../../data/apps';
+
+export function getStaticPaths() {
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props;
+const available = app.status === 'available';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'MobileApplication',
+  name: app.name,
+  operatingSystem: 'iOS',
+  applicationCategory: app.category,
+  description: app.shortDescription,
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+  author: { '@type': 'Organization', name: 'Amsterdam Future Labs' },
+};
+---
+
+<BaseLayout
+  title={`${app.name} — ${app.tagline} | Amsterdam Future Labs`}
+  description={app.shortDescription}
+  ogImage={`/images/og/${app.slug}.png`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <!-- ======================= HERO ======================= -->
+  <section class="app-hero section--dark" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
+    <div class="app-hero-glow" data-parallax="0.15" aria-hidden="true"></div>
+
+    <div class="container app-hero-grid">
+      <div class="app-hero-copy">
+        <AnimatedSection>
+          <img class="app-hero-icon" src={app.icon} alt="" width="88" height="88" loading="eager" />
+          <p class="eyebrow">{app.category} · {app.platform}</p>
+          <h1 class="display">{app.name}</h1>
+          <p class="app-tagline">{app.tagline}</p>
+        </AnimatedSection>
+        <AnimatedSection delay={0.1}>
+          <p class="lead">{app.shortDescription}</p>
+        </AnimatedSection>
+        <AnimatedSection delay={0.18} class="app-hero-actions">
+          {available ? (
+            <CTAButton href={app.appStoreUrl ?? '#'} variant="primary" appStore>
+              Download on the App Store
+            </CTAButton>
+          ) : (
+            <CTAButton href="/support/" variant="primary" appStore disabled>
+              Coming soon to the App Store
+            </CTAButton>
+          )}
+          <CTAButton href="#features" variant="ghost" arrow>Key features</CTAButton>
+        </AnimatedSection>
+        <AnimatedSection delay={0.24}>
+          <p class="app-hero-meta">{app.price}</p>
+        </AnimatedSection>
+      </div>
+
+      <AnimatedSection delay={0.2} class="app-hero-device">
+        <div data-parallax="-0.04">
+          <PhoneFrame src={app.screenshots[0].src} alt={app.screenshots[0].alt} eager />
+        </div>
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= ABOUT ======================= -->
+  <section class="section">
+    <div class="container narrow">
+      <AnimatedSection>
+        <p class="eyebrow" style={`color:${app.accent}`}>About</p>
+        <h2 class="h2">What is {app.name}?</h2>
+      </AnimatedSection>
+      <div class="about-copy">
+        {app.description.map((para, i) => (
+          <AnimatedSection delay={i * 0.06}>
+            <p class="about-para">{para}</p>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= SCREENSHOTS ======================= -->
+  <section class="section section--soft screens-section">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow" style={`color:${app.accent}`}>A closer look</p>
+        <h2 class="h2">Inside the app</h2>
+      </AnimatedSection>
+    </div>
+    <div class="screens-rail" tabindex="0" aria-label={`${app.name} screenshots`}>
+      {app.screenshots.map((shot, i) => (
+        <AnimatedSection delay={i * 0.07} class="screens-item">
+          <PhoneFrame src={shot.src} alt={shot.alt} />
+        </AnimatedSection>
+      ))}
+    </div>
+  </section>
+
+  <!-- ======================= FEATURES ======================= -->
+  <section class="section" id="features">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow" style={`color:${app.accent}`}>Key features</p>
+        <h2 class="h2">Built around what matters</h2>
+      </AnimatedSection>
+
+      <div class="features-grid">
+        {app.features.map((feature, i) => (
+          <AnimatedSection delay={(i % 3) * 0.07} class="feature card">
+            <span class="feature-badge" style={`color:${app.accent}; background:${app.accentSoft}`}>
+              <FeatureIcon name={feature.icon} />
+            </span>
+            <h3 class="h3">{feature.title}</h3>
+            <p>{feature.description}</p>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= AUDIENCE ======================= -->
+  <section class="section section--soft">
+    <div class="container narrow">
+      <AnimatedSection>
+        <p class="eyebrow" style={`color:${app.accent}`}>Who it’s for</p>
+        <h2 class="h2">Made for people like you</h2>
+      </AnimatedSection>
+      <ul class="audience-list">
+        {app.audience.map((line, i) => (
+          <AnimatedSection as="li" delay={i * 0.06} class="audience-item">
+            <span class="audience-check" style={`color:${app.accent}; background:${app.accentSoft}`} aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>
+            </span>
+            {line}
+          </AnimatedSection>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ======================= DOWNLOAD CTA ======================= -->
+  <section class="section section--dark cta-band" style={`--app-accent:${app.accent}`}>
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="container cta-inner">
+      <AnimatedSection>
+        <h2 class="h2">{available ? `Get ${app.name} today` : `${app.name} is almost here`}</h2>
+        <p class="lead cta-lead">
+          {available
+            ? `Free to download on the App Store. ${app.price}.`
+            : 'Currently in final testing. Want to know the moment it launches? Drop us a line.'}
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} class="cta-actions">
+        {available ? (
+          <CTAButton href={app.appStoreUrl ?? '#'} variant="primary" appStore>
+            Download on the App Store
+          </CTAButton>
+        ) : (
+          <CTAButton
+            href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Notify me — ${app.name}`)}`}
+            variant="primary"
+            arrow
+          >
+            Notify me at launch
+          </CTAButton>
+        )}
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= PRIVACY ======================= -->
+  <section class="section section--dark privacy-band" id="privacy">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow" style={`color:${app.accent}`}>Privacy</p>
+        <h2 class="h2">How {app.name} treats your data</h2>
+        <p class="lead">{app.privacy.summary}</p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1}>
+        <PrivacySection app={app} />
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ ======================= -->
+  <section class="section" id="faq">
+    <div class="container narrow">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow" style={`color:${app.accent}`}>FAQ</p>
+        <h2 class="h2">Frequently asked questions</h2>
+      </AnimatedSection>
+      <AnimatedSection delay={0.08}>
+        <FAQAccordion items={app.faq} />
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= SUPPORT ======================= -->
+  <section class="section section--soft" id="support">
+    <div class="container narrow support-block">
+      <AnimatedSection>
+        <p class="eyebrow" style={`color:${app.accent}`}>Support</p>
+        <h2 class="h2">Need a hand with {app.name}?</h2>
+        <p class="lead support-lead">
+          Questions, bug reports, feature ideas — we read everything and aim to
+          reply within two business days.
+        </p>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1} class="support-actions">
+        <CTAButton
+          href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Support — ${app.name}`)}`}
+          variant="primary"
+          arrow
+        >
+          Email support
+        </CTAButton>
+        <CTAButton href="/support/" variant="ghost">Support center</CTAButton>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .narrow {
+    max-width: 46rem;
+  }
+
+  .section-head {
+    max-width: 38rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head .lead {
+    margin-top: 1rem;
+  }
+
+  /* ---------- Hero ---------- */
+  .app-hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(8rem, 15vw, 11rem) 0 clamp(4rem, 8vw, 6.5rem);
+  }
+
+  .app-hero-glow {
+    position: absolute;
+    top: -25%;
+    right: -10%;
+    width: 55rem;
+    height: 55rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--app-accent) 26%, transparent),
+      transparent 65%
+    );
+    pointer-events: none;
+  }
+
+  .app-hero-grid {
+    position: relative;
+    display: grid;
+    gap: 3.5rem;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .app-hero-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+    }
+  }
+
+  .app-hero-icon {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 1.15rem;
+    margin-bottom: 1.6rem;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 16px 36px -12px rgba(0, 0, 0, 0.6);
+  }
+
+  .app-hero .eyebrow {
+    color: var(--app-accent);
+  }
+
+  .app-tagline {
+    margin-top: 1.1rem;
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--app-accent);
+  }
+
+  .app-hero-copy .lead {
+    margin-top: 1.2rem;
+    max-width: 34rem;
+  }
+
+  .app-hero :global(.app-hero-actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2.2rem;
+  }
+
+  .app-hero-meta {
+    margin-top: 1.1rem;
+    font-size: 0.88rem;
+    color: var(--text-light-secondary);
+  }
+
+  .app-hero :global(.app-hero-device) {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ---------- About ---------- */
+  .about-copy {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .about-para {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--text-dark-secondary);
+  }
+
+  /* ---------- Screenshots rail ---------- */
+  .screens-section {
+    overflow: hidden;
+  }
+
+  .screens-rail {
+    display: flex;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    overflow-x: auto;
+    padding: 0.5rem max(calc((100vw - var(--container)) / 2), 1.25rem) 1.5rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .screens-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .screens-rail :global(.screens-item) {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    width: clamp(210px, 26vw, 280px);
+  }
+
+  /* ---------- Features ---------- */
+  .features-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .features-grid :global(.feature) {
+    padding: 1.8rem 1.6rem;
+  }
+
+  .features-grid :global(.feature:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px -18px rgba(14, 15, 20, 0.2);
+  }
+
+  .feature-badge {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 1.2rem;
+    border-radius: 0.9rem;
+  }
+
+  .features-grid :global(.feature p) {
+    margin-top: 0.6rem;
+    font-size: 0.93rem;
+    color: var(--text-dark-secondary);
+  }
+
+  /* ---------- Audience ---------- */
+  .audience-list {
+    margin: 2.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .audience-list :global(.audience-item) {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.95rem;
+    font-size: 1.02rem;
+    line-height: 1.55;
+  }
+
+  .audience-check {
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .audience-check svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cta-glow {
+    position: absolute;
+    inset: auto -20% -60% -20%;
+    height: 30rem;
+    background: radial-gradient(
+      ellipse at 50% 100%,
+      color-mix(in srgb, var(--app-accent) 30%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .cta-inner {
+    position: relative;
+  }
+
+  .cta-lead {
+    margin: 1.1rem auto 0;
+    max-width: 34rem;
+  }
+
+  .cta-band :global(.cta-actions) {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.2rem;
+  }
+
+  /* ---------- Privacy band ---------- */
+  .privacy-band {
+    background: var(--ink-soft);
+  }
+
+  /* ---------- Support ---------- */
+  .support-block {
+    text-align: center;
+  }
+
+  .support-lead {
+    margin: 1.2rem auto 0;
+    max-width: 32rem;
+  }
+
+  .support-block :global(.support-actions) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.2rem;
+  }
+</style>

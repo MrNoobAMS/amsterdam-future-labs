@@ -1,0 +1,469 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import AppCard from '../components/AppCard.astro';
+import CTAButton from '../components/CTAButton.astro';
+import PhoneFrame from '../components/PhoneFrame.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import FAQAccordion from '../components/FAQAccordion.astro';
+import { apps } from '../data/apps';
+
+const featured = apps.slice(0, 3);
+const heroApps = [apps[1], apps[0], apps[3]]; // kamado · breathwell · sudoku
+
+const pillars = [
+  {
+    icon: 'sparkle',
+    title: 'Crafted, not assembled',
+    description:
+      'Every app is designed and built end-to-end with obsessive attention to typography, motion and detail. No templates, no shortcuts.',
+  },
+  {
+    icon: 'shield',
+    title: 'Private by design',
+    description:
+      'No accounts, no tracking, no data harvesting. Your data lives on your device — where it belongs.',
+  },
+  {
+    icon: 'wind',
+    title: 'Offline first',
+    description:
+      'Airplane mode is not an edge case. Every app works fully without an internet connection, every day.',
+  },
+  {
+    icon: 'heart',
+    title: 'Honest pricing',
+    description:
+      'Free where possible, a fair one-time purchase or simple upgrade where not. Never dark patterns.',
+  },
+];
+
+const teaserFaq = [
+  {
+    question: 'Are the apps free?',
+    answer:
+      'Most apps are free to download and use. Some offer an optional Pro upgrade — always clearly priced, never required for core functionality.',
+  },
+  {
+    question: 'Do the apps collect my data?',
+    answer:
+      'No. None of our apps include analytics or tracking SDKs, and none require an account. Your data is stored on your device only.',
+  },
+  {
+    question: 'Do the apps work offline?',
+    answer:
+      'Yes — every app is built offline-first. Recipes, sessions, puzzles and timers all work without an internet connection.',
+  },
+  {
+    question: 'Which devices are supported?',
+    answer:
+      'All apps are designed for iPhone and require iOS 17 or later. Several are localized in English and Dutch.',
+  },
+];
+---
+
+<BaseLayout
+  title="Amsterdam Future Labs — Thoughtfully crafted iPhone apps"
+  description="Premium iPhone apps for cooking, calm and play — BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL. Private by design, offline first, made in Amsterdam."
+>
+  <!-- ======================= HERO ======================= -->
+  <section class="hero section--dark">
+    <div class="hero-glow hero-glow--a" data-parallax="0.16" aria-hidden="true"></div>
+    <div class="hero-glow hero-glow--b" data-parallax="0.08" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-copy">
+        <AnimatedSection>
+          <p class="eyebrow">Amsterdam Future Labs</p>
+          <h1 class="display">
+            Apps you’ll actually<br />
+            <span class="gradient-text">love to use.</span>
+          </h1>
+        </AnimatedSection>
+        <AnimatedSection delay={0.1}>
+          <p class="lead hero-lead">
+            A small studio crafting premium iPhone apps for cooking, calm and play.
+            Private by design, offline first — and obsessed with the details.
+          </p>
+        </AnimatedSection>
+        <AnimatedSection delay={0.2} class="hero-actions">
+          <CTAButton href="/apps/" variant="gradient" arrow>Explore the apps</CTAButton>
+          <CTAButton href="#featured" variant="ghost">See featured</CTAButton>
+        </AnimatedSection>
+      </div>
+
+      <AnimatedSection delay={0.25} class="hero-devices" aria-hidden="true">
+        {heroApps.map((app, i) => (
+          <div class={`hero-device hero-device--${i}`}>
+            <PhoneFrame src={app.screenshots[0].src} alt="" eager={i === 1} />
+          </div>
+        ))}
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= FEATURED ======================= -->
+  <section class="section" id="featured">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">Featured</p>
+        <h2 class="h2">Currently in the spotlight</h2>
+        <p class="lead">Three apps, three very different moments of your day.</p>
+      </AnimatedSection>
+
+      <div class="card-grid card-grid--3">
+        {featured.map((app, i) => (
+          <AnimatedSection delay={i * 0.08}>
+            <AppCard app={app} compact />
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= WHY ======================= -->
+  <section class="section section--dark">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">Why these apps</p>
+        <h2 class="h2">Small studio. High standards.</h2>
+        <p class="lead">
+          Every app follows the same four principles — no exceptions.
+        </p>
+      </AnimatedSection>
+
+      <div class="pillar-grid">
+        {pillars.map((pillar, i) => (
+          <AnimatedSection delay={i * 0.07} class="pillar card">
+            <span class="pillar-icon"><FeatureIcon name={pillar.icon} /></span>
+            <h3 class="h3">{pillar.title}</h3>
+            <p>{pillar.description}</p>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= PRIVACY ======================= -->
+  <section class="section">
+    <div class="container privacy-split">
+      <AnimatedSection>
+        <p class="eyebrow">Privacy first</p>
+        <h2 class="h2">Your data stays yours.<br />Full stop.</h2>
+        <p class="lead privacy-lead">
+          We build apps the way we wish all apps were built: no accounts to create,
+          no analytics watching over your shoulder, no data leaving your device.
+          Each app page explains exactly what it does — and doesn’t — do.
+        </p>
+        <div class="privacy-actions">
+          <CTAButton href="/privacy/" variant="primary" arrow>Read the privacy overview</CTAButton>
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.12} class="privacy-list">
+        {apps.map((app) => (
+          <a href={`/apps/${app.slug}/privacy/`} class="privacy-chip card">
+            <img src={app.icon} alt="" width="40" height="40" loading="lazy" />
+            <span>
+              <strong>{app.name}</strong>
+              <small>{app.privacy.summary}</small>
+            </span>
+          </a>
+        ))}
+      </AnimatedSection>
+    </div>
+  </section>
+
+  <!-- ======================= PORTFOLIO ======================= -->
+  <section class="section section--soft">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">Portfolio</p>
+        <h2 class="h2">Every app in the lab</h2>
+      </AnimatedSection>
+
+      <div class="card-grid card-grid--2">
+        {apps.map((app, i) => (
+          <AnimatedSection delay={(i % 2) * 0.08}>
+            <AppCard app={app} />
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= FAQ TEASER ======================= -->
+  <section class="section">
+    <div class="container faq-teaser">
+      <AnimatedSection>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h2">Good to know</h2>
+        <p class="lead faq-teaser-lead">
+          The short version of what people ask most. Each app also has its own
+          detailed FAQ.
+        </p>
+        <CTAButton href="/faq/" variant="ghost" arrow>All questions</CTAButton>
+      </AnimatedSection>
+      <AnimatedSection delay={0.1}>
+        <FAQAccordion items={teaserFaq} />
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(8rem, 16vw, 11rem) 0 0;
+  }
+
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-glow--a {
+    top: -25%;
+    left: -10%;
+    width: 55rem;
+    height: 55rem;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 65%);
+  }
+
+  .hero-glow--b {
+    bottom: -30%;
+    right: -15%;
+    width: 50rem;
+    height: 50rem;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.16), transparent 65%);
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+
+  .hero-lead {
+    margin: 1.6rem auto 0;
+    max-width: 36rem;
+  }
+
+  .hero :global(.hero-actions) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.4rem;
+  }
+
+  .hero :global(.hero-devices) {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: clamp(1rem, 4vw, 2.5rem);
+    margin-top: clamp(3.5rem, 8vw, 5.5rem);
+    padding-bottom: 0;
+    mask-image: linear-gradient(to bottom, black 78%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, black 78%, transparent);
+  }
+
+  .hero-device {
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .hero-device--0,
+  .hero-device--2 {
+    display: none;
+    transform: translateY(3rem);
+  }
+
+  .hero-device--0 :global(.phone),
+  .hero-device--2 :global(.phone) {
+    width: clamp(170px, 20vw, 240px);
+  }
+
+  .hero-device--1 :global(.phone) {
+    width: clamp(220px, 26vw, 300px);
+  }
+
+  @media (min-width: 760px) {
+    .hero-device--0,
+    .hero-device--2 {
+      display: block;
+    }
+  }
+
+  /* ---------- Shared section bits ---------- */
+  .section-head {
+    max-width: 38rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head .lead {
+    margin-top: 1rem;
+  }
+
+  .card-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid > :global(*) {
+    height: 100%;
+  }
+
+  @media (min-width: 700px) {
+    .card-grid--2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .card-grid--3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* ---------- Pillars ---------- */
+  .pillar-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .pillar-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pillar-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pillar-grid :global(.pillar) {
+    padding: 1.8rem 1.6rem;
+  }
+
+  .pillar-grid :global(.pillar:hover) {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .pillar-icon {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 1.2rem;
+    border-radius: 0.9rem;
+    background: var(--gradient-brand);
+    color: #fff;
+    box-shadow: 0 8px 20px -8px rgba(99, 102, 241, 0.65);
+  }
+
+  .pillar-grid :global(.pillar p) {
+    margin-top: 0.6rem;
+    font-size: 0.93rem;
+    color: var(--text-light-secondary);
+  }
+
+  /* ---------- Privacy split ---------- */
+  .privacy-split {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .privacy-split {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  .privacy-lead {
+    margin-top: 1.2rem;
+  }
+
+  .privacy-actions {
+    margin-top: 2rem;
+  }
+
+  .privacy-split :global(.privacy-list) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .privacy-chip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .privacy-chip:hover {
+    transform: translateX(4px);
+    box-shadow: 0 14px 30px -16px rgba(14, 15, 20, 0.25);
+  }
+
+  .privacy-chip img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .privacy-chip span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .privacy-chip strong {
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+  }
+
+  .privacy-chip small {
+    font-size: 0.82rem;
+    color: var(--text-dark-secondary);
+  }
+
+  /* ---------- FAQ teaser ---------- */
+  .faq-teaser {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  @media (min-width: 900px) {
+    .faq-teaser {
+      grid-template-columns: 1fr 1.3fr;
+      gap: 5rem;
+    }
+  }
+
+  .faq-teaser-lead {
+    margin: 1.2rem 0 2rem;
+  }
+</style>

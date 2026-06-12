@@ -1,0 +1,250 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import CTAButton from '../components/CTAButton.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import { apps, SUPPORT_EMAIL } from '../data/apps';
+
+const channels = [
+  {
+    icon: 'mail',
+    title: 'General questions',
+    description: 'Anything about the apps, the studio or upcoming releases.',
+    subject: 'General question',
+    cta: 'Ask a question',
+  },
+  {
+    icon: 'bug',
+    title: 'Bug reports',
+    description: 'Found something broken? Include your iPhone model, iOS version and what you expected to happen.',
+    subject: 'Bug report',
+    cta: 'Report a bug',
+  },
+  {
+    icon: 'feature',
+    title: 'Feature requests',
+    description: 'Ideas that would make an app better for you. We read every single one.',
+    subject: 'Feature request',
+    cta: 'Suggest a feature',
+  },
+  {
+    icon: 'lock',
+    title: 'Privacy questions',
+    description: 'Questions about how an app handles data — answered personally, in plain language.',
+    subject: 'Privacy question',
+    cta: 'Ask about privacy',
+  },
+];
+---
+
+<BaseLayout
+  title="Support — Amsterdam Future Labs"
+  description="Get support for BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL. Bug reports, feature requests and privacy questions — answered within two business days."
+>
+  <PageHero
+    eyebrow="Support"
+    title="We’re here to help"
+    lead={`One inbox for everything: ${SUPPORT_EMAIL}. We read every message and aim to reply within two business days.`}
+  >
+    <div class="hero-cta">
+      <CTAButton href={`mailto:${SUPPORT_EMAIL}`} variant="gradient" arrow>
+        Email {SUPPORT_EMAIL}
+      </CTAButton>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <h2 class="h2">What can we do for you?</h2>
+      </AnimatedSection>
+      <div class="channels-grid">
+        {channels.map((channel, i) => (
+          <AnimatedSection delay={(i % 2) * 0.08} class="channel card">
+            <span class="channel-icon"><FeatureIcon name={channel.icon} /></span>
+            <h3 class="h3">{channel.title}</h3>
+            <p>{channel.description}</p>
+            <CTAButton
+              href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(channel.subject)}`}
+              variant="ghost"
+              arrow
+            >
+              {channel.cta}
+            </CTAButton>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <h2 class="h2">Support per app</h2>
+        <p class="lead">
+          Mention the app in your subject line and we can help you faster.
+        </p>
+      </AnimatedSection>
+      <div class="app-support-grid">
+        {apps.map((app, i) => (
+          <AnimatedSection delay={(i % 2) * 0.08} class="app-support card">
+            <img src={app.icon} alt="" width="48" height="48" loading="lazy" />
+            <div class="app-support-body">
+              <h3 class="h3">{app.name}</h3>
+              <p>{app.tagline}</p>
+              <div class="app-support-links">
+                <a href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Support — ${app.name}`)}`}>Email support</a>
+                <a href={`/apps/${app.slug}/#faq`}>FAQ</a>
+                <a href={`/apps/${app.slug}/privacy/`}>Privacy policy</a>
+              </div>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container refund-note">
+      <AnimatedSection>
+        <h2 class="h3">A note on purchases & refunds</h2>
+        <p>
+          All purchases are processed by Apple through the App Store. For refunds,
+          visit <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a> —
+          Apple handles refund requests directly and we never see your payment details.
+        </p>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-cta {
+    margin-top: 2.2rem;
+  }
+
+  .section-head {
+    max-width: 40rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head .lead {
+    margin-top: 1rem;
+  }
+
+  .channels-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 700px) {
+    .channels-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .channels-grid :global(.channel) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 1.9rem 1.8rem;
+  }
+
+  .channels-grid :global(.channel:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px -18px rgba(14, 15, 20, 0.2);
+  }
+
+  .channel-icon {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 0.6rem;
+    border-radius: 0.9rem;
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+
+  .channels-grid :global(.channel p) {
+    font-size: 0.93rem;
+    color: var(--text-dark-secondary);
+    flex: 1;
+  }
+
+  .channels-grid :global(.channel .btn) {
+    margin-top: 0.8rem;
+  }
+
+  .app-support-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 800px) {
+    .app-support-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .app-support-grid :global(.app-support) {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    align-items: flex-start;
+  }
+
+  .app-support-grid :global(.app-support:hover) {
+    transform: translateY(-4px);
+  }
+
+  .app-support-grid :global(.app-support img) {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .app-support-body p {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .app-support-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1rem;
+    margin-top: 0.9rem;
+  }
+
+  .app-support-links a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--brand-a);
+    text-decoration: none;
+  }
+
+  .app-support-links a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .refund-note {
+    max-width: 42rem;
+  }
+
+  .refund-note p {
+    margin-top: 0.8rem;
+    color: var(--text-dark-secondary);
+    line-height: 1.7;
+  }
+
+  .refund-note a {
+    color: var(--text-dark);
+  }
+</style>

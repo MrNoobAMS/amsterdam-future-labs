@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import CTAButton from '../components/CTAButton.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import { apps, SUPPORT_EMAIL } from '../data/apps';
+
+const principles = [
+  {
+    icon: 'shield',
+    title: 'No data collection',
+    description: 'Our apps do not collect personal data. There are no servers receiving your information.',
+  },
+  {
+    icon: 'lock',
+    title: 'No accounts',
+    description: 'No sign-ups, no logins, no passwords. Every app works the moment you open it.',
+  },
+  {
+    icon: 'chart',
+    title: 'No analytics',
+    description: 'We do not include analytics or tracking SDKs. We cannot see how you use our apps — and that is the point.',
+  },
+  {
+    icon: 'save',
+    title: 'Local storage only',
+    description: 'Your data is stored on your device. Deleting an app deletes its data, completely and immediately.',
+  },
+];
+---
+
+<BaseLayout
+  title="Privacy — Amsterdam Future Labs"
+  description="How Amsterdam Future Labs apps handle your data: no accounts, no analytics, no tracking. Per-app privacy details for BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL."
+>
+  <PageHero
+    eyebrow="Privacy"
+    title="Privacy is the default"
+    lead="We don’t have a data strategy, because we don’t take your data. Here is exactly how each app behaves — in plain language."
+  />
+
+  <section class="section">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <h2 class="h2">Four rules, every app</h2>
+      </AnimatedSection>
+      <div class="principles-grid">
+        {principles.map((p, i) => (
+          <AnimatedSection delay={i * 0.07} class="principle card">
+            <span class="principle-icon"><FeatureIcon name={p.icon} /></span>
+            <h3 class="h3">{p.title}</h3>
+            <p>{p.description}</p>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <h2 class="h2">Privacy per app</h2>
+        <p class="lead">
+          The summary below links to each app’s full privacy policy — the same
+          document referenced on the App Store.
+        </p>
+      </AnimatedSection>
+
+      <div class="policy-grid">
+        {apps.map((app, i) => (
+          <AnimatedSection delay={(i % 2) * 0.08} class="policy-card card" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
+            <div class="policy-card-head">
+              <img src={app.icon} alt="" width="48" height="48" loading="lazy" />
+              <div>
+                <h3 class="h3">{app.name}</h3>
+                <p class="policy-card-summary">{app.privacy.summary}</p>
+              </div>
+            </div>
+            <dl class="policy-facts">
+              <div><dt>Ads</dt><dd>{app.privacy.hasAds ? 'Yes (free app)' : 'None'}</dd></div>
+              <div><dt>Analytics</dt><dd>None</dd></div>
+              <div><dt>Account</dt><dd>Not required</dd></div>
+              <div><dt>Data</dt><dd>On device only</dd></div>
+            </dl>
+            <CTAButton href={`/apps/${app.slug}/privacy/`} variant="ghost" arrow>
+              Full privacy policy
+            </CTAButton>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-block">
+      <AnimatedSection>
+        <h2 class="h2">Privacy questions?</h2>
+        <p class="lead contact-lead">
+          We answer every privacy question personally — usually within two
+          business days.
+        </p>
+        <CTAButton
+          href={`mailto:${SUPPORT_EMAIL}?subject=Privacy%20question`}
+          variant="primary"
+          arrow
+        >
+          {SUPPORT_EMAIL}
+        </CTAButton>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .section-head {
+    max-width: 40rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head .lead {
+    margin-top: 1rem;
+  }
+
+  .principles-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 640px) {
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .principles-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .principles-grid :global(.principle) {
+    padding: 1.8rem 1.6rem;
+  }
+
+  .principles-grid :global(.principle:hover) {
+    transform: translateY(-5px);
+  }
+
+  .principle-icon {
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    margin-bottom: 1.2rem;
+    border-radius: 0.9rem;
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+
+  .principles-grid :global(.principle p) {
+    margin-top: 0.6rem;
+    font-size: 0.93rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .policy-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 800px) {
+    .policy-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .policy-grid :global(.policy-card) {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    padding: 1.8rem;
+  }
+
+  .policy-grid :global(.policy-card:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 44px -20px rgba(14, 15, 20, 0.22), 0 0 0 1px var(--app-accent-soft);
+  }
+
+  .policy-card-head {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .policy-card-head img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .policy-card-summary {
+    margin-top: 0.4rem;
+    font-size: 0.92rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .policy-facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem 1.5rem;
+    margin: 0;
+    padding: 1.1rem 1.2rem;
+    border-radius: var(--radius-md);
+    background: var(--paper-soft);
+  }
+
+  .policy-facts dt {
+    font-size: 0.72rem;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dark-secondary);
+  }
+
+  .policy-facts dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .policy-grid :global(.policy-card .btn) {
+    align-self: flex-start;
+    margin-top: auto;
+  }
+
+  .contact-block {
+    text-align: center;
+    max-width: 36rem;
+  }
+
+  .contact-lead {
+    margin: 1.2rem auto 2rem;
+  }
+</style>

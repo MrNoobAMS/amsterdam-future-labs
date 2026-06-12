@@ -1,0 +1,146 @@
+---
+import { apps, SUPPORT_EMAIL } from '../data/apps';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer on-dark">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="brand" aria-label="Amsterdam Future Labs — home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Amsterdam<br />Future Labs</span>
+        </a>
+        <p class="footer-tagline">
+          Thoughtfully crafted iPhone apps. Private by design, made in Amsterdam.
+        </p>
+      </div>
+
+      <nav class="footer-col" aria-label="Apps">
+        <h2 class="footer-heading">Apps</h2>
+        {apps.map((app) => <a href={`/apps/${app.slug}/`}>{app.name}</a>)}
+      </nav>
+
+      <nav class="footer-col" aria-label="Company">
+        <h2 class="footer-heading">Explore</h2>
+        <a href="/apps/">All apps</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/support/">Support</a>
+      </nav>
+
+      <div class="footer-col">
+        <h2 class="footer-heading">Contact</h2>
+        <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
+        <p class="footer-note">We aim to reply within two business days.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} Amsterdam Future Labs · Pieter Thurkow. All rights reserved.</p>
+      <p>Apple, the Apple logo and App Store are trademarks of Apple Inc.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ink);
+    color: var(--text-light);
+    padding: clamp(3.5rem, 7vw, 5.5rem) 0 2.25rem;
+    border-top: 1px solid var(--line-light);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--text-light);
+  }
+
+  .brand-mark {
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 0.6rem;
+    background: var(--gradient-brand);
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .footer-tagline {
+    margin-top: 1.1rem;
+    max-width: 18rem;
+    font-size: 0.92rem;
+    color: var(--text-light-secondary);
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .footer-heading {
+    font-size: 0.78rem;
+    font-weight: 650;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-light-secondary);
+    margin: 0 0 0.35rem;
+  }
+
+  .footer-col a {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    text-decoration: none;
+    width: fit-content;
+    opacity: 0.85;
+    transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+  }
+
+  .footer-col a:hover {
+    opacity: 1;
+    transform: translateX(2px);
+  }
+
+  .footer-note {
+    font-size: 0.85rem;
+    color: var(--text-light-secondary);
+  }
+
+  .footer-bottom {
+    margin-top: 3.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line-light);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-light-secondary);
+  }
+
+  @media (min-width: 700px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+    }
+    .footer-bottom {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+</style>

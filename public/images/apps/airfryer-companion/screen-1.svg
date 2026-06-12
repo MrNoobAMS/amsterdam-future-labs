@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="food1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd98a"/>
+      <stop offset="1" stop-color="#f5a623"/>
+    </linearGradient>
+    <linearGradient id="food2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffc1a1"/>
+      <stop offset="1" stop-color="#e8794a"/>
+    </linearGradient>
+  </defs>
+  <rect width="440" height="956" fill="#fffaf3"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#2b2620">9:41</text>
+
+  <text x="30" y="112" font-size="27" font-weight="700" fill="#2b2620">Recipes</text>
+  <rect x="30" y="136" width="380" height="44" rx="22" fill="#f4ece1"/>
+  <circle cx="56" cy="158" r="8" fill="none" stroke="#a6988a" stroke-width="2.5"/>
+  <line x1="62" y1="164" x2="68" y2="170" stroke="#a6988a" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="84" y="163" font-size="14" fill="#a6988a">Search recipes…</text>
+
+  <!-- chips -->
+  <rect x="30" y="200" width="78" height="34" rx="17" fill="#f5a623"/>
+  <text x="50" y="222" font-size="13" font-weight="600" fill="#fff">All</text>
+  <rect x="118" y="200" width="96" height="34" rx="17" fill="#f4ece1"/>
+  <text x="136" y="222" font-size="13" fill="#7c6f61">Snacks</text>
+  <rect x="224" y="200" width="96" height="34" rx="17" fill="#f4ece1"/>
+  <text x="240" y="222" font-size="13" fill="#7c6f61">Dinner</text>
+  <rect x="330" y="200" width="80" height="34" rx="17" fill="#f4ece1"/>
+  <text x="346" y="222" font-size="13" fill="#7c6f61">Veggie</text>
+
+  <!-- recipe cards 2-col -->
+  <g>
+    <rect x="30" y="258" width="183" height="220" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="30" y="258" width="183" height="130" rx="20" fill="url(#food1)"/>
+    <rect x="30" y="368" width="183" height="20" fill="url(#food1)"/>
+    <text x="48" y="416" font-size="15" font-weight="700" fill="#2b2620">Crispy Fries</text>
+    <text x="48" y="440" font-size="12" fill="#9c8d7d">200°C · 18 min</text>
+  </g>
+  <g>
+    <rect x="227" y="258" width="183" height="220" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="227" y="258" width="183" height="130" rx="20" fill="url(#food2)"/>
+    <rect x="227" y="368" width="183" height="20" fill="url(#food2)"/>
+    <text x="245" y="416" font-size="15" font-weight="700" fill="#2b2620">Chicken Thighs</text>
+    <text x="245" y="440" font-size="12" fill="#9c8d7d">190°C · 22 min</text>
+  </g>
+  <g>
+    <rect x="30" y="494" width="183" height="220" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="30" y="494" width="183" height="130" rx="20" fill="url(#food2)"/>
+    <rect x="30" y="604" width="183" height="20" fill="url(#food2)"/>
+    <text x="48" y="652" font-size="15" font-weight="700" fill="#2b2620">Salmon Fillet</text>
+    <text x="48" y="676" font-size="12" fill="#9c8d7d">180°C · 10 min</text>
+  </g>
+  <g>
+    <rect x="227" y="494" width="183" height="220" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="227" y="494" width="183" height="130" rx="20" fill="url(#food1)"/>
+    <rect x="227" y="604" width="183" height="20" fill="url(#food1)"/>
+    <text x="245" y="652" font-size="15" font-weight="700" fill="#2b2620">Roast Veggies</text>
+    <text x="245" y="676" font-size="12" fill="#9c8d7d">185°C · 15 min</text>
+  </g>
+  <g>
+    <rect x="30" y="730" width="183" height="120" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="30" y="730" width="183" height="120" rx="20" fill="url(#food1)" opacity="0.6"/>
+  </g>
+  <g>
+    <rect x="227" y="730" width="183" height="120" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <rect x="227" y="730" width="183" height="120" rx="20" fill="url(#food2)" opacity="0.6"/>
+  </g>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#fff"/>
+  <line x1="0" y1="868" x2="440" y2="868" stroke="#efe5d6"/>
+  <circle cx="70" cy="904" r="4" fill="#f5a623"/>
+  <text x="48" y="932" font-size="10" fill="#f5a623">Recipes</text>
+  <text x="142" y="932" font-size="10" fill="#a6988a">Convert</text>
+  <text x="240" y="932" font-size="10" fill="#a6988a">Timers</text>
+  <text x="330" y="932" font-size="10" fill="#a6988a">Cooks</text>
+</svg>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTAButton from '../components/CTAButton.astro';
+---
+
+<BaseLayout
+  title="Page not found — Amsterdam Future Labs"
+  description="The page you’re looking for doesn’t exist."
+>
+  <section class="not-found section--dark">
+    <div class="container nf-inner">
+      <p class="nf-code gradient-text">404</p>
+      <h1 class="h2">This page wandered off</h1>
+      <p class="lead nf-lead">The link may be outdated, or the page may have moved.</p>
+      <div class="nf-actions">
+        <CTAButton href="/" variant="gradient" arrow>Back to home</CTAButton>
+        <CTAButton href="/apps/" variant="ghost">Browse apps</CTAButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 80vh;
+    display: grid;
+    place-items: center;
+    padding: 8rem 0 4rem;
+  }
+
+  .nf-inner {
+    text-align: center;
+  }
+
+  .nf-code {
+    font-size: clamp(5rem, 18vw, 9rem);
+    font-weight: 750;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .nf-lead {
+    margin-top: 1rem;
+  }
+
+  .nf-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 2.4rem;
+  }
+</style>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#fffaf3"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#2b2620">9:41</text>
+
+  <text x="30" y="112" font-size="27" font-weight="700" fill="#2b2620">Timers</text>
+  <circle cx="394" cy="104" r="20" fill="#f5a623"/>
+  <path d="M394 96v16M386 104h16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- big active timer -->
+  <rect x="30" y="150" width="380" height="320" rx="26" fill="#2b2620"/>
+  <circle cx="220" cy="290" r="92" fill="none" stroke="#473e33" stroke-width="12"/>
+  <circle cx="220" cy="290" r="92" fill="none" stroke="#f5a623" stroke-width="12" stroke-linecap="round" stroke-dasharray="578" stroke-dashoffset="170" transform="rotate(-90 220 290)"/>
+  <text x="172" y="300" font-size="44" font-weight="700" fill="#fff">14:32</text>
+  <text x="178" y="330" font-size="13" fill="#b3a489">Crispy fries · 200°C</text>
+  <rect x="150" y="408" width="60" height="36" rx="18" fill="#473e33"/>
+  <rect x="166" y="419" width="4" height="14" rx="2" fill="#fff"/>
+  <rect x="176" y="419" width="4" height="14" rx="2" fill="#fff"/>
+  <rect x="230" y="408" width="60" height="36" rx="18" fill="#f5a623"/>
+  <path d="M250 417l14 9-14 9z" fill="#fff"/>
+
+  <!-- shake reminder -->
+  <rect x="30" y="494" width="380" height="64" rx="18" fill="#fdeed3"/>
+  <circle cx="64" cy="526" r="16" fill="#f5a623"/>
+  <path d="M58 526h12M64 520v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="94" y="520" font-size="14" font-weight="600" fill="#2b2620">Shake reminder at 09:00</text>
+  <text x="94" y="540" font-size="12" fill="#9c8d7d">Halfway through — basket shake time</text>
+
+  <!-- second timer -->
+  <g>
+    <rect x="30" y="582" width="380" height="96" rx="20" fill="#fff" stroke="#efe5d6"/>
+    <circle cx="76" cy="630" r="28" fill="none" stroke="#efe5d6" stroke-width="6"/>
+    <circle cx="76" cy="630" r="28" fill="none" stroke="#e8794a" stroke-width="6" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="44" transform="rotate(-90 76 630)"/>
+    <text x="62" y="636" font-size="13" font-weight="700" fill="#2b2620">6:10</text>
+    <text x="124" y="622" font-size="15" font-weight="700" fill="#2b2620">Garlic bread</text>
+    <text x="124" y="644" font-size="12" fill="#9c8d7d">180°C · 6 m 10 s left</text>
+  </g>
+
+  <!-- done timer -->
+  <g>
+    <rect x="30" y="694" width="380" height="96" rx="20" fill="#f0f7ee"/>
+    <circle cx="76" cy="742" r="28" fill="none" stroke="#7aa05a" stroke-width="6"/>
+    <path d="M64 742l8 8 16-16" fill="none" stroke="#7aa05a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="124" y="734" font-size="15" font-weight="700" fill="#54763c">Spring rolls</text>
+    <text x="124" y="756" font-size="12" fill="#84a06c">Done — crisp and ready</text>
+  </g>
+
+  <text x="98" y="836" font-size="12" fill="#b3a489">Timers notify you even when the app is closed</text>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#fff"/>
+  <line x1="0" y1="868" x2="440" y2="868" stroke="#efe5d6"/>
+  <text x="48" y="932" font-size="10" fill="#a6988a">Recipes</text>
+  <text x="142" y="932" font-size="10" fill="#a6988a">Convert</text>
+  <circle cx="260" cy="904" r="4" fill="#f5a623"/>
+  <text x="240" y="932" font-size="10" fill="#f5a623">Timers</text>
+  <text x="330" y="932" font-size="10" fill="#a6988a">Cooks</text>
+</svg>

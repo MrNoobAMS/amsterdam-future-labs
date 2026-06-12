@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/PageHero.astro';
+import AnimatedSection from '../../../components/AnimatedSection.astro';
+import CTAButton from '../../../components/CTAButton.astro';
+import { apps, SUPPORT_EMAIL } from '../../../data/apps';
+
+export function getStaticPaths() {
+  return apps.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props;
+const updated = 'June 12, 2026';
+
+const sections = [
+  { title: 'Data we collect', body: app.privacy.dataCollected },
+  { title: 'Advertising', body: app.privacy.ads },
+  { title: 'Analytics & tracking', body: app.privacy.analytics },
+  { title: 'Accounts', body: app.privacy.account },
+  { title: 'Data storage', body: app.privacy.storage },
+];
+---
+
+<BaseLayout
+  title={`Privacy Policy — ${app.name} | Amsterdam Future Labs`}
+  description={`Privacy policy for ${app.name}: ${app.privacy.summary}`}
+  ogImage={`/images/og/${app.slug}.png`}
+>
+  <PageHero
+    eyebrow={`${app.name} · Legal`}
+    title={`${app.name} privacy policy`}
+    lead={app.privacy.summary}
+    accent={app.accent}
+  />
+
+  <section class="section">
+    <div class="container policy">
+      <AnimatedSection>
+        <p class="policy-updated">Last updated: {updated}</p>
+      </AnimatedSection>
+
+      {sections.map((section, i) => (
+        <AnimatedSection delay={Math.min(i * 0.04, 0.16)} class="policy-section">
+          <h2 class="h3">{section.title}</h2>
+          <p>{section.body}</p>
+        </AnimatedSection>
+      ))}
+
+      <AnimatedSection class="policy-section">
+        <h2 class="h3">Additional details</h2>
+        <ul>
+          {app.privacy.details.map((detail) => (
+            <li>{detail}</li>
+          ))}
+        </ul>
+      </AnimatedSection>
+
+      <AnimatedSection class="policy-section">
+        <h2 class="h3">Children’s privacy</h2>
+        <p>
+          {app.name} does not collect personal data from anyone, including
+          children. The app contains no social features, chat or user-generated
+          content shared with others.
+        </p>
+      </AnimatedSection>
+
+      <AnimatedSection class="policy-section">
+        <h2 class="h3">Changes to this policy</h2>
+        <p>
+          If a future version of {app.name} changes how data is handled — for
+          example by introducing new features — this policy will be updated
+          before that version is released, and the date above will reflect it.
+        </p>
+      </AnimatedSection>
+
+      <AnimatedSection class="policy-section">
+        <h2 class="h3">Contact</h2>
+        <p>
+          For privacy questions about {app.name}, email{' '}
+          <a href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Privacy question — ${app.name}`)}`}>
+            {SUPPORT_EMAIL}
+          </a>. Amsterdam Future Labs · Pieter Thurkow, Amsterdam, The Netherlands.
+        </p>
+      </AnimatedSection>
+
+      <AnimatedSection class="policy-back">
+        <CTAButton href={`/apps/${app.slug}/`} variant="ghost" arrow>
+          Back to {app.name}
+        </CTAButton>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .policy {
+    max-width: 44rem;
+  }
+
+  .policy-updated {
+    font-size: 0.85rem;
+    color: var(--text-dark-secondary);
+    margin-bottom: 2.5rem;
+  }
+
+  .policy :global(.policy-section) {
+    margin-bottom: 2.5rem;
+  }
+
+  .policy :global(.policy-section p),
+  .policy :global(.policy-section li) {
+    margin-top: 0.7rem;
+    line-height: 1.75;
+    color: var(--text-dark-secondary);
+  }
+
+  .policy :global(.policy-section ul) {
+    margin: 0.7rem 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .policy :global(.policy-section a) {
+    color: var(--text-dark);
+    text-underline-offset: 3px;
+  }
+
+  .policy :global(.policy-back) {
+    margin-top: 3.5rem;
+  }
+</style>

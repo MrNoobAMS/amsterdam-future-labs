@@ -1,0 +1,102 @@
+---
+import type { AppMeta } from '../data/apps';
+import { SUPPORT_EMAIL } from '../data/apps';
+import FeatureIcon from './FeatureIcon.astro';
+
+/**
+ * App-specific privacy block used on every app detail page,
+ * with a link to the app's full standalone policy.
+ */
+interface Props {
+  app: AppMeta;
+}
+
+const { app } = Astro.props;
+
+const rows = [
+  { icon: 'shield', label: 'Data collection', value: app.privacy.dataCollected },
+  { icon: 'sparkle', label: 'Advertising', value: app.privacy.ads },
+  { icon: 'chart', label: 'Analytics', value: app.privacy.analytics },
+  { icon: 'lock', label: 'Accounts', value: app.privacy.account },
+  { icon: 'save', label: 'Storage', value: app.privacy.storage },
+];
+---
+
+<div class="privacy-grid">
+  {rows.map((row) => (
+    <div class="privacy-row">
+      <span class="privacy-icon" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
+        <FeatureIcon name={row.icon} />
+      </span>
+      <div>
+        <h3 class="privacy-label">{row.label}</h3>
+        <p class="privacy-value">{row.value}</p>
+      </div>
+    </div>
+  ))}
+  <div class="privacy-row">
+    <span class="privacy-icon" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
+      <FeatureIcon name="mail" />
+    </span>
+    <div>
+      <h3 class="privacy-label">Privacy questions</h3>
+      <p class="privacy-value">
+        Email <a href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(`Privacy question — ${app.name}`)}`}>{SUPPORT_EMAIL}</a>
+        — or read the <a href={`/apps/${app.slug}/privacy/`}>full privacy policy for {app.name}</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .privacy-grid {
+    display: grid;
+    gap: 1.8rem 2.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 700px) {
+    .privacy-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .privacy-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .privacy-icon {
+    display: grid;
+    place-items: center;
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 0.85rem;
+    flex-shrink: 0;
+    color: var(--app-accent);
+    background: var(--app-accent-soft);
+  }
+
+  .privacy-label {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .privacy-value {
+    font-size: 0.93rem;
+    line-height: 1.6;
+    color: var(--text-light-secondary);
+  }
+
+  .privacy-value a {
+    color: inherit;
+    text-decoration-color: rgba(255, 255, 255, 0.35);
+    text-underline-offset: 3px;
+    transition: color 0.2s var(--ease-out);
+  }
+
+  .privacy-value a:hover {
+    color: var(--text-light);
+  }
+</style>
