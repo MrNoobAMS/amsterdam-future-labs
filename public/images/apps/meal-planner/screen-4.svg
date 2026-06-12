@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#0e1611"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#e8f2ea">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#e8f2ea" stroke-width="1.5" opacity="0.8"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#e8f2ea" opacity="0.8"/>
+
+  <text x="30" y="118" font-size="27" font-weight="700" fill="#e8f2ea">Shopping list</text>
+  <text x="30" y="144" font-size="14" fill="#93a89a">Built from your week · 23 items</text>
+
+  <!-- progress -->
+  <rect x="30" y="166" width="380" height="10" rx="5" fill="#16241b"/>
+  <rect x="30" y="166" width="140" height="10" rx="5" fill="#3bae6e"/>
+
+  <!-- aisle: produce -->
+  <text x="30" y="226" font-size="12" font-weight="700" letter-spacing="1.5" fill="#6fcf97">PRODUCE</text>
+  <g>
+    <rect x="30" y="242" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="273" r="12" fill="#3bae6e"/>
+    <path d="M52 273l4 4 8-8" fill="none" stroke="#0e1611" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="84" y="269" font-size="15" fill="#5e7264" text-decoration="line-through">Spinach</text>
+    <text x="84" y="289" font-size="11" fill="#5e7264">300 g · 2 recipes</text>
+    <text x="382" y="278" font-size="13" fill="#5e7264" text-anchor="end">300 g</text>
+  </g>
+  <g>
+    <rect x="30" y="314" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="345" r="12" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+    <text x="84" y="341" font-size="15" fill="#e8f2ea">Cherry tomatoes</text>
+    <text x="84" y="361" font-size="11" fill="#93a89a">500 g · Shakshuka, Caesar Bowl</text>
+    <text x="382" y="350" font-size="13" fill="#93a89a" text-anchor="end">500 g</text>
+  </g>
+  <g>
+    <rect x="30" y="386" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="417" r="12" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+    <text x="84" y="413" font-size="15" fill="#e8f2ea">Avocado</text>
+    <text x="84" y="433" font-size="11" fill="#93a89a">3 pc · 2 recipes</text>
+    <rect x="318" y="402" width="76" height="24" rx="12" fill="#3bae6e" opacity="0.2"/>
+    <text x="330" y="418" font-size="10" font-weight="700" fill="#6fcf97">IN PANTRY</text>
+  </g>
+
+  <!-- aisle: meat & fish -->
+  <text x="30" y="496" font-size="12" font-weight="700" letter-spacing="1.5" fill="#6fcf97">MEAT &amp; FISH</text>
+  <g>
+    <rect x="30" y="512" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="543" r="12" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+    <text x="84" y="539" font-size="15" fill="#e8f2ea">Chicken breast</text>
+    <text x="84" y="559" font-size="11" fill="#93a89a">900 g · Caesar Bowl, Ramen</text>
+    <text x="382" y="548" font-size="13" fill="#93a89a" text-anchor="end">900 g</text>
+  </g>
+  <g>
+    <rect x="30" y="584" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="615" r="12" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+    <text x="84" y="611" font-size="15" fill="#e8f2ea">Salmon fillet</text>
+    <text x="84" y="631" font-size="11" fill="#93a89a">400 g · Salmon Pasta</text>
+    <text x="382" y="620" font-size="13" fill="#93a89a" text-anchor="end">400 g</text>
+  </g>
+
+  <!-- aisle: dairy -->
+  <text x="30" y="694" font-size="12" font-weight="700" letter-spacing="1.5" fill="#6fcf97">DAIRY</text>
+  <g>
+    <rect x="30" y="710" width="380" height="62" rx="16" fill="#16241b"/>
+    <circle cx="58" cy="741" r="12" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+    <text x="84" y="737" font-size="15" fill="#e8f2ea">Greek yogurt</text>
+    <text x="84" y="757" font-size="11" fill="#93a89a">1 000 g · Overnight Oats, snacks</text>
+    <text x="382" y="746" font-size="13" fill="#93a89a" text-anchor="end">1 kg</text>
+  </g>
+
+  <!-- share button -->
+  <rect x="284" y="794" width="126" height="44" rx="22" fill="#3bae6e"/>
+  <text x="310" y="821" font-size="13" font-weight="600" fill="#0e1611">Share list</text>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#121b15"/>
+  <text x="46" y="932" font-size="10" fill="#5e7264">Home</text>
+  <text x="124" y="932" font-size="10" fill="#5e7264">Planner</text>
+  <text x="208" y="932" font-size="10" fill="#5e7264">Recipes</text>
+  <circle cx="310" cy="904" r="4" fill="#3bae6e"/>
+  <text x="288" y="932" font-size="10" fill="#3bae6e">Shopping</text>
+  <text x="372" y="932" font-size="10" fill="#5e7264">Profile</text>
+</svg>

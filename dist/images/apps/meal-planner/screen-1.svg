@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15301f"/>
+      <stop offset="1" stop-color="#0b1a10"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#3bae6e"/>
+      <stop offset="1" stop-color="#8ee0ae"/>
+    </linearGradient>
+  </defs>
+  <rect width="440" height="956" fill="#0e1611"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#e8f2ea">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#e8f2ea" stroke-width="1.5" opacity="0.8"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#e8f2ea" opacity="0.8"/>
+
+  <text x="30" y="108" font-size="15" fill="#93a89a">Good morning</text>
+  <text x="30" y="140" font-size="27" font-weight="700" fill="#e8f2ea">What's on today</text>
+
+  <!-- macro dashboard card -->
+  <rect x="30" y="170" width="380" height="180" rx="22" fill="url(#hero)"/>
+  <circle cx="110" cy="260" r="46" fill="none" stroke="#1f3a2a" stroke-width="9"/>
+  <path d="M110 214a46 46 0 0 1 44 33" fill="none" stroke="url(#ring)" stroke-width="9" stroke-linecap="round"/>
+  <text x="110" y="256" font-size="20" font-weight="700" fill="#e8f2ea" text-anchor="middle">1 240</text>
+  <text x="110" y="276" font-size="11" fill="#93a89a" text-anchor="middle">kcal left</text>
+  <text x="190" y="232" font-size="13" fill="#93a89a">Protein</text>
+  <rect x="190" y="244" width="190" height="10" rx="5" fill="#1f3a2a"/>
+  <rect x="190" y="244" width="118" height="10" rx="5" fill="url(#ring)"/>
+  <text x="190" y="278" font-size="13" fill="#93a89a">86 g of 140 g · on track</text>
+  <rect x="190" y="296" width="120" height="26" rx="13" fill="#3bae6e" opacity="0.2"/>
+  <text x="204" y="313" font-size="11" font-weight="700" fill="#6fcf97">5-DAY STREAK</text>
+
+  <!-- today's meals -->
+  <text x="30" y="402" font-size="18" font-weight="700" fill="#e8f2ea">Today's meals</text>
+  <g>
+    <rect x="30" y="422" width="380" height="84" rx="18" fill="#16241b"/>
+    <rect x="46" y="438" width="52" height="52" rx="12" fill="#23402e"/>
+    <text x="60" y="474" font-size="24">🥣</text>
+    <text x="114" y="458" font-size="15" font-weight="600" fill="#e8f2ea">Overnight Oats</text>
+    <text x="114" y="480" font-size="12" fill="#93a89a">Breakfast · 420 kcal · 24 g protein</text>
+    <circle cx="378" cy="464" r="14" fill="#3bae6e"/>
+    <path d="M371 464l5 5 10-10" fill="none" stroke="#0e1611" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g>
+    <rect x="30" y="518" width="380" height="84" rx="18" fill="#16241b"/>
+    <rect x="46" y="534" width="52" height="52" rx="12" fill="#23402e"/>
+    <text x="60" y="570" font-size="24">🥗</text>
+    <text x="114" y="554" font-size="15" font-weight="600" fill="#e8f2ea">Chicken Caesar Bowl</text>
+    <text x="114" y="576" font-size="12" fill="#93a89a">Lunch · 540 kcal · 42 g protein</text>
+    <circle cx="378" cy="560" r="14" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+  </g>
+  <g>
+    <rect x="30" y="614" width="380" height="84" rx="18" fill="#16241b"/>
+    <rect x="46" y="630" width="52" height="52" rx="12" fill="#23402e"/>
+    <text x="60" y="666" font-size="24">🍝</text>
+    <text x="114" y="650" font-size="15" font-weight="600" fill="#e8f2ea">Salmon Pasta</text>
+    <text x="114" y="672" font-size="12" fill="#93a89a">Dinner · 680 kcal · 38 g protein</text>
+    <circle cx="378" cy="656" r="14" fill="none" stroke="#3d5c4a" stroke-width="2"/>
+  </g>
+
+  <!-- suggestion -->
+  <rect x="30" y="722" width="380" height="64" rx="18" fill="#16241b"/>
+  <text x="46" y="750" font-size="13" font-weight="600" fill="#6fcf97">Smart suggestion</text>
+  <text x="46" y="770" font-size="12" fill="#93a89a">High-protein snack to close today's gap →</text>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#121b15"/>
+  <circle cx="62" cy="904" r="4" fill="#3bae6e"/>
+  <text x="46" y="932" font-size="10" fill="#3bae6e">Home</text>
+  <text x="124" y="932" font-size="10" fill="#5e7264">Planner</text>
+  <text x="208" y="932" font-size="10" fill="#5e7264">Recipes</text>
+  <text x="288" y="932" font-size="10" fill="#5e7264">Shopping</text>
+  <text x="372" y="932" font-size="10" fill="#5e7264">Profile</text>
+</svg>

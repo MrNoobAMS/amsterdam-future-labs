@@ -408,6 +408,94 @@ export const apps: AppMeta[] = [
       { question: 'How do I get support?', answer: `Email ${'support@amsterdamfuturelabs.com'} — we aim to reply within two business days.` },
     ],
   },
+  {
+    slug: 'meal-planner',
+    name: 'Meal Planner',
+    tagline: 'Plan smarter. Eat better.',
+    shortDescription:
+      'Your week of meals in one tap — 156 bilingual recipes, an automatic week planner, live macros and a shopping list that builds itself.',
+    description: [
+      'Meal Planner answers the questions every kitchen asks: what should I eat today, what do I buy this week, and how do I hit my protein goal? Pick your goal, household size and budget, and Plan My Week fills a balanced week of breakfasts, lunches, dinners and snacks in one tap — no recipe repeats, calories allocated sensibly across the day.',
+      'Behind it sits a library of 156 hand-written recipes in English and Dutch, each with per-serving macros, live portion scaling and honest step-by-step instructions. The shopping list generates itself from your planned week, merges duplicate ingredients and groups everything by supermarket aisle. Tick off your pantry and “What can I make?” shows recipes you can cook right now — and exactly which one or two items you are missing.',
+      'A gentle onboarding estimates your calorie and protein targets, the home dashboard shows what is left for today, and everything runs offline on your device. No account, no tracking, no subscription.',
+    ],
+    category: 'Food & Drink',
+    platform: 'iPhone · iOS 26+',
+    price: 'Free · one-time Pro unlock',
+    status: 'coming-soon',
+    accent: '#3BAE6E',
+    accentSoft: 'rgba(59, 174, 110, 0.16)',
+    icon: '/images/apps/meal-planner/icon.svg',
+    screenshots: [
+      { src: '/images/apps/meal-planner/screen-1.svg', alt: 'Meal Planner home dashboard with calories and protein remaining' },
+      { src: '/images/apps/meal-planner/screen-2.svg', alt: 'Meal Planner week planner with four meal slots per day' },
+      { src: '/images/apps/meal-planner/screen-3.svg', alt: 'Meal Planner recipe library with filters' },
+      { src: '/images/apps/meal-planner/screen-4.svg', alt: 'Meal Planner self-building shopping list grouped by aisle' },
+    ],
+    features: [
+      {
+        icon: 'calendar',
+        title: 'Plan My Week',
+        description: 'People, goal, calories, budget and diet in — a full balanced week out, in one tap. Keep meals you already planned.',
+      },
+      {
+        icon: 'book',
+        title: '156 bilingual recipes',
+        description: 'Hand-written breakfasts, lunches, dinners and snacks in English and Dutch, with filters for vegetarian, high-protein, budget, under 20 minutes and more.',
+      },
+      {
+        icon: 'cart',
+        title: 'A list that builds itself',
+        description: 'The shopping list is generated from your planned week: duplicates merged, quantities scaled, grouped by supermarket aisle.',
+      },
+      {
+        icon: 'chart',
+        title: 'Live macros',
+        description: 'Calories and protein remaining for today, day and week summaries, and per-serving macros that rescale with your portions.',
+      },
+      {
+        icon: 'bulb',
+        title: 'What can I make?',
+        description: 'Select what is in your pantry and see perfect matches — plus recipes missing just one or two ingredients, named.',
+      },
+      {
+        icon: 'shield',
+        title: 'Private & offline',
+        description: 'No account, no analytics, no ads. Your plans, pantry and targets never leave your iPhone.',
+      },
+    ],
+    audience: [
+      'Busy households tired of the daily “what are we eating?” debate',
+      'Fitness-minded cooks tracking calorie and protein targets without a food scale app',
+      'Budget shoppers who want one exact grocery list per week',
+      'Meal preppers batch-cooking lunches and grab-and-go breakfasts',
+    ],
+    privacy: {
+      summary: 'No data collected. No ads, no analytics, no account — plans and pantry stay on your device.',
+      hasAds: false,
+      dataCollected: 'Meal Planner collects no personal data. Your meal plans, pantry, shopping lists and nutrition targets are stored only on your device.',
+      ads: 'Meal Planner contains no advertising.',
+      analytics: 'No analytics or tracking SDKs are included.',
+      account: 'No account or sign-up is required.',
+      storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      details: [
+        'The Pro upgrade is a one-time lifetime purchase processed entirely by Apple through the App Store — we never see your payment details.',
+        'Calorie and protein targets are estimates calculated on your device and clearly labeled as such; they are not medical advice.',
+        'The app makes no network requests for its core functionality and works fully offline.',
+      ],
+    },
+    faq: [
+      { question: 'Is Meal Planner free?', answer: 'The app is free to download and use. A single one-time Pro purchase unlocks everything for life — no subscription, ever.' },
+      { question: 'Does the app work offline?', answer: 'Yes — completely. Recipes, the week planner, shopping lists and your pantry all work without an internet connection.' },
+      { question: 'Is my data stored or shared?', answer: 'Everything stays on your device. There are no servers, no analytics and no tracking.' },
+      { question: 'Are there ads?', answer: 'No. Meal Planner is completely ad-free.' },
+      { question: 'Do I need an account?', answer: 'No account is needed — everything works immediately.' },
+      { question: 'How does Plan My Week work?', answer: 'Tell the app how many people you cook for, your goal, your budget level and any dietary preference. It fills all four meal slots for every day of the week with balanced, non-repeating recipes — and you can keep any meals you already planned yourself.' },
+      { question: 'Are the calorie targets medical advice?', answer: 'No. Targets are estimates based on the well-known Mifflin-St Jeor formula, are fully editable, and are clearly labeled as estimates — not medical or dietary advice.' },
+      { question: 'Which devices and languages are supported?', answer: 'Meal Planner is designed for iPhone and requires iOS 26 or later. The full app — including every recipe — is available in English and Dutch, switchable instantly in settings.' },
+      { question: 'How do I get support?', answer: `Email ${'support@amsterdamfuturelabs.com'} — we aim to reply within two business days.` },
+    ],
+  },
 ];
 
 export function getApp(slug: string): AppMeta | undefined {

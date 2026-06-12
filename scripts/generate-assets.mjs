@@ -105,6 +105,14 @@ const ogCards = [
     accent: '#5B6BF5',
     accent2: '#9aa5ff',
   },
+  {
+    file: 'meal-planner.png',
+    eyebrow: 'MEAL PLANNER',
+    title: 'Plan smarter.',
+    title2: 'Eat better.',
+    accent: '#3BAE6E',
+    accent2: '#8ee0ae',
+  },
 ];
 
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');

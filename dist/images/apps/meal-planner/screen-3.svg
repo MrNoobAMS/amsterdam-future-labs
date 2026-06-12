@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#0e1611"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#e8f2ea">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#e8f2ea" stroke-width="1.5" opacity="0.8"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#e8f2ea" opacity="0.8"/>
+
+  <text x="30" y="118" font-size="27" font-weight="700" fill="#e8f2ea">Recipes</text>
+  <text x="30" y="144" font-size="14" fill="#93a89a">156 recipes · English &amp; Dutch</text>
+
+  <!-- search -->
+  <rect x="30" y="164" width="380" height="46" rx="14" fill="#16241b"/>
+  <circle cx="56" cy="187" r="7" fill="none" stroke="#5e7264" stroke-width="2"/>
+  <line x1="61" y1="192" x2="67" y2="198" stroke="#5e7264" stroke-width="2" stroke-linecap="round"/>
+  <text x="80" y="192" font-size="14" fill="#5e7264">Search recipes or ingredients…</text>
+
+  <!-- filter chips -->
+  <rect x="30" y="226" width="118" height="36" rx="18" fill="#3bae6e"/>
+  <text x="50" y="249" font-size="13" font-weight="600" fill="#0e1611">High-protein</text>
+  <rect x="158" y="226" width="108 " height="36" rx="18" fill="#16241b"/>
+  <text x="178" y="249" font-size="13" fill="#93a89a">Vegetarian</text>
+  <rect x="276" y="226" width="118" height="36" rx="18" fill="#16241b"/>
+  <text x="296" y="249" font-size="13" fill="#93a89a">Under 20 min</text>
+
+  <!-- recipe grid -->
+  <g>
+    <rect x="30" y="290" width="184" height="220" rx="18" fill="#16241b"/>
+    <rect x="30" y="290" width="184" height="124" rx="18" fill="#23402e"/>
+    <rect x="30" y="396" width="184" height="18" fill="#23402e"/>
+    <text x="104" y="368" font-size="38">🍲</text>
+    <text x="46" y="442" font-size="14" font-weight="600" fill="#e8f2ea">Beef Ragu Bowl</text>
+    <text x="46" y="464" font-size="11" fill="#93a89a">640 kcal · 41 g protein</text>
+    <rect x="46" y="476" width="74" height="22" rx="11" fill="#3bae6e" opacity="0.2"/>
+    <text x="56" y="491" font-size="10" font-weight="700" fill="#6fcf97">35 MIN</text>
+  </g>
+  <g>
+    <rect x="226" y="290" width="184" height="220" rx="18" fill="#16241b"/>
+    <rect x="226" y="290" width="184" height="124" rx="18" fill="#23402e"/>
+    <rect x="226" y="396" width="184" height="18" fill="#23402e"/>
+    <text x="300" y="368" font-size="38">🥘</text>
+    <text x="242" y="442" font-size="14" font-weight="600" fill="#e8f2ea">Shakshuka</text>
+    <text x="242" y="464" font-size="11" fill="#93a89a">420 kcal · 23 g protein</text>
+    <rect x="242" y="476" width="74" height="22" rx="11" fill="#3bae6e" opacity="0.2"/>
+    <text x="252" y="491" font-size="10" font-weight="700" fill="#6fcf97">25 MIN</text>
+  </g>
+  <g>
+    <rect x="30" y="526" width="184" height="220" rx="18" fill="#16241b"/>
+    <rect x="30" y="526" width="184" height="124" rx="18" fill="#23402e"/>
+    <rect x="30" y="632" width="184" height="18" fill="#23402e"/>
+    <text x="104" y="604" font-size="38">🍜</text>
+    <text x="46" y="678" font-size="14" font-weight="600" fill="#e8f2ea">Chicken Ramen</text>
+    <text x="46" y="700" font-size="11" fill="#93a89a">580 kcal · 39 g protein</text>
+    <rect x="46" y="712" width="74" height="22" rx="11" fill="#3bae6e" opacity="0.2"/>
+    <text x="56" y="727" font-size="10" font-weight="700" fill="#6fcf97">30 MIN</text>
+  </g>
+  <g>
+    <rect x="226" y="526" width="184" height="220" rx="18" fill="#16241b"/>
+    <rect x="226" y="526" width="184" height="124" rx="18" fill="#23402e"/>
+    <rect x="226" y="632" width="184" height="18" fill="#23402e"/>
+    <text x="300" y="604" font-size="38">🥙</text>
+    <text x="242" y="678" font-size="14" font-weight="600" fill="#e8f2ea">Falafel Pita</text>
+    <text x="242" y="700" font-size="11" fill="#93a89a">490 kcal · 19 g protein</text>
+    <rect x="242" y="712" width="74" height="22" rx="11" fill="#3bae6e" opacity="0.2"/>
+    <text x="252" y="727" font-size="10" font-weight="700" fill="#6fcf97">20 MIN</text>
+  </g>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#121b15"/>
+  <text x="46" y="932" font-size="10" fill="#5e7264">Home</text>
+  <text x="124" y="932" font-size="10" fill="#5e7264">Planner</text>
+  <circle cx="226" cy="904" r="4" fill="#3bae6e"/>
+  <text x="208" y="932" font-size="10" fill="#3bae6e">Recipes</text>
+  <text x="288" y="932" font-size="10" fill="#5e7264">Shopping</text>
+  <text x="372" y="932" font-size="10" fill="#5e7264">Profile</text>
+</svg>
