@@ -31,6 +31,10 @@ export interface AppPrivacy {
   analytics: string;
   account: string;
   storage: string;
+  /** Optional "Last updated" date for the full policy page; falls back to the site default. */
+  updated?: string;
+  /** Optional in-app purchase / subscription clause for the full policy page. */
+  purchases?: string;
   /** Extra app-specific clauses for the full policy page. */
   details: string[];
 }
@@ -132,8 +136,9 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included. We cannot see how you use the app.',
       account: 'No account or sign-up is required — the app works fully without one.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'June 13, 2026',
+      purchases: 'BreathWell offers optional in-app purchases — BreathWell Pro is available as a monthly or yearly auto-renewing subscription, or as a one-time lifetime unlock. All payments are processed by Apple through the App Store; we never receive or store your card or payment details. To unlock Pro on your device, Apple shares only your purchase and subscription status with the app — nothing more. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the current period, and can be managed or cancelled at any time in your Apple Account settings. Restoring a previous purchase uses your Apple Account and discloses no personal information to us.',
       details: [
-        'Purchases of BreathWell Pro are processed entirely by Apple through the App Store. We never see your payment details.',
         'The optional daily reminder uses local notifications scheduled on your device — no push servers are involved.',
         'BreathWell makes no network requests for its core functionality and works fully offline.',
       ],

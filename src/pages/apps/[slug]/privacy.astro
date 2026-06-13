@@ -10,7 +10,7 @@ export function getStaticPaths() {
 }
 
 const { app } = Astro.props;
-const updated = 'June 12, 2026';
+const updated = app.privacy.updated ?? 'June 12, 2026';
 
 const sections = [
   { title: 'Data we collect', body: app.privacy.dataCollected },
@@ -18,6 +18,9 @@ const sections = [
   { title: 'Analytics & tracking', body: app.privacy.analytics },
   { title: 'Accounts', body: app.privacy.account },
   { title: 'Data storage', body: app.privacy.storage },
+  ...(app.privacy.purchases
+    ? [{ title: 'Purchases & subscriptions', body: app.privacy.purchases }]
+    : []),
 ];
 ---
 
