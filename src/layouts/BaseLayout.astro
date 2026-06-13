@@ -84,7 +84,10 @@ const ogImageUrl = new URL(ogImage, Astro.site);
       const header = document.getElementById('site-header');
       let headerTicking = false;
       const updateHeader = () => {
-        header?.classList.toggle('is-scrolled', window.scrollY > 24);
+        const y = window.scrollY;
+        header?.classList.toggle('is-scrolled', y > 24);
+        // 0 at the top → 1 after ~160px, drives the brand logo animation.
+        header?.style.setProperty('--logo-p', Math.min(y / 160, 1).toFixed(3));
         headerTicking = false;
       };
       updateHeader();
