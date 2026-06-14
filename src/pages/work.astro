@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import AnimatedSection from '../components/AnimatedSection.astro';
+import CTAButton from '../components/CTAButton.astro';
+import FeatureIcon from '../components/FeatureIcon.astro';
+import { SUPPORT_EMAIL } from '../data/apps';
+
+const projectMail = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Project inquiry')}`;
+
+const services = [
+  {
+    icon: 'sparkle',
+    title: 'iPhone apps',
+    description:
+      'Native iOS apps built in SwiftUI — from a first sketch to a finished app on the App Store. The same craft, speed and privacy-first approach that goes into our own apps.',
+    points: [
+      'Concept, UX and interface design',
+      'SwiftUI development for iPhone',
+      'App Store submission & review',
+      'Offline-first, private by default',
+    ],
+  },
+  {
+    icon: 'grid',
+    title: 'Websites',
+    description:
+      'Fast, modern websites that look right on every screen — marketing sites, landing pages and app companion sites like this one. Clean, accessible and easy to grow.',
+    points: [
+      'Visual design & copy direction',
+      'Responsive, hand-built front-end',
+      'SEO, performance & analytics',
+      'Hosting and domain setup',
+    ],
+  },
+];
+
+const principles = [
+  {
+    icon: 'bulb',
+    title: 'Design that fits',
+    description: 'No templates. Every project gets an interface shaped around your goal and the people who use it.',
+  },
+  {
+    icon: 'chart',
+    title: 'Fast & polished',
+    description: 'Performance is a feature. Quick to load, smooth to use, and refined down to the small details.',
+  },
+  {
+    icon: 'shield',
+    title: 'Built to last',
+    description: 'Clean, maintainable code and honest choices — so what we ship keeps working long after launch.',
+  },
+  {
+    icon: 'lock',
+    title: 'Privacy by design',
+    description: 'We collect only what a product truly needs, and we are transparent about it. The default is your data, on your device.',
+  },
+];
+
+const steps = [
+  {
+    n: '01',
+    title: 'Discovery',
+    description: 'A short call to understand your idea, your users and the scope. You get a clear plan, timeline and quote.',
+  },
+  {
+    n: '02',
+    title: 'Design',
+    description: 'Wireframes and a visual direction to react to. We refine together until it feels right before a line of code is written.',
+  },
+  {
+    n: '03',
+    title: 'Build',
+    description: 'Development in focused sprints with regular previews, so you always see progress and can steer along the way.',
+  },
+  {
+    n: '04',
+    title: 'Launch & beyond',
+    description: 'App Store submission or go-live, plus the aftercare to keep things running smoothly once you are out in the world.',
+  },
+];
+---
+
+<BaseLayout
+  title="Work with us — Amsterdam Future Labs"
+  description="Amsterdam Future Labs designs and builds polished iPhone apps and modern websites for clients — the same craft behind our own apps, applied to your project."
+>
+  <PageHero
+    eyebrow="Work with us"
+    title="Need a website or an app? Let’s build it."
+    lead="We don’t only make our own apps — we take on a handful of client projects too. The same care, craft and privacy-first thinking, applied to whatever you have in mind."
+  >
+    <div class="hero-cta">
+      <CTAButton href={projectMail} variant="gradient" arrow>Start a project</CTAButton>
+      <CTAButton href="#services" variant="ghost">What we build</CTAButton>
+    </div>
+  </PageHero>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section" id="services">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">What we build</p>
+        <h2 class="h2">Two things, done properly</h2>
+        <p class="lead">
+          Whether it lives on the App Store or in a browser, we design and build the whole
+          thing — and keep the quality bar exactly where it is for our own products.
+        </p>
+      </AnimatedSection>
+
+      <div class="services-grid">
+        {services.map((s, i) => (
+          <AnimatedSection delay={i * 0.1} class="service card">
+            <span class="service-icon"><FeatureIcon name={s.icon} /></span>
+            <h3 class="h3">{s.title}</h3>
+            <p class="service-desc">{s.description}</p>
+            <ul class="service-points">
+              {s.points.map((p) => <li>{p}</li>)}
+            </ul>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRINCIPLES ===================== -->
+  <section class="section section--soft">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">How we work</p>
+        <h2 class="h2">What you can count on</h2>
+      </AnimatedSection>
+
+      <div class="principles-grid">
+        {principles.map((p, i) => (
+          <AnimatedSection delay={(i % 2) * 0.08} class="principle card">
+            <span class="principle-icon"><FeatureIcon name={p.icon} /></span>
+            <div>
+              <h3 class="h3">{p.title}</h3>
+              <p>{p.description}</p>
+            </div>
+          </AnimatedSection>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS ===================== -->
+  <section class="section">
+    <div class="container">
+      <AnimatedSection class="section-head">
+        <p class="eyebrow">The process</p>
+        <h2 class="h2">From idea to launch</h2>
+        <p class="lead">A simple, transparent path — you always know where things stand.</p>
+      </AnimatedSection>
+
+      <ol class="steps">
+        {steps.map((s, i) => (
+          <AnimatedSection delay={i * 0.07} class="step">
+            <span class="step-n">{s.n}</span>
+            <div class="step-body">
+              <h3 class="h3">{s.title}</h3>
+              <p>{s.description}</p>
+            </div>
+          </AnimatedSection>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="section">
+    <div class="container">
+      <AnimatedSection class="work-cta section--dark">
+        <p class="eyebrow">Let’s talk</p>
+        <h2 class="h2">Have a project in mind?</h2>
+        <p class="lead">
+          Tell us what you’re thinking — even a rough idea is enough to start. We reply within
+          two business days and we’ll be honest about whether we’re the right fit.
+        </p>
+        <div class="work-cta-actions">
+          <CTAButton href={projectMail} variant="gradient" arrow>Email {SUPPORT_EMAIL}</CTAButton>
+          <CTAButton href="/apps/" variant="ghost">See our own apps</CTAButton>
+        </div>
+      </AnimatedSection>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.2rem;
+  }
+
+  .section-head {
+    max-width: 42rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .section-head .lead {
+    margin-top: 1rem;
+  }
+
+  /* ---------- Services ---------- */
+  .services-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 760px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .services-grid :global(.service) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 2.2rem 2rem;
+  }
+
+  .services-grid :global(.service:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 22px 48px -20px rgba(14, 15, 20, 0.22);
+  }
+
+  .service-icon {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    border-radius: 1rem;
+    background: var(--gradient-brand);
+    color: #fff;
+  }
+
+  .service-desc {
+    color: var(--text-dark-secondary);
+  }
+
+  .service-points {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 0;
+    display: grid;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .service-points li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: 0.95rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .service-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background: var(--gradient-brand);
+  }
+
+  /* ---------- Principles ---------- */
+  .principles-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 700px) {
+    .principles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .principles-grid :global(.principle) {
+    display: flex;
+    gap: 1.1rem;
+    padding: 1.7rem;
+    align-items: flex-start;
+  }
+
+  .principles-grid :global(.principle:hover) {
+    transform: translateY(-4px);
+  }
+
+  .principle-icon {
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    flex-shrink: 0;
+    border-radius: 0.85rem;
+    background: var(--app-accent-soft, rgba(99, 102, 241, 0.12));
+    color: var(--brand-a);
+  }
+
+  .principles-grid :global(.principle p) {
+    margin-top: 0.3rem;
+    font-size: 0.93rem;
+    color: var(--text-dark-secondary);
+  }
+
+  /* ---------- Process ---------- */
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    counter-reset: step;
+  }
+
+  @media (min-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem 2.5rem;
+    }
+  }
+
+  .steps :global(.step) {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 0.4rem 0;
+  }
+
+  .step-n {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: transparent;
+    background: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    flex-shrink: 0;
+    padding-top: 0.15rem;
+  }
+
+  .step-body p {
+    margin-top: 0.35rem;
+    color: var(--text-dark-secondary);
+    line-height: 1.6;
+  }
+
+  /* ---------- CTA ---------- */
+  .work-cta {
+    border-radius: var(--radius-lg, 1.5rem);
+    padding: clamp(2.5rem, 6vw, 4rem);
+    text-align: center;
+  }
+
+  .work-cta .lead {
+    margin: 1rem auto 0;
+    max-width: 48ch;
+  }
+
+  .work-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+</style>
