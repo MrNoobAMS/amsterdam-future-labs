@@ -9,8 +9,10 @@
  * Run via `npm run assets` (also runs automatically before `npm run build`).
  */
 
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -35,14 +37,50 @@ async function resizeTo(src, dest, width) {
   console.log(`wrote ${path.relative(root, dest)}`);
 }
 
-// ---------- BreathWell: real screenshots + logo ----------
+/**
+ * Brand a raw screenshot via the app's `frame.sh` (kicker + caption in the
+ * app's house style), then resize the result to web width. Requires
+ * ImageMagick (`magick`); if the source, the script, or `magick` is missing,
+ * the existing committed asset is kept and the step is skipped — so the build
+ * still succeeds on hosts without ImageMagick.
+ */
+async function frameAndResize(frameScript, src, title, dest, width) {
+  if (!existsSync(src) || !existsSync(frameScript)) {
+    console.warn(`skip framing (missing source/script): ${src}`);
+    return;
+  }
+  const tmpDir = mkdtempSync(path.join(tmpdir(), 'afl-frame-'));
+  const framed = path.join(tmpDir, 'framed.png');
+  try {
+    execFileSync('bash', [frameScript, src, title, framed], { stdio: 'pipe' });
+    await ensureDir(dest);
+    await sharp(framed).resize({ width }).png({ quality: 80, compressionLevel: 9 }).toFile(dest);
+    console.log(`wrote ${path.relative(root, dest)} (framed)`);
+  } catch (err) {
+    console.warn(`skip framing (${frameScript} failed, keeping existing): ${dest}`);
+  } finally {
+    rmSync(tmpDir, { recursive: true, force: true });
+  }
+}
 
-const bwShots = ['IMG_5476.PNG', 'IMG_5478.PNG', 'IMG_5479.PNG', 'IMG_5480.PNG'];
+// ---------- BreathWell: branded screenshots + logo ----------
+// Raw captures live in BreathWell/Media/Screenshots; frame.sh adds the
+// calm Japandi caption + kicker before we resize for the web.
+
 const bwSrcDir = path.join(appsRoot, 'BreathWell', 'Media', 'Screenshots');
+const bwFrame = path.join(appsRoot, 'BreathWell', 'screenshot-tools', 'frame.sh');
+const bwShots = [
+  ['IMG_5476.PNG', 'Start with how you feel'],
+  ['IMG_5478.PNG', 'Wind down for sleep'],
+  ['IMG_5479.PNG', '120 calming sessions'],
+  ['IMG_5480.PNG', 'Six pathways for every mood'],
+];
 
-for (const [i, name] of bwShots.entries()) {
-  await resizeTo(
+for (const [i, [name, title]] of bwShots.entries()) {
+  await frameAndResize(
+    bwFrame,
     path.join(bwSrcDir, name),
+    title,
     pub('images', 'apps', 'breathwell', `screen-${i + 1}.png`),
     SCREEN_WIDTH
   );
@@ -53,6 +91,30 @@ await resizeTo(
   pub('images', 'apps', 'breathwell', 'icon.png'),
   192
 );
+
+// ---------- Kamado Companion: branded screenshots ----------
+// Raw English simulator captures live in KamadoCompanion/Media/Screenshots/en;
+// frame.sh adds the dark, orange-kicker caption before we resize for the web.
+
+const kcSrcDir = path.join(appsRoot, 'KamadoCompanion', 'Media', 'Screenshots', 'en');
+const kcFrame = path.join(appsRoot, 'KamadoCompanion', 'screenshot-tools', 'frame.sh');
+const kcShots = [
+  '65+ recipes for your kamado',
+  'Built for ceramic grills',
+  'Dome & core temps in °C',
+  'Know exactly when to light up',
+  'Every cut, every temp',
+];
+
+for (const [i, title] of kcShots.entries()) {
+  await frameAndResize(
+    kcFrame,
+    path.join(kcSrcDir, `screen-${i + 1}.png`),
+    title,
+    pub('images', 'apps', 'kamado-companion', `screen-${i + 1}.png`),
+    SCREEN_WIDTH
+  );
+}
 
 // ---------- Sudoku XL: icon from render ----------
 

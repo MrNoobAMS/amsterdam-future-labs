@@ -10,10 +10,11 @@ interface Props {
 
 const { app, compact = false } = Astro.props;
 const available = app.status === 'available';
+const framed = app.framedScreenshots ?? false;
 ---
 
 <article class="app-card card" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
-  <a href={`/apps/${app.slug}/`} class="app-card-media" aria-hidden="true" tabindex="-1">
+  <a href={`/apps/${app.slug}/`} class:list={['app-card-media', { 'app-card-media--framed': framed }]} aria-hidden="true" tabindex="-1">
     <img
       src={app.screenshots[0].src}
       alt=""
@@ -90,6 +91,12 @@ const available = app.status === 'available';
 
   .app-card:hover .app-card-media img {
     transform: translateY(2px) scale(1.02);
+  }
+
+  /* Pre-branded App Store images already carry their own background and
+     rounding — drop the dark "phone edge" ring (jarring on light frames). */
+  .app-card-media--framed img {
+    box-shadow: 0 18px 40px -16px rgba(14, 15, 20, 0.4);
   }
 
   .app-card-body {

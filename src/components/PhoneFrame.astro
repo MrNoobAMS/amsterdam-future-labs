@@ -2,20 +2,24 @@
 /**
  * iPhone-style device frame around a screenshot. Screenshots are lazily
  * loaded by default; pass eager for above-the-fold heroes.
+ *
+ * Pass `framed` for screenshots that already are branded, captioned App
+ * Store images (their own background + caption): these are shown flat with
+ * rounded corners and a soft shadow, without the device bezel/notch.
  */
 interface Props {
   src: string;
   alt: string;
   eager?: boolean;
+  framed?: boolean;
   class?: string;
 }
 
-const { src, alt, eager = false, class: className = '' } = Astro.props;
+const { src, alt, eager = false, framed = false, class: className = '' } = Astro.props;
 ---
 
-<figure class:list={['phone', className]}>
-  <div class="phone-body">
-    <span class="phone-notch" aria-hidden="true"></span>
+{framed ? (
+  <figure class:list={['shot', className]}>
     <img
       src={src}
       alt={alt}
@@ -24,13 +28,44 @@ const { src, alt, eager = false, class: className = '' } = Astro.props;
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
     />
-  </div>
-</figure>
+  </figure>
+) : (
+  <figure class:list={['phone', className]}>
+    <div class="phone-body">
+      <span class="phone-notch" aria-hidden="true"></span>
+      <img
+        src={src}
+        alt={alt}
+        width="330"
+        height="717"
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    </div>
+  </figure>
+)}
 
 <style>
   .phone {
     margin: 0;
     width: clamp(200px, 100%, 300px);
+  }
+
+  /* Flat, pre-branded App Store screenshot (no device bezel). */
+  .shot {
+    margin: 0;
+    width: clamp(200px, 100%, 300px);
+  }
+
+  .shot img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1320 / 2868;
+    object-fit: contain;
+    border-radius: clamp(1.1rem, 6cqw, 1.6rem);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 24px 60px -20px rgba(0, 0, 0, 0.5);
   }
 
   .phone-body {

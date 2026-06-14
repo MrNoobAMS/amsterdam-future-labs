@@ -54,6 +54,9 @@ export interface AppMeta {
   accent: string;
   accentSoft: string;
   icon: string;
+  /** When true, `screenshots` are pre-branded, captioned App Store images
+   * shown flat (no device bezel) rather than raw screenshots in a frame. */
+  framedScreenshots?: boolean;
   screenshots: { src: string; alt: string }[];
   features: AppFeature[];
   audience: string[];
@@ -84,6 +87,7 @@ export const apps: AppMeta[] = [
     accent: '#8FAE9B',
     accentSoft: 'rgba(143, 174, 155, 0.16)',
     icon: '/images/apps/breathwell/icon.png',
+    framedScreenshots: true,
     screenshots: [
       { src: '/images/apps/breathwell/screen-1.png', alt: 'BreathWell home screen with daily recommendation' },
       { src: '/images/apps/breathwell/screen-2.png', alt: 'BreathWell breathing session player' },
@@ -172,6 +176,7 @@ export const apps: AppMeta[] = [
     accent: '#E25A2C',
     accentSoft: 'rgba(226, 90, 44, 0.16)',
     icon: '/images/apps/kamado-companion/icon.svg',
+    framedScreenshots: true,
     screenshots: [
       { src: '/images/apps/kamado-companion/screen-1.png', alt: 'Kamado Companion home screen with the featured recipe and categories' },
       { src: '/images/apps/kamado-companion/screen-2.png', alt: 'Kamado Companion recipe library with category, time and temperature filters' },

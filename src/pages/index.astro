@@ -9,7 +9,9 @@ import FAQAccordion from '../components/FAQAccordion.astro';
 import { apps, getApp } from '../data/apps';
 
 const featured = [getApp('meal-planner')!, getApp('breathwell')!, getApp('sudoku-xl')!];
-const heroApps = [getApp('kamado-companion')!, getApp('meal-planner')!, getApp('sudoku-xl')!];
+// Decorative device cluster — use apps whose screenshots are raw phone
+// mockups (framed/captioned App Store images don't belong in a bezel).
+const heroApps = [getApp('airfryer-companion')!, getApp('meal-planner')!, getApp('sudoku-xl')!];
 
 const pillars = [
   {

@@ -68,7 +68,7 @@ const structuredData = {
 
       <AnimatedSection delay={0.2} class="app-hero-device">
         <div data-parallax="-0.04">
-          <PhoneFrame src={app.screenshots[0].src} alt={app.screenshots[0].alt} eager />
+          <PhoneFrame src={app.screenshots[0].src} alt={app.screenshots[0].alt} framed={app.framedScreenshots} eager />
         </div>
       </AnimatedSection>
     </div>
@@ -102,7 +102,7 @@ const structuredData = {
     <div class="screens-rail" tabindex="0" aria-label={`${app.name} screenshots`}>
       {app.screenshots.map((shot, i) => (
         <AnimatedSection delay={i * 0.07} class="screens-item">
-          <PhoneFrame src={shot.src} alt={shot.alt} />
+          <PhoneFrame src={shot.src} alt={shot.alt} framed={app.framedScreenshots} />
         </AnimatedSection>
       ))}
     </div>
