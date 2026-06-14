@@ -51,11 +51,22 @@ const generalFaq = [
       'Purchases are processed by Apple, so refunds go through Apple as well: visit reportaproblem.apple.com, sign in and select the purchase. Apple handles the request directly.',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: generalFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
 ---
 
 <BaseLayout
   title="FAQ — Amsterdam Future Labs"
   description="Frequently asked questions about Amsterdam Future Labs apps: pricing, offline use, privacy, supported devices and support."
+  jsonLd={faqSchema}
 >
   <PageHero
     eyebrow="FAQ"

@@ -4,9 +4,37 @@ import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
-import { SUPPORT_EMAIL } from '../data/apps';
+import { SUPPORT_EMAIL, SITE_URL, SITE_NAME } from '../data/apps';
 
 const projectMail = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('Project inquiry')}`;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'App & website design and development',
+  serviceType: ['iOS app development', 'Web design and development'],
+  url: `${SITE_URL}/work/`,
+  provider: { '@id': `${SITE_URL}/#organization` },
+  areaServed: 'Worldwide',
+  description:
+    'Custom iPhone apps built in SwiftUI and modern, fast websites — designed and built end to end by Amsterdam Future Labs.',
+  offers: {
+    '@type': 'Offer',
+    itemOffered: [
+      { '@type': 'Service', name: 'iPhone app design & development' },
+      { '@type': 'Service', name: 'Website design & development' },
+    ],
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Work with us', item: `${SITE_URL}/work/` },
+  ],
+};
 
 const services = [
   {
@@ -83,8 +111,10 @@ const steps = [
 ---
 
 <BaseLayout
-  title="Work with us — Amsterdam Future Labs"
+  title="Work with us — App & website development | Amsterdam Future Labs"
   description="Amsterdam Future Labs designs and builds polished iPhone apps and modern websites for clients — the same craft behind our own apps, applied to your project."
+  ogImageAlt="Amsterdam Future Labs — app and website development"
+  jsonLd={[serviceSchema, breadcrumbSchema]}
 >
   <PageHero
     eyebrow="Work with us"

@@ -3,25 +3,61 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_NAME } from '../data/apps';
+import { SITE_NAME, SITE_URL, SUPPORT_EMAIL } from '../data/apps';
 
 interface Props {
   title: string;
   description: string;
   /** Path to an Open Graph image, defaults to the site-wide card. */
   ogImage?: string;
+  /** Alt text describing the Open Graph image. */
+  ogImageAlt?: string;
   ogType?: string;
+  /** Optional page-specific JSON-LD (object or array of objects). */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title,
   description,
   ogImage = '/images/og/default.png',
+  ogImageAlt,
   ogType = 'website',
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage, Astro.site);
+const imageAlt = ogImageAlt ?? title;
+
+// Site-wide identity graph, present on every page so search engines can tie
+// pages back to a single Organization + WebSite entity.
+const siteGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
+      email: SUPPORT_EMAIL,
+      logo: new URL('/favicon.svg', SITE_URL).href,
+      description: 'An independent studio crafting private, offline-first iPhone apps — and building apps and websites for clients.',
+      founder: { '@type': 'Person', name: 'Pieter Thurkow' },
+      foundingLocation: { '@type': 'Place', name: 'Amsterdam, Netherlands' },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      inLanguage: 'en',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+    },
+  ],
+};
+
+const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!doctype html>
@@ -36,13 +72,17 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#0b0c10" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content={SITE_NAME} />
 
     <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -50,6 +90,12 @@ const ogImageUrl = new URL(ogImage, Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteGraph)} />
+    {pageJsonLd.map((entry) => (
+      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+    ))}
   </head>
   <body>
     <Header />
