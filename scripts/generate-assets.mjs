@@ -9,7 +9,7 @@
  * Run via `npm run assets` (also runs automatically before `npm run build`).
  */
 
-import { existsSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, rmSync, readdirSync, statSync } from 'node:fs';
 import { mkdir } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -204,6 +204,48 @@ for (const card of ogCards) {
   await ensureDir(dest);
   await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toFile(dest);
   console.log(`wrote ${path.relative(root, dest)}`);
+}
+
+// ---------- Organization logo + apple-touch-icon (raster) ----------
+// Google prefers a raster Organization.logo; iOS wants an apple-touch-icon.
+if (existsSync(pub('favicon.svg'))) {
+  await sharp(pub('favicon.svg'), { density: 384 })
+    .resize(512, 512)
+    .png({ compressionLevel: 9 })
+    .toFile(pub('images', 'logo.png'));
+  console.log('wrote public/images/logo.png');
+
+  await sharp(pub('favicon.svg'), { density: 256 })
+    .resize(180, 180)
+    .flatten({ background: '#0b0c10' })
+    .png({ compressionLevel: 9 })
+    .toFile(pub('apple-touch-icon.png'));
+  console.log('wrote public/apple-touch-icon.png');
+}
+
+// ---------- Next-gen formats (AVIF + WebP) ----------
+// Emit modern-format siblings for every raster PNG screenshot/icon under
+// images/apps, so the site can serve them via <picture> with a PNG fallback.
+
+function walkPng(dir) {
+  const found = [];
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory()) found.push(...walkPng(full));
+    else if (/\.png$/i.test(entry)) found.push(full);
+  }
+  return found;
+}
+
+const rasterRoot = pub('images', 'apps');
+if (existsSync(rasterRoot)) {
+  for (const png of walkPng(rasterRoot)) {
+    const avif = png.replace(/\.png$/i, '.avif');
+    const webp = png.replace(/\.png$/i, '.webp');
+    await sharp(png).avif({ quality: 55 }).toFile(avif);
+    await sharp(png).webp({ quality: 78 }).toFile(webp);
+    console.log(`wrote ${path.relative(root, avif)} + .webp`);
+  }
 }
 
 console.log('assets done');

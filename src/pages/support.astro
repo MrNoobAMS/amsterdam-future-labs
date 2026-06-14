@@ -4,7 +4,16 @@ import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
-import { apps, SUPPORT_EMAIL } from '../data/apps';
+import { apps, SUPPORT_EMAIL, SITE_URL } from '../data/apps';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Support', item: `${SITE_URL}/support/` },
+  ],
+};
 
 const channels = [
   {
@@ -41,6 +50,7 @@ const channels = [
 <BaseLayout
   title="Support — Amsterdam Future Labs"
   description="Get support for Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL. Bug reports, feature requests and privacy questions — answered within two business days."
+  jsonLd={breadcrumbSchema}
 >
   <PageHero
     eyebrow="Support"
@@ -48,7 +58,7 @@ const channels = [
     lead={`One inbox for everything: ${SUPPORT_EMAIL}. We read every message and aim to reply within two business days.`}
   >
     <div class="hero-cta">
-      <CTAButton href={`mailto:${SUPPORT_EMAIL}`} variant="gradient" arrow>
+      <CTAButton href={`mailto:${SUPPORT_EMAIL}`} variant="gradient" arrow class="btn--wrap">
         Email {SUPPORT_EMAIL}
       </CTAButton>
     </div>
@@ -223,9 +233,11 @@ const channels = [
   }
 
   .app-support-links a {
+    display: inline-block;
+    padding-block: 0.25rem;
     font-size: 0.88rem;
     font-weight: 600;
-    color: var(--brand-a);
+    color: var(--brand-ink);
     text-decoration: none;
   }
 

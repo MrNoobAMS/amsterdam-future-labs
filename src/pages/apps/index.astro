@@ -3,12 +3,36 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
 import AppCard from '../../components/AppCard.astro';
-import { apps } from '../../data/apps';
+import { apps, SITE_URL } from '../../data/apps';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Apps', item: `${SITE_URL}/apps/` },
+  ],
+};
+
+// Product catalogue — links every app so Google can map the studio's products.
+const itemListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Amsterdam Future Labs apps',
+  numberOfItems: apps.length,
+  itemListElement: apps.map((app, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `${SITE_URL}/apps/${app.slug}/`,
+    name: app.name,
+  })),
+};
 ---
 
 <BaseLayout
   title="Apps — Amsterdam Future Labs"
   description="Explore all Amsterdam Future Labs apps for iPhone: Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL. Private by design and offline first."
+  jsonLd={[breadcrumbSchema, itemListSchema]}
 >
   <PageHero
     eyebrow="Portfolio"

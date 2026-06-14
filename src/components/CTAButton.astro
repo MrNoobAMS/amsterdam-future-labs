@@ -16,12 +16,19 @@ const {
   appStore = false,
   class: className = '',
 } = Astro.props;
+
+// A disabled CTA is not an action you can take — render a real disabled
+// <button> (out of the tab order, not activatable) rather than a navigable
+// link that merely looks dimmed.
+const Tag = disabled ? 'button' : 'a';
+const tagProps = disabled
+  ? { type: 'button', disabled: true }
+  : { href };
 ---
 
-<a
-  href={href}
+<Tag
   class:list={['btn', `btn--${variant}`, { 'btn--disabled': disabled }, className]}
-  aria-disabled={disabled ? 'true' : undefined}
+  {...tagProps}
 >
   {appStore && (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,4 +41,4 @@ const {
       <path d="M5 12h14M13 6l6 6-6 6" />
     </svg>
   )}
-</a>
+</Tag>

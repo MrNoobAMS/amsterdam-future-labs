@@ -2,6 +2,30 @@
    Amsterdam Future Labs — design system
    ============================================================ */
 
+/* Self-hosted, preloaded Inter (latin variable subset). swap shows text
+   immediately for fast LCP; the metric-matched fallback below makes the
+   swap shift-free (near-zero CLS). */
+@font-face {
+  font-family: 'Inter Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/inter-latin-variable.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+    U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Arial remapped to Inter's metrics so the fallback occupies the same space. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  ascent-override: 90%;
+  descent-override: 22.43%;
+  line-gap-override: 0%;
+  size-adjust: 107.06%;
+}
+
 :root {
   /* Palette */
   --ink: #0b0c10;
@@ -21,20 +45,34 @@
   --brand-b: #8b5cf6;
   --brand-c: #22d3ee;
   --gradient-brand: linear-gradient(120deg, var(--brand-a), var(--brand-b) 50%, var(--brand-c));
+  /* Accessible brand variants for *text*: --brand-ink ≥4.5:1 on light,
+     --brand-tint ≥4.5:1 on dark. */
+  --brand-ink: #4a4db5;
+  --brand-tint: #aab2ff;
 
   /* Type */
-  --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter Variable', 'Inter Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --tracking-tight: -0.035em;
 
   /* Rhythm */
-  --section-pad: clamp(4.5rem, 10vw, 8.5rem);
+  --section-pad: clamp(5rem, 11vw, 9.5rem);
   --container: 72rem;
-  --radius-lg: 1.5rem;
-  --radius-md: 1rem;
+  --radius-lg: 1.65rem;
+  --radius-md: 1.1rem;
+  --radius-sm: 0.7rem;
+
+  /* Elevation — one shared language for every surface */
+  --shadow-sm: 0 1px 2px rgba(14, 15, 20, 0.04), 0 4px 12px -6px rgba(14, 15, 20, 0.08);
+  --shadow-card: 0 1px 2px rgba(14, 15, 20, 0.04), 0 12px 30px -18px rgba(14, 15, 20, 0.16);
+  --shadow-card-hover: 0 28px 56px -24px rgba(14, 15, 20, 0.26);
+  --shadow-card-dark: inset 0 1px 0 rgba(245, 246, 250, 0.05), 0 26px 52px -34px rgba(0, 0, 0, 0.85);
+  --lift: -6px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur: 0.6s;
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur: 0.7s;
+  --dur-fast: 0.25s;
 }
 
 /* ---------- Base ---------- */
@@ -48,6 +86,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* Keep in-page anchor targets clear of the fixed header. */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
@@ -58,13 +98,21 @@ body {
   color: var(--text-dark);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
 }
 
 img,
 svg {
   max-width: 100%;
   display: block;
+}
+
+/* <picture> is a transparent wrapper — let the <img> lay out as if direct. */
+picture {
+  display: contents;
 }
 
 a {
@@ -97,6 +145,12 @@ p {
   border-radius: 4px;
 }
 
+/* Brighter ring on dark surfaces so focus stays clearly visible. */
+.section--dark :focus-visible,
+.on-dark :focus-visible {
+  outline-color: var(--brand-tint);
+}
+
 /* ---------- Layout primitives ---------- */
 
 .container {
@@ -120,23 +174,27 @@ p {
 /* ---------- Typography helpers ---------- */
 
 .display {
-  font-size: clamp(2.6rem, 7vw, 4.75rem);
+  font-size: clamp(2.75rem, 6.6vw, 5rem);
   font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 1.02;
+  letter-spacing: -0.05em;
+  line-height: 1.03;
 }
 
 .h2 {
-  font-size: clamp(1.9rem, 4.4vw, 3rem);
+  font-size: clamp(2rem, 4.6vw, 3.25rem);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
 }
 
 .h3 {
-  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  letter-spacing: -0.02em;
 }
 
 .lead {
-  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
-  line-height: 1.55;
+  font-size: clamp(1.1rem, 1.85vw, 1.35rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
   color: var(--text-dark-secondary);
 }
 
@@ -147,13 +205,18 @@ p {
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.78rem;
+  gap: 0.55rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brand-a);
-  margin-bottom: 1.1rem;
+  color: var(--brand-ink);
+  margin-bottom: 1.2rem;
+}
+
+.section--dark .eyebrow,
+.on-dark .eyebrow {
+  color: var(--brand-tint);
 }
 
 .eyebrow::before {
@@ -175,12 +238,11 @@ p {
 
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(22px);
   transition:
     opacity var(--dur) var(--ease-out),
     transform var(--dur) var(--ease-out);
   transition-delay: var(--reveal-delay, 0s);
-  will-change: opacity, transform;
 }
 
 .reveal.is-visible {
@@ -213,6 +275,8 @@ p {
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
+  min-height: 2.75rem;
+  max-width: 100%;
   padding: 0.85rem 1.7rem;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -269,34 +333,37 @@ p {
 }
 
 .btn--gradient {
-  background: var(--gradient-brand);
-  background-size: 160% 160%;
-  background-position: 0% 50%;
+  /* Indigo→violet keeps the brand gradient on the primary CTA while
+     guaranteeing white-text contrast — the full tri-colour gradient's light
+     cyan stop cannot carry white text at AA. The text-shadow is insurance
+     across the violet end. */
+  background: linear-gradient(120deg, var(--brand-a), var(--brand-b));
   color: #fff;
+  text-shadow: 0 1px 2px rgba(14, 12, 40, 0.28);
   box-shadow: 0 8px 24px -10px rgba(99, 102, 241, 0.55);
 }
 
 .btn--gradient:hover {
   transform: translateY(-2px);
-  background-position: 100% 50%;
+  filter: brightness(1.06);
   box-shadow: 0 14px 34px -10px rgba(139, 92, 246, 0.6);
 }
 
 .btn--ghost {
   background: transparent;
-  border-color: var(--line-dark);
+  border-color: rgba(14, 15, 20, 0.2);
   color: inherit;
 }
 
 .btn--ghost:hover {
   transform: translateY(-2px);
-  border-color: rgba(14, 15, 20, 0.3);
-  background: rgba(14, 15, 20, 0.03);
+  border-color: rgba(14, 15, 20, 0.38);
+  background: rgba(14, 15, 20, 0.04);
 }
 
 .section--dark .btn--ghost,
 .on-dark .btn--ghost {
-  border-color: var(--line-light);
+  border-color: rgba(245, 246, 250, 0.24);
 }
 
 .section--dark .btn--ghost:hover,
@@ -310,21 +377,42 @@ p {
   pointer-events: none;
 }
 
+/* Lets long-content buttons (e.g. a full email address) wrap instead of
+   overflowing the viewport on small screens. */
+.btn--wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
 /* ---------- Cards ---------- */
 
 .card {
   border-radius: var(--radius-lg);
   background: #fff;
   border: 1px solid var(--line-dark);
+  box-shadow: var(--shadow-card);
   transition:
-    transform 0.35s var(--ease-out),
-    box-shadow 0.35s var(--ease-out),
-    border-color 0.35s var(--ease-out);
+    transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    border-color 0.45s var(--ease-out);
+}
+
+/* Consistent default elevation on hover — components may refine the
+   transform, but every card now shares the same easing and shadow language. */
+.card:hover {
+  transform: translateY(var(--lift));
+  box-shadow: var(--shadow-card-hover);
 }
 
 .section--dark .card {
   background: var(--ink-card);
   border-color: var(--line-light);
+  box-shadow: var(--shadow-card-dark);
+}
+
+.section--dark .card:hover {
+  box-shadow: var(--shadow-card-dark);
+  border-color: rgba(245, 246, 250, 0.22);
 }
 
 /* ---------- Glass ---------- */
@@ -355,6 +443,28 @@ p {
   clip: rect(0 0 0 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Skip link — hidden until focused, then slides in above everything. */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 200;
+  padding: 0.7rem 1.15rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 0.2s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 .no-scroll {

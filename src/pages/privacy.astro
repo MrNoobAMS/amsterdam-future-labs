@@ -4,7 +4,16 @@ import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
-import { apps, SUPPORT_EMAIL } from '../data/apps';
+import { apps, SUPPORT_EMAIL, SITE_URL } from '../data/apps';
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Privacy', item: `${SITE_URL}/privacy/` },
+  ],
+};
 
 const principles = [
   {
@@ -33,6 +42,7 @@ const principles = [
 <BaseLayout
   title="Privacy — Amsterdam Future Labs"
   description="How Amsterdam Future Labs apps handle your data: no accounts, no analytics, no tracking. Per-app privacy details for Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL."
+  jsonLd={breadcrumbSchema}
 >
   <PageHero
     eyebrow="Privacy"
@@ -104,6 +114,7 @@ const principles = [
           href={`mailto:${SUPPORT_EMAIL}?subject=Privacy%20question`}
           variant="primary"
           arrow
+          class="btn--wrap"
         >
           {SUPPORT_EMAIL}
         </CTAButton>

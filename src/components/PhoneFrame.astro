@@ -16,31 +16,47 @@ interface Props {
 }
 
 const { src, alt, eager = false, framed = false, class: className = '' } = Astro.props;
+
+// Serve AVIF/WebP siblings for raster (PNG) screenshots; SVG placeholders
+// render as-is. The .avif/.webp files are produced by generate-assets.mjs.
+const isRaster = /\.png$/i.test(src);
+const avif = isRaster ? src.replace(/\.png$/i, '.avif') : null;
+const webp = isRaster ? src.replace(/\.png$/i, '.webp') : null;
 ---
 
 {framed ? (
   <figure class:list={['shot', className]}>
-    <img
-      src={src}
-      alt={alt}
-      width="330"
-      height="717"
-      loading={eager ? 'eager' : 'lazy'}
-      decoding="async"
-    />
-  </figure>
-) : (
-  <figure class:list={['phone', className]}>
-    <div class="phone-body">
-      <span class="phone-notch" aria-hidden="true"></span>
+    <picture>
+      {avif && <source srcset={avif} type="image/avif" />}
+      {webp && <source srcset={webp} type="image/webp" />}
       <img
         src={src}
         alt={alt}
         width="330"
         height="717"
         loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
         decoding="async"
       />
+    </picture>
+  </figure>
+) : (
+  <figure class:list={['phone', className]}>
+    <div class="phone-body">
+      <span class="phone-notch" aria-hidden="true"></span>
+      <picture>
+        {avif && <source srcset={avif} type="image/avif" />}
+        {webp && <source srcset={webp} type="image/webp" />}
+        <img
+          src={src}
+          alt={alt}
+          width="330"
+          height="717"
+          loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : 'auto'}
+          decoding="async"
+        />
+      </picture>
     </div>
   </figure>
 )}

@@ -15,17 +15,39 @@ export function getStaticPaths() {
 const { app } = Astro.props;
 const available = app.status === 'available';
 
+// Accent darkened toward ink for use as *text* on light surfaces, so light
+// accents (amber, sage) keep their hue while staying legible (WCAG AA).
+const accentInk = `color-mix(in srgb, ${app.accent} 64%, #0e0f14)`;
+
 const appUrl = `${SITE_URL}/apps/${app.slug}/`;
+
+// Derive the minimum iOS version from the app's own platform string
+// (e.g. "iPhone · iOS 17+" → "iOS 17.0 or later") so the structured data
+// always matches the page — Meal Planner, for instance, requires iOS 26.
+const iosMatch = app.platform.match(/iOS\s*(\d+)/i);
+const operatingSystem = iosMatch ? `iOS ${iosMatch[1]}.0 or later` : 'iOS';
+
+// Map our human-readable category to a schema.org applicationCategory token.
+const categoryMap: Record<string, string> = {
+  'Health & Fitness': 'HealthApplication',
+  'Food & Drink': 'LifestyleApplication',
+  'Games · Puzzle': 'GameApplication',
+};
 
 const appSchema = {
   '@context': 'https://schema.org',
-  '@type': 'MobileApplication',
+  '@type': ['SoftwareApplication', 'MobileApplication'],
+  '@id': `${appUrl}#app`,
   name: app.name,
   url: appUrl,
-  operatingSystem: 'iOS 17.0 or later',
-  applicationCategory: app.category,
+  operatingSystem,
+  applicationCategory: categoryMap[app.category] ?? 'UtilitiesApplication',
+  applicationSubCategory: app.category,
   description: app.shortDescription,
   image: new URL(`/images/og/${app.slug}.png`, SITE_URL).href,
+  screenshot: app.screenshots.map((shot) => new URL(shot.src, SITE_URL).href),
+  featureList: app.features.map((feature) => feature.title),
+  // Free to download; the optional Pro upgrade is described in copy/FAQ.
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
   publisher: { '@id': `${SITE_URL}/#organization` },
   author: { '@id': `${SITE_URL}/#organization` },
@@ -105,7 +127,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section">
     <div class="container narrow">
       <AnimatedSection>
-        <p class="eyebrow" style={`color:${app.accent}`}>About</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>About</p>
         <h2 class="h2">What is {app.name}?</h2>
       </AnimatedSection>
       <div class="about-copy">
@@ -122,11 +144,11 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section section--soft screens-section">
     <div class="container">
       <AnimatedSection class="section-head">
-        <p class="eyebrow" style={`color:${app.accent}`}>A closer look</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>A closer look</p>
         <h2 class="h2">Inside the app</h2>
       </AnimatedSection>
     </div>
-    <div class="screens-rail" tabindex="0" aria-label={`${app.name} screenshots`}>
+    <div class="screens-rail" tabindex="0" role="region" aria-label={`${app.name} screenshots — scroll horizontally`}>
       {app.screenshots.map((shot, i) => (
         <AnimatedSection delay={i * 0.07} class="screens-item">
           <PhoneFrame src={shot.src} alt={shot.alt} framed={app.framedScreenshots} />
@@ -139,7 +161,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section" id="features">
     <div class="container">
       <AnimatedSection class="section-head">
-        <p class="eyebrow" style={`color:${app.accent}`}>Key features</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>Key features</p>
         <h2 class="h2">Built around what matters</h2>
       </AnimatedSection>
 
@@ -161,7 +183,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section section--soft">
     <div class="container narrow">
       <AnimatedSection>
-        <p class="eyebrow" style={`color:${app.accent}`}>Who it’s for</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>Who it’s for</p>
         <h2 class="h2">Made for people like you</h2>
       </AnimatedSection>
       <ul class="audience-list">
@@ -225,7 +247,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section" id="faq">
     <div class="container narrow">
       <AnimatedSection class="section-head">
-        <p class="eyebrow" style={`color:${app.accent}`}>FAQ</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>FAQ</p>
         <h2 class="h2">Frequently asked questions</h2>
       </AnimatedSection>
       <AnimatedSection delay={0.08}>
@@ -238,7 +260,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <section class="section section--soft" id="support">
     <div class="container narrow support-block">
       <AnimatedSection>
-        <p class="eyebrow" style={`color:${app.accent}`}>Support</p>
+        <p class="eyebrow" style={`color:${accentInk}`}>Support</p>
         <h2 class="h2">Need a hand with {app.name}?</h2>
         <p class="lead support-lead">
           Questions, bug reports, feature ideas — we read everything and aim to

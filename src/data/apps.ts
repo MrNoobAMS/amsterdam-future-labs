@@ -326,6 +326,7 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included.',
       account: 'No account or sign-up is required.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'June 14, 2026',
       details: [
         'The Pro upgrade is a one-time purchase processed entirely by Apple through the App Store — we never see your payment details.',
         'Timer notifications are local notifications scheduled on your device.',
@@ -413,6 +414,7 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included.',
       account: 'No account or sign-up is required.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'June 14, 2026',
       details: [
         'Any optional purchases (such as hint credits) are processed entirely by Apple through the App Store.',
         'The app makes no network requests and works fully offline.',
@@ -499,6 +501,7 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included.',
       account: 'No account or sign-up is required.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'June 14, 2026',
       details: [
         'The Pro upgrade is a one-time lifetime purchase processed entirely by Apple through the App Store — we never see your payment details.',
         'Calorie and protein targets are estimates calculated on your device and clearly labeled as such; they are not medical advice.',

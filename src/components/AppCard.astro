@@ -11,18 +11,27 @@ interface Props {
 const { app, compact = false } = Astro.props;
 const available = app.status === 'available';
 const framed = app.framedScreenshots ?? false;
+
+// Next-gen formats for raster (PNG) screenshots; SVG placeholders render as-is.
+const shot = app.screenshots[0].src;
+const shotAvif = /\.png$/i.test(shot) ? shot.replace(/\.png$/i, '.avif') : null;
+const shotWebp = /\.png$/i.test(shot) ? shot.replace(/\.png$/i, '.webp') : null;
 ---
 
 <article class="app-card card" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
   <a href={`/apps/${app.slug}/`} class:list={['app-card-media', { 'app-card-media--framed': framed }]} aria-hidden="true" tabindex="-1">
-    <img
-      src={app.screenshots[0].src}
-      alt=""
-      width="330"
-      height="717"
-      loading="lazy"
-      decoding="async"
-    />
+    <picture>
+      {shotAvif && <source srcset={shotAvif} type="image/avif" />}
+      {shotWebp && <source srcset={shotWebp} type="image/webp" />}
+      <img
+        src={shot}
+        alt=""
+        width="330"
+        height="717"
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
   </a>
 
   <div class="app-card-body">
@@ -86,11 +95,11 @@ const framed = app.framedScreenshots ?? false;
       0 0 0 5px #17181f,
       0 18px 40px -14px rgba(14, 15, 20, 0.5);
     transform: translateY(10px);
-    transition: transform 0.45s var(--ease-out);
+    transition: transform 0.6s var(--ease-out);
   }
 
   .app-card:hover .app-card-media img {
-    transform: translateY(2px) scale(1.02);
+    transform: translateY(0) scale(1.04);
   }
 
   /* Pre-branded App Store images already carry their own background and
@@ -126,11 +135,17 @@ const framed = app.framedScreenshots ?? false;
     font-weight: 650;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--app-accent);
+    /* Darken the accent toward ink so light accents (amber, sage) stay
+       legible on the pale pill — meets WCAG AA without losing the hue. */
+    color: color-mix(in srgb, var(--app-accent) 68%, #0e0f14);
     background: var(--app-accent-soft);
     padding: 0.32rem 0.7rem;
     border-radius: 999px;
     white-space: nowrap;
+  }
+
+  :global(.section--dark) .app-card-category {
+    color: var(--app-accent);
   }
 
   .app-card-name {

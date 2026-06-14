@@ -4,7 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
-import { apps, SUPPORT_EMAIL } from '../data/apps';
+import { apps, SUPPORT_EMAIL, SITE_URL } from '../data/apps';
 
 const generalFaq = [
   {
@@ -30,7 +30,7 @@ const generalFaq = [
   {
     question: 'Are there ads?',
     answer:
-      'Most apps are completely ad-free. Kamado Companion is free and ad-supported — clearly disclosed on its page and in its privacy policy.',
+      'No. None of our apps contain advertising — no banners, no ad networks, no tracking. Where an app is free, it is funded by an optional, clearly priced upgrade, never by ads.',
   },
   {
     question: 'Do I need an account?',
@@ -61,12 +61,21 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: f.answer },
   })),
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: `${SITE_URL}/faq/` },
+  ],
+};
 ---
 
 <BaseLayout
   title="FAQ — Amsterdam Future Labs"
   description="Frequently asked questions about Amsterdam Future Labs apps: pricing, offline use, privacy, supported devices and support."
-  jsonLd={faqSchema}
+  jsonLd={[faqSchema, breadcrumbSchema]}
 >
   <PageHero
     eyebrow="FAQ"

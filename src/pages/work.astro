@@ -210,7 +210,7 @@ const steps = [
           two business days and we’ll be honest about whether we’re the right fit.
         </p>
         <div class="work-cta-actions">
-          <CTAButton href={projectMail} variant="gradient" arrow>Email {SUPPORT_EMAIL}</CTAButton>
+          <CTAButton href={projectMail} variant="gradient" arrow class="btn--wrap">Email {SUPPORT_EMAIL}</CTAButton>
           <CTAButton href="/apps/" variant="ghost">See our own apps</CTAButton>
         </div>
       </AnimatedSection>
@@ -369,13 +369,12 @@ const steps = [
   }
 
   .step-n {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: transparent;
-    background: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
+    /* Solid accessible indigo — the gradient's cyan stop is unreadable on
+       white, so the step ordinals use the AA-safe brand ink instead. */
+    color: var(--brand-ink);
     flex-shrink: 0;
     padding-top: 0.15rem;
   }
