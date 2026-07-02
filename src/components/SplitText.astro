@@ -1,0 +1,46 @@
+---
+/**
+ * Splits a string into per-character spans for a letter-by-letter reveal
+ * (ORYZO-style stagger). Renders inline, so it can sit inside a heading.
+ *
+ * The reveal is driven by the nearest `.reveal.is-visible` ancestor — the
+ * same IntersectionObserver in BaseLayout that powers scroll reveals — so no
+ * extra JS is needed. Each character carries a `--char-i` index that CSS turns
+ * into a staggered transition-delay.
+ *
+ * Inner spans are aria-hidden; put an `aria-label` on the wrapping heading so
+ * screen readers still read the text as one string.
+ *
+ * `startIndex` lets you chain several SplitText runs (e.g. two lines of a
+ * headline) so the stagger keeps counting across them.
+ */
+interface Props {
+  text: string;
+  /** Stagger offset to continue counting across multiple runs. */
+  startIndex?: number;
+  /** Class applied to each word span (e.g. `gradient-text`). */
+  class?: string;
+}
+
+const { text, startIndex = 0, class: className = '' } = Astro.props;
+
+// Split on whitespace but keep the separators so spacing is preserved.
+const tokens = text.split(/(\s+)/);
+let i = startIndex;
+---
+
+{
+  tokens.map((token) =>
+    /^\s+$/.test(token) ? (
+      <span class="split-space" aria-hidden="true">{token}</span>
+    ) : (
+      <span class:list={['split-word', className]}>
+        {[...token].map((ch) => (
+          <span class="split-char" style={`--char-i:${i++}`} aria-hidden="true">
+            {ch}
+          </span>
+        ))}
+      </span>
+    )
+  )
+}

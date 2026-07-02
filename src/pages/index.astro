@@ -3,15 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import AppCard from '../components/AppCard.astro';
 import CTAButton from '../components/CTAButton.astro';
-import PhoneFrame from '../components/PhoneFrame.astro';
+import ScrollPhone from '../components/ScrollPhone.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
 import FAQAccordion from '../components/FAQAccordion.astro';
 import { apps, getApp } from '../data/apps';
 
 const featured = [getApp('meal-planner')!, getApp('breathwell')!, getApp('sudoku-xl')!];
-// Decorative device cluster — use apps whose screenshots are raw phone
-// mockups (framed/captioned App Store images don't belong in a bezel).
-const heroApps = [getApp('airfryer-companion')!, getApp('meal-planner')!, getApp('sudoku-xl')!];
 
 const pillars = [
   {
@@ -68,43 +65,8 @@ const teaserFaq = [
   title="Amsterdam Future Labs — Thoughtfully crafted iPhone apps"
   description="Amsterdam Future Labs is an independent studio crafting premium, private iPhone apps — Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL — and building apps and websites for clients. Offline first, made in Amsterdam."
 >
-  <!-- ======================= HERO ======================= -->
-  <section class="hero section--dark">
-    <div class="hero-glow hero-glow--a" data-parallax="0.16" aria-hidden="true"></div>
-    <div class="hero-glow hero-glow--b" data-parallax="0.08" aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="hero-copy">
-        <AnimatedSection>
-          <p class="eyebrow">Independent app studio · Amsterdam</p>
-          <h1 class="display">
-            Apps you’ll love to use<br />
-            <span class="gradient-text">— and trust.</span>
-          </h1>
-        </AnimatedSection>
-        <AnimatedSection delay={0.1}>
-          <p class="lead hero-lead">
-            Amsterdam Future Labs is an independent studio designing premium iPhone
-            apps for cooking, calm and play — and building apps and websites for the
-            clients who hire us. Private by design, offline first, and crafted down
-            to the last detail.
-          </p>
-        </AnimatedSection>
-        <AnimatedSection delay={0.2} class="hero-actions">
-          <CTAButton href="/apps/" variant="gradient" arrow>Explore the apps</CTAButton>
-          <CTAButton href="/work/" variant="ghost">Work with us</CTAButton>
-        </AnimatedSection>
-      </div>
-
-      <AnimatedSection delay={0.25} class="hero-devices" aria-hidden="true">
-        {heroApps.map((app, i) => (
-          <div class={`hero-device hero-device--${i}`}>
-            <PhoneFrame src={app.screenshots[0].src} alt="" eager={i === 1} />
-          </div>
-        ))}
-      </AnimatedSection>
-    </div>
-  </section>
+  <!-- ======================= HERO (3D scroll) ======================= -->
+  <ScrollPhone />
 
   <!-- ======================= FEATURED ======================= -->
   <section class="section" id="featured">

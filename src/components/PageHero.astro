@@ -1,5 +1,6 @@
 ---
 import AnimatedSection from './AnimatedSection.astro';
+import SplitText from './SplitText.astro';
 
 /**
  * Dark hero used on sub-pages so the fixed header always sits on a dark
@@ -20,7 +21,7 @@ const { eyebrow, title, lead, accent } = Astro.props;
   <div class="container">
     <AnimatedSection>
       <p class="eyebrow">{eyebrow}</p>
-      <h1 class="display">{title}</h1>
+      <h1 class="display" aria-label={title}><SplitText text={title} /></h1>
       {lead && <p class="lead page-hero-lead">{lead}</p>}
       <slot />
     </AnimatedSection>

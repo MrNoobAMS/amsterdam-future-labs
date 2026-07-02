@@ -1,4 +1,6 @@
 ---
+import SplitText from './SplitText.astro';
+
 const links = [
   { href: '/', label: 'Home' },
   { href: '/apps/', label: 'Apps' },
@@ -7,6 +9,15 @@ const links = [
   { href: '/faq/', label: 'FAQ' },
   { href: '/support/', label: 'Support' },
 ];
+
+// Cumulative character offset so the on-load stagger flows as one continuous
+// wave across the whole nav (ORYZO-style), left to right.
+let charOffset = 0;
+const navRuns = links.map((l) => {
+  const start = charOffset;
+  charOffset += l.label.replace(/\s/g, '').length;
+  return { ...l, start };
+});
 
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
@@ -41,10 +52,14 @@ const isActive = (href: string) =>
       <span class="brand-name">Amsterdam<br />Future Labs</span>
     </a>
 
-    <nav class="nav-desktop" aria-label="Main">
-      {links.map((l) => (
-        <a href={l.href} class:list={['nav-link', { 'is-active': isActive(l.href) }]}>
-          {l.label}
+    <nav class="nav-desktop reveal reveal--chars" aria-label="Main">
+      {navRuns.map((l) => (
+        <a
+          href={l.href}
+          class:list={['nav-link', { 'is-active': isActive(l.href) }]}
+          aria-label={l.label}
+        >
+          <SplitText text={l.label} startIndex={l.start} />
         </a>
       ))}
     </nav>

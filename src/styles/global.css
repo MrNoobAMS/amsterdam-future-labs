@@ -250,7 +250,47 @@ p {
   transform: none;
 }
 
+/* ---------- Split-text (per-character reveal) ---------- */
+
+/* Keep whole words intact when wrapping. */
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split-char {
+  display: inline-block;
+  opacity: 0;
+  /* Subtle downward settle — "material gravity", no bounce (ORYZO). */
+  transform: translateY(0.42em);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  /* Stagger each character; --char-i is set per span in SplitText.astro. */
+  transition-delay: calc(var(--char-i, 0) * 0.025s);
+  will-change: transform, opacity;
+}
+
+/* Revealed once the nearest .reveal ancestor enters the viewport. */
+.reveal.is-visible .split-char {
+  opacity: 1;
+  transform: none;
+}
+
+/* Container that reveals only its characters — no block-level fade/slide.
+   Pair with `reveal` so the same IntersectionObserver still triggers it. */
+.reveal.reveal--chars {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .split-char {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
   html {
     scroll-behavior: auto;
   }
