@@ -80,10 +80,12 @@ const panels = [
            on-screen contact form and zoom the phone in. -->
       <a class="btn btn--ghost" href="/work/" data-open-contact>Work with us</a>
     </div>
+  </div>
 
-    <!-- Contact form that appears "on the phone screen" when Work with us is
-         clicked. Hidden until then; submits via a prefilled mailto. -->
-    <div class="contact-overlay" data-contact hidden>
+  <!-- Contact form. Rendered outside .phone-stage so it stacks ABOVE the
+       scrolling text panels (which sit at a higher z-index than the sticky
+       stage). Position:fixed keeps it centered over the phone while open. -->
+  <div class="contact-overlay" data-contact hidden>
       <div
         class="contact-card"
         role="dialog"
@@ -133,7 +135,6 @@ const panels = [
         </div>
       </div>
     </div>
-  </div>
 
   <!-- Text panels: one per face. Real, crawlable content + the scroll length. -->
   <div class="phone-panels">
@@ -246,9 +247,10 @@ const panels = [
   /* ---------- On-screen contact form ---------- */
   /* Sits over the phone; scales/fades in as the 3D phone zooms toward you. */
   .contact-overlay {
-    position: absolute;
+    position: fixed;
     inset: 0;
-    z-index: 5;
+    /* Above the sticky stage AND the scrolling text panels. */
+    z-index: 60;
     display: grid;
     place-items: center;
     padding: 1.5rem;
@@ -282,6 +284,25 @@ const panels = [
   .contact-overlay.is-open .contact-card {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+
+  /* When WebGL is live, the render loop writes --contact-zoom (0→1) in lockstep
+     with the phone's zoom, so the form scales up *with* the phone instead of on
+     its own timeline. (Fallback above handles the no-WebGL case.) */
+  .phone-scroll[data-phone-live] .contact-card {
+    opacity: var(--contact-zoom, 0);
+    transform: scale(calc(0.62 + 0.38 * var(--contact-zoom, 0)));
+    transition: none;
+  }
+
+  /* Declutter: once the form is open, fade out the hero copy, CTAs and hint so
+     only the phone + form remain. */
+  .phone-scroll.is-contact-open .phone-panels,
+  .phone-scroll.is-contact-open .scroll-hint,
+  .phone-scroll.is-contact-open .phone-screen-cta {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease-out);
   }
 
   .contact-close {
@@ -446,24 +467,15 @@ const panels = [
     /* Centered column: copy overlaps the phone (in front of it). */
     margin-inline: auto;
     pointer-events: auto;
-    /* Legible + punchy over the bright screen it overlaps. */
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 6px 44px rgba(0, 0, 0, 0.55);
-  }
-
-  /* Soft dark scrim behind the copy so it reads over bright app screens.
-     Radial + fading, so it feels like a gentle shadow, not a hard box. */
-  .phone-panel-inner::before {
-    content: '';
-    position: absolute;
-    inset: -3rem -4rem;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(
-      72% 68% at 42% 50%,
-      rgba(5, 6, 9, 0.82),
-      rgba(5, 6, 9, 0.45) 50%,
-      transparent 78%
-    );
+    /* Legibility comes from a soft dark halo that hugs the glyphs and fades
+       smoothly to transparent — layered blurs give a gradient-to-0% shadow
+       around the text itself, so there's no hard-edged box behind the copy. */
+    text-shadow:
+      0 0 1px rgba(3, 4, 8, 0.95),
+      0 1px 4px rgba(3, 4, 8, 0.9),
+      0 2px 14px rgba(3, 4, 8, 0.78),
+      0 4px 28px rgba(3, 4, 8, 0.5),
+      0 8px 52px rgba(3, 4, 8, 0.28);
   }
 
   .phone-eyebrow {
@@ -558,6 +570,19 @@ const panels = [
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
     camera.position.set(0, 0, 9);
+
+    // Camera distance + contact-form zoom. `baseZ` is the resting distance
+    // (set in resize); `contactZoom` is the 0→1 target the render loop eases
+    // toward, pulling the camera closer when the contact form is open.
+    // Declared here (before resize runs) to avoid a temporal-dead-zone error.
+    let baseZ = 9;
+    let contactZoom = 0;
+    let zoomEase = 0;
+    // Tell the CSS that WebGL is driving the phone, so the form scales from the
+    // live --contact-zoom value rather than its own fallback transition.
+    section.dataset.phoneLive = 'true';
+    window.addEventListener('contact:open', () => { contactZoom = 1; });
+    window.addEventListener('contact:close', () => { contactZoom = 0; });
 
     // Image-based lighting: a soft room env drives realistic reflections on
     // the titanium frame and glass — the difference between a plastic toy and
@@ -673,15 +698,6 @@ const panels = [
     let targetPP = 0;
     let smoothPP = 0;
 
-    // Camera distance + contact-form zoom. `baseZ` is the resting distance
-    // (set in resize); `contactZoom` is the 0→1 target the render loop eases
-    // toward, pulling the camera closer when the contact form is open.
-    let baseZ = 9;
-    let contactZoom = 0;
-    let zoomEase = 0;
-    window.addEventListener('contact:open', () => { contactZoom = 1; });
-    window.addEventListener('contact:close', () => { contactZoom = 0; });
-
     function computePP() {
       const rect = section!.getBoundingClientRect();
       const pp = -rect.top / window.innerHeight;
@@ -715,6 +731,8 @@ const panels = [
       // Ease the camera toward the phone when the contact form opens (zoom in).
       zoomEase += (contactZoom - zoomEase) * 0.08;
       camera.position.z = baseZ * (1 - zoomEase * 0.34);
+      // Publish the zoom so the on-screen form can scale in lockstep with it.
+      section!.style.setProperty('--contact-zoom', zoomEase.toFixed(3));
 
       // Swap the screen texture at the nearest panel — this lands on the
       // half-step where the phone faces away, so the change stays hidden.
@@ -773,6 +791,8 @@ const panels = [
       // Reset to the form view in case it was previously submitted.
       form!.hidden = false;
       done!.hidden = true;
+      // Hide the hero copy / CTAs / hint for a clean, focused view.
+      scroll!.classList.add('is-contact-open');
       // Next frame so the transition runs from the hidden state.
       requestAnimationFrame(() => overlay!.classList.add('is-open'));
       window.dispatchEvent(new Event('contact:open'));
@@ -785,6 +805,7 @@ const panels = [
       if (!isOpen) return;
       isOpen = false;
       overlay!.classList.remove('is-open');
+      scroll!.classList.remove('is-contact-open');
       document.body.style.overflow = '';
       window.dispatchEvent(new Event('contact:close'));
 
