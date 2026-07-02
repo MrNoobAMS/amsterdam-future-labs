@@ -125,6 +125,65 @@ const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     ))}
   </head>
   <body>
+    <!-- Loading screen: centered logo + progress bar, hidden once ready. -->
+    <div id="preloader" aria-hidden="true">
+      <div class="preloader-logo">
+        <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="preloaderGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#6366f1" />
+              <stop offset="0.5" stop-color="#8b5cf6" />
+              <stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="16" fill="url(#preloaderGrad)" />
+          <path d="M18 44 L32 18 L46 44" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="32" cy="38" r="3.5" fill="#fff" />
+        </svg>
+        <span class="preloader-wordmark">Amsterdam<br />Future&nbsp;Labs</span>
+      </div>
+      <div class="preloader-bar"><span class="preloader-bar-fill"></span></div>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var pre = document.getElementById('preloader');
+        if (!pre) return;
+        var fill = pre.querySelector('.preloader-bar-fill');
+        var hasPhone = !!document.querySelector('[data-phone-scroll]');
+        var real = 0, trickle = 0, done = false;
+
+        function render() {
+          var p = Math.max(real, trickle);
+          if (fill) fill.style.width = Math.min(1, p) * 100 + '%';
+        }
+        function finish() {
+          if (done) return;
+          done = true;
+          if (fill) fill.style.width = '100%';
+          clearInterval(iv);
+          setTimeout(function () { pre.classList.add('is-done'); }, 260);
+          setTimeout(function () { if (pre.parentNode) pre.remove(); }, 1100);
+        }
+
+        // Trickle toward 90% so the bar always feels alive.
+        var iv = setInterval(function () {
+          trickle = Math.min(0.9, trickle + Math.random() * 0.06);
+          if (!done) render();
+        }, 200);
+
+        window.addEventListener('phone:progress', function (e) {
+          real = (e && e.detail) || real;
+          if (!done) render();
+        });
+        window.addEventListener('phone:ready', finish);
+        // Pages without the 3D phone: just wait for the page to load.
+        if (!hasPhone) window.addEventListener('load', finish);
+        // Safety net so the loader can never get stuck.
+        setTimeout(finish, 12000);
+      })();
+    </script>
+
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" tabindex="-1">
