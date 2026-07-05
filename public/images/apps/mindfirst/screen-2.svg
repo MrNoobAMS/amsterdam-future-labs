@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <radialGradient id="circle" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7fd6c9"/>
+      <stop offset="1" stop-color="#56c2b3"/>
+    </radialGradient>
+  </defs>
+  <rect width="440" height="956" fill="#eef6f4"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#173934">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#173934" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#173934" opacity="0.7"/>
+
+  <text x="30" y="104" font-size="13" fill="#5f7a75">Paniek · stap 2 van 6</text>
+  <rect x="30" y="120" width="380" height="6" rx="3" fill="#d5e7e3"/>
+  <rect x="30" y="120" width="127" height="6" rx="3" fill="#56c2b3"/>
+
+  <text x="220" y="196" font-size="24" font-weight="700" fill="#173934" text-anchor="middle">Adem rustig mee</text>
+  <text x="220" y="226" font-size="14" fill="#5f7a75" text-anchor="middle">Volg de cirkel. In door je neus, uit door je mond.</text>
+
+  <!-- breathing circle -->
+  <circle cx="220" cy="470" r="150" fill="none" stroke="#d5e7e3" stroke-width="2"/>
+  <circle cx="220" cy="470" r="112" fill="url(#circle)" opacity="0.9"/>
+  <text x="220" y="462" font-size="18" font-weight="600" fill="#ffffff" text-anchor="middle">Adem in</text>
+  <text x="220" y="490" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle">4</text>
+
+  <!-- grounding hint -->
+  <rect x="30" y="688" width="380" height="88" rx="20" fill="#ffffff"/>
+  <text x="46" y="718" font-size="13" font-weight="600" fill="#2e8b8b">Hierna: 5-4-3-2-1</text>
+  <text x="46" y="742" font-size="13" fill="#5f7a75">Noem straks 5 dingen die je ziet en 4 dingen</text>
+  <text x="46" y="762" font-size="13" fill="#5f7a75">die je kunt aanraken. We doen het samen.</text>
+
+  <!-- next step -->
+  <rect x="30" y="796" width="380" height="52" rx="26" fill="#173934"/>
+  <text x="220" y="828" font-size="15" font-weight="600" fill="#ffffff" text-anchor="middle">Volgende stap</text>
+
+  <text x="220" y="884" font-size="12" fill="#8fa8a3" text-anchor="middle">SOS blijft altijd bereikbaar onderaan</text>
+</svg>

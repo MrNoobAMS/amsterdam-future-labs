@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f5f8f7"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#10312e">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#10312e" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#10312e" opacity="0.7"/>
+
+  <text x="30" y="104" font-size="13" fill="#5e7773">Stack Checker · 4 supplementen</text>
+  <text x="30" y="136" font-size="26" font-weight="700" fill="#10312e">Jouw combinatie</text>
+
+  <!-- overall -->
+  <rect x="30" y="162" width="380" height="84" rx="20" fill="#ffffff"/>
+  <circle cx="70" cy="204" r="18" fill="#e7f6ee"/>
+  <path d="M62 204l5 5 11-11" fill="none" stroke="#22a45f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="102" y="198" font-size="15" font-weight="700" fill="#10312e">Grotendeels veilig samen</text>
+  <text x="102" y="220" font-size="12" fill="#5e7773">1 aandachtspunt en 1 dubbeling gevonden</text>
+
+  <!-- findings -->
+  <g>
+    <rect x="30" y="262" width="380" height="112" rx="18" fill="#ffffff"/>
+    <rect x="30" y="262" width="6" height="112" rx="3" fill="#22a45f"/>
+    <text x="54" y="292" font-size="14" font-weight="700" fill="#10312e">Magnesium + Vitamine D3</text>
+    <rect x="54" y="304" width="52" height="22" rx="11" fill="#e7f6ee"/>
+    <text x="80" y="319" font-size="11" font-weight="700" fill="#22a45f" text-anchor="middle">Groen</text>
+    <text x="54" y="348" font-size="12" fill="#5e7773">Goede combinatie — magnesium ondersteunt de</text>
+    <text x="54" y="366" font-size="12" fill="#5e7773">omzetting van vitamine D.</text>
+  </g>
+  <g>
+    <rect x="30" y="386" width="380" height="112" rx="18" fill="#ffffff"/>
+    <rect x="30" y="386" width="6" height="112" rx="3" fill="#f2a93c"/>
+    <text x="54" y="416" font-size="14" font-weight="700" fill="#10312e">Zink + Multivitamine</text>
+    <rect x="54" y="428" width="58" height="22" rx="11" fill="#fdf3e2"/>
+    <text x="83" y="443" font-size="11" font-weight="700" fill="#d98f2b" text-anchor="middle">Oranje</text>
+    <text x="54" y="472" font-size="12" fill="#5e7773">Dubbele zinkinname — samen 32 mg per dag,</text>
+    <text x="54" y="490" font-size="12" fill="#5e7773">boven de aanbevolen bovengrens van 25 mg.</text>
+  </g>
+  <g>
+    <rect x="30" y="510" width="380" height="112" rx="18" fill="#ffffff"/>
+    <rect x="30" y="510" width="6" height="112" rx="3" fill="#e35257"/>
+    <text x="54" y="540" font-size="14" font-weight="700" fill="#10312e">Sint-janskruid + medicatie</text>
+    <rect x="54" y="552" width="48" height="22" rx="11" fill="#fdeaea"/>
+    <text x="78" y="567" font-size="11" font-weight="700" fill="#e35257" text-anchor="middle">Rood</text>
+    <text x="54" y="596" font-size="12" fill="#5e7773">Kan de werking van veel medicijnen beïnvloeden —</text>
+    <text x="54" y="614" font-size="12" fill="#5e7773">overleg met je arts of apotheker.</text>
+  </g>
+
+  <!-- disclaimer -->
+  <rect x="30" y="646" width="380" height="64" rx="16" fill="#e9f1ef"/>
+  <text x="46" y="673" font-size="12" font-weight="600" fill="#127a72">Educatief, geen medisch advies</text>
+  <text x="46" y="693" font-size="12" fill="#5e7773">Bespreek wijzigingen altijd met een professional.</text>
+
+  <rect x="0" y="868" width="440" height="88" fill="#ffffff"/>
+  <text x="44" y="932" font-size="10" fill="#8ba39f">Ontdek</text>
+  <text x="150" y="932" font-size="10" fill="#8ba39f">Scanner</text>
+  <circle cx="278" cy="904" r="4" fill="#199e94"/>
+  <text x="256" y="932" font-size="10" fill="#127a72">Mijn stack</text>
+  <text x="366" y="932" font-size="10" fill="#8ba39f">Assistent</text>
+</svg>

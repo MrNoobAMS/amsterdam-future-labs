@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#216b6b"/>
+      <stop offset="1" stop-color="#154a4a"/>
+    </linearGradient>
+  </defs>
+  <rect width="440" height="956" fill="#f4f6f4"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#12312f">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#12312f" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#12312f" opacity="0.7"/>
+
+  <text x="30" y="108" font-size="15" fill="#5c7370">Leerpad</text>
+  <text x="30" y="140" font-size="27" font-weight="700" fill="#12312f">Rustig leren werken met AI</text>
+
+  <!-- progress hero card -->
+  <rect x="30" y="170" width="380" height="120" rx="22" fill="url(#hero)"/>
+  <text x="54" y="212" font-size="14" fill="#bfe0dc">Jouw voortgang</text>
+  <text x="54" y="244" font-size="22" font-weight="700" fill="#ffffff">Module 2 · Les 1</text>
+  <rect x="54" y="258" width="300" height="8" rx="4" fill="#0e3a38"/>
+  <rect x="54" y="258" width="112" height="8" rx="4" fill="#7fc7c7"/>
+
+  <!-- modules -->
+  <text x="30" y="336" font-size="18" font-weight="700" fill="#12312f">Modules</text>
+  <g>
+    <rect x="30" y="356" width="380" height="86" rx="18" fill="#ffffff"/>
+    <circle cx="66" cy="399" r="20" fill="#e2efed"/>
+    <text x="66" y="405" font-size="15" font-weight="700" fill="#216b6b" text-anchor="middle">1</text>
+    <text x="100" y="392" font-size="15" font-weight="600" fill="#12312f">Wat is AI eigenlijk?</text>
+    <text x="100" y="414" font-size="12" fill="#5c7370">3 lessen · afgerond</text>
+    <circle cx="380" cy="399" r="13" fill="#216b6b"/>
+    <path d="M374 399l4.5 4.5 8-9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g>
+    <rect x="30" y="454" width="380" height="86" rx="18" fill="#ffffff"/>
+    <circle cx="66" cy="497" r="20" fill="#e2efed"/>
+    <text x="66" y="503" font-size="15" font-weight="700" fill="#216b6b" text-anchor="middle">2</text>
+    <text x="100" y="490" font-size="15" font-weight="600" fill="#12312f">Je eerste goede prompt</text>
+    <text x="100" y="512" font-size="12" fill="#5c7370">3 lessen · 1 van 3 klaar</text>
+    <circle cx="380" cy="497" r="13" fill="none" stroke="#b9cfcb" stroke-width="2"/>
+    <path d="M375 497h10" stroke="#216b6b" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="30" y="552" width="380" height="86" rx="18" fill="#ffffff"/>
+    <circle cx="66" cy="595" r="20" fill="#eef2f1"/>
+    <text x="66" y="601" font-size="15" font-weight="700" fill="#8aa19d" text-anchor="middle">3</text>
+    <text x="100" y="588" font-size="15" font-weight="600" fill="#8aa19d">Doorvragen &amp; verfijnen</text>
+    <text x="100" y="610" font-size="12" fill="#a9bbb8">3 lessen · nog vergrendeld</text>
+  </g>
+  <g>
+    <rect x="30" y="650" width="380" height="86" rx="18" fill="#eef2f1"/>
+    <circle cx="66" cy="693" r="20" fill="#e4eae9"/>
+    <text x="66" y="699" font-size="15" font-weight="700" fill="#8aa19d" text-anchor="middle">6</text>
+    <text x="100" y="686" font-size="15" font-weight="600" fill="#8aa19d">Werken met AI-agents</text>
+    <text x="100" y="708" font-size="12" fill="#a9bbb8">3 lessen · nog vergrendeld</text>
+  </g>
+
+  <!-- tip -->
+  <rect x="30" y="756" width="380" height="64" rx="18" fill="#ffffff"/>
+  <text x="46" y="784" font-size="13" font-weight="600" fill="#216b6b">Tip van de dag</text>
+  <text x="46" y="804" font-size="12" fill="#5c7370">Vraag AI om zijn antwoord in stappen uit te leggen →</text>
+
+  <!-- tab bar -->
+  <rect x="0" y="868" width="440" height="88" fill="#ffffff"/>
+  <circle cx="62" cy="904" r="4" fill="#216b6b"/>
+  <text x="42" y="932" font-size="10" fill="#216b6b">Leerpad</text>
+  <text x="126" y="932" font-size="10" fill="#8aa19d">Prompts</text>
+  <text x="212" y="932" font-size="10" fill="#8aa19d">Opdrachten</text>
+  <text x="308" y="932" font-size="10" fill="#8aa19d">Voortgang</text>
+  <text x="388" y="932" font-size="10" fill="#8aa19d">Meer</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#ebe9e7"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#2b2a29">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#2b2a29" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#2b2a29" opacity="0.7"/>
+
+  <text x="30" y="104" font-size="13" fill="#8a8683" letter-spacing="2">BLOK 2 · SET 1</text>
+  <text x="30" y="138" font-size="26" font-weight="800" fill="#2b2a29">Live groep</text>
+  <rect x="316" y="108" width="94" height="38" rx="19" fill="#2b2a29"/>
+  <text x="363" y="132" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">00:45</text>
+
+  <!-- participant tiles -->
+  <g>
+    <rect x="30" y="170" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="52" y="204" font-size="15" font-weight="700" fill="#2b2a29">Sophie</text>
+    <circle cx="122" cy="262" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M122 224a38 38 0 0 1 33 57" fill="none" stroke="#e6483d" stroke-width="8" stroke-linecap="round"/>
+    <text x="122" y="268" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">172</text>
+    <rect x="52" y="300" width="62" height="24" rx="12" fill="#fdeaea"/>
+    <text x="83" y="316" font-size="11" font-weight="700" fill="#e6483d" text-anchor="middle">Zone 5</text>
+  </g>
+  <g>
+    <rect x="225" y="170" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="247" y="204" font-size="15" font-weight="700" fill="#2b2a29">Daan</text>
+    <circle cx="317" cy="262" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M317 224a38 38 0 0 1 20 68" fill="none" stroke="#f2a93c" stroke-width="8" stroke-linecap="round"/>
+    <text x="317" y="268" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">158</text>
+    <rect x="247" y="300" width="62" height="24" rx="12" fill="#fdf3e2"/>
+    <text x="278" y="316" font-size="11" font-weight="700" fill="#d98f2b" text-anchor="middle">Zone 4</text>
+  </g>
+  <g>
+    <rect x="30" y="350" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="52" y="384" font-size="15" font-weight="700" fill="#2b2a29">Lisa</text>
+    <circle cx="122" cy="442" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M122 404a38 38 0 0 1 10 74" fill="none" stroke="#2eb861" stroke-width="8" stroke-linecap="round"/>
+    <text x="122" y="448" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">141</text>
+    <rect x="52" y="480" width="62" height="24" rx="12" fill="#e7f6ee"/>
+    <text x="83" y="496" font-size="11" font-weight="700" fill="#22a45f" text-anchor="middle">Zone 3</text>
+  </g>
+  <g>
+    <rect x="225" y="350" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="247" y="384" font-size="15" font-weight="700" fill="#2b2a29">Tom</text>
+    <circle cx="317" cy="442" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M317 404a38 38 0 0 1 30 62" fill="none" stroke="#e6483d" stroke-width="8" stroke-linecap="round"/>
+    <text x="317" y="448" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">168</text>
+    <rect x="247" y="480" width="62" height="24" rx="12" fill="#fdeaea"/>
+    <text x="278" y="496" font-size="11" font-weight="700" fill="#e6483d" text-anchor="middle">Zone 5</text>
+  </g>
+  <g>
+    <rect x="30" y="530" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="52" y="564" font-size="15" font-weight="700" fill="#2b2a29">Emma</text>
+    <circle cx="122" cy="622" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M122 584a38 38 0 0 1 24 66" fill="none" stroke="#f2a93c" stroke-width="8" stroke-linecap="round"/>
+    <text x="122" y="628" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">154</text>
+    <rect x="52" y="660" width="62" height="24" rx="12" fill="#fdf3e2"/>
+    <text x="83" y="676" font-size="11" font-weight="700" fill="#d98f2b" text-anchor="middle">Zone 4</text>
+  </g>
+  <g>
+    <rect x="225" y="530" width="185" height="168" rx="20" fill="#ffffff"/>
+    <text x="247" y="564" font-size="15" font-weight="700" fill="#2b2a29">Nora</text>
+    <circle cx="317" cy="622" r="38" fill="none" stroke="#f0edea" stroke-width="8"/>
+    <path d="M317 584a38 38 0 0 1 6 75" fill="none" stroke="#2eb861" stroke-width="8" stroke-linecap="round"/>
+    <text x="317" y="628" font-size="20" font-weight="800" fill="#2b2a29" text-anchor="middle">136</text>
+    <rect x="247" y="660" width="62" height="24" rx="12" fill="#e7f6ee"/>
+    <text x="278" y="676" font-size="11" font-weight="700" fill="#22a45f" text-anchor="middle">Zone 3</text>
+  </g>
+
+  <!-- current exercise bar -->
+  <rect x="30" y="726" width="380" height="70" rx="20" fill="#2b2a29"/>
+  <text x="54" y="756" font-size="12" fill="#b6b1ac" letter-spacing="2">NU BEZIG</text>
+  <text x="54" y="780" font-size="17" font-weight="700" fill="#ffffff">Burpees · oefening 2 van 4</text>
+  <circle cx="376" cy="761" r="17" fill="#2eb861"/>
+  <text x="376" y="767" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle">45</text>
+</svg>

@@ -42,7 +42,7 @@ const principles = [
 
 <BaseLayout
   title="Privacy — Amsterdam Future Labs"
-  description="How Amsterdam Future Labs apps handle your data: no accounts, no analytics, no tracking. Per-app privacy details for Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL."
+  description="How Amsterdam Future Labs apps handle your data: no accounts, no analytics, no tracking. Per-app privacy details for every app, from Meal Planner and BreathWell to MindFirst and Sudoku XL."
   jsonLd={breadcrumbSchema}
 >
   <PageHero
@@ -66,6 +66,14 @@ const principles = [
           </AnimatedSection>
         ))}
       </div>
+
+      <AnimatedSection>
+        <p class="principles-note">
+          One honest exception: our arcade game <a href="/apps/mergeorbit/">MergeOrbit</a> offers
+          optional rewarded ads you start yourself — no banners, nothing during play, and its
+          privacy page spells out exactly what that means.
+        </p>
+      </AnimatedSection>
     </div>
   </section>
 
@@ -179,6 +187,18 @@ const principles = [
     margin-top: 0.6rem;
     font-size: 0.93rem;
     color: var(--text-dark-secondary);
+  }
+
+  .principles-note {
+    margin-top: 1.6rem;
+    max-width: 60ch;
+    font-size: 0.92rem;
+    color: var(--text-dark-secondary);
+  }
+
+  .principles-note a {
+    color: var(--text-dark);
+    font-weight: 600;
   }
 
   .policy-grid {

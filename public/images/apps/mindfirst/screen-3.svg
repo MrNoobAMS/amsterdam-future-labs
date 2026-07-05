@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f2f7f6"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#173934">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#173934" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#173934" opacity="0.7"/>
+
+  <text x="30" y="112" font-size="15" fill="#5f7a75">Altijd bij de hand</text>
+  <text x="30" y="144" font-size="27" font-weight="700" fill="#173934">Mijn veiligheidsplan</text>
+
+  <!-- plan sections -->
+  <rect x="30" y="176" width="380" height="112" rx="20" fill="#ffffff"/>
+  <text x="46" y="206" font-size="13" font-weight="600" fill="#2e8b8b">Dit helpt mij</text>
+  <text x="46" y="230" font-size="13" fill="#41544f">Koud water over mijn polsen, naar buiten</text>
+  <text x="46" y="250" font-size="13" fill="#41544f">lopen, muziek met koptelefoon op.</text>
+  <text x="46" y="274" font-size="12" fill="#8fa8a3">Laatst bijgewerkt: vorige week</text>
+
+  <rect x="30" y="300" width="380" height="92" rx="20" fill="#ffffff"/>
+  <text x="46" y="330" font-size="13" font-weight="600" fill="#2e8b8b">Dit zeg ik tegen mezelf</text>
+  <text x="46" y="354" font-size="13" fill="#41544f">“Dit gevoel is heftig maar tijdelijk.</text>
+  <text x="46" y="374" font-size="13" fill="#41544f">Ik heb dit eerder doorstaan.”</text>
+
+  <!-- contacts -->
+  <text x="30" y="440" font-size="18" font-weight="700" fill="#173934">Vertrouwde contacten</text>
+  <g>
+    <rect x="30" y="460" width="380" height="80" rx="20" fill="#ffffff"/>
+    <circle cx="70" cy="500" r="22" fill="#e3f2ef"/>
+    <text x="70" y="506" font-size="15" font-weight="700" fill="#2e8b8b" text-anchor="middle">S</text>
+    <text x="106" y="494" font-size="15" font-weight="600" fill="#173934">Sanne</text>
+    <text x="106" y="516" font-size="12" fill="#5f7a75">Zus · altijd bellen mag</text>
+    <circle cx="374" cy="500" r="18" fill="#56c2b3"/>
+    <path d="M368 495c0-1 1-2 2-2h2l1.5 4-2 1.5c1 2 2.5 3.5 4.5 4.5l1.5-2 4 1.5v2c0 1-1 2-2 2-6.5-.5-11.5-5.5-11.5-11.5z" fill="#ffffff"/>
+  </g>
+  <g>
+    <rect x="30" y="552" width="380" height="80" rx="20" fill="#ffffff"/>
+    <circle cx="70" cy="592" r="22" fill="#e3f2ef"/>
+    <text x="70" y="598" font-size="15" font-weight="700" fill="#2e8b8b" text-anchor="middle">M</text>
+    <text x="106" y="586" font-size="15" font-weight="600" fill="#173934">Mark</text>
+    <text x="106" y="608" font-size="12" fill="#5f7a75">Beste vriend</text>
+    <circle cx="374" cy="592" r="18" fill="#56c2b3"/>
+    <path d="M368 587c0-1 1-2 2-2h2l1.5 4-2 1.5c1 2 2.5 3.5 4.5 4.5l1.5-2 4 1.5v2c0 1-1 2-2 2-6.5-.5-11.5-5.5-11.5-11.5z" fill="#ffffff"/>
+  </g>
+  <g>
+    <rect x="30" y="644" width="380" height="80" rx="20" fill="#ffffff"/>
+    <circle cx="70" cy="684" r="22" fill="#fdeaea"/>
+    <text x="70" y="690" font-size="13" font-weight="700" fill="#c23a3a" text-anchor="middle">113</text>
+    <text x="106" y="678" font-size="15" font-weight="600" fill="#173934">Hulplijn</text>
+    <text x="106" y="700" font-size="12" fill="#5f7a75">Dag en nacht bereikbaar</text>
+    <circle cx="374" cy="684" r="18" fill="#e05252"/>
+    <path d="M368 679c0-1 1-2 2-2h2l1.5 4-2 1.5c1 2 2.5 3.5 4.5 4.5l1.5-2 4 1.5v2c0 1-1 2-2 2-6.5-.5-11.5-5.5-11.5-11.5z" fill="#ffffff"/>
+  </g>
+
+  <text x="220" y="780" font-size="12" fill="#8fa8a3" text-anchor="middle">Alles blijft op dit toestel. Geen account, geen cloud.</text>
+
+  <rect x="0" y="868" width="440" height="88" fill="#ffffff"/>
+  <text x="62" y="932" font-size="10" fill="#8fa8a3">Hulp</text>
+  <text x="196" y="932" font-size="10" fill="#8fa8a3">Plan</text>
+  <circle cx="358" cy="904" r="4" fill="#56c2b3"/>
+  <text x="336" y="932" font-size="10" fill="#2e8b8b">Contacten</text>
+</svg>

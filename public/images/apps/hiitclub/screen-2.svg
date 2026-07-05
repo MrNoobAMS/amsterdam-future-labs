@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#2b2a29"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#f5f3f1">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#f5f3f1" stroke-width="1.5" opacity="0.8"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#f5f3f1" opacity="0.8"/>
+
+  <text x="220" y="120" font-size="13" fill="#b6b1ac" text-anchor="middle" letter-spacing="3">BLOK 2 · SET 3 · OEFENING 4</text>
+
+  <!-- big countdown ring -->
+  <circle cx="220" cy="360" r="170" fill="none" stroke="#3d3b39" stroke-width="14"/>
+  <path d="M220 190a170 170 0 1 1-120 290" fill="none" stroke="#2eb861" stroke-width="14" stroke-linecap="round"/>
+  <text x="220" y="340" font-size="88" font-weight="800" fill="#ffffff" text-anchor="middle">28</text>
+  <text x="220" y="392" font-size="16" fill="#b6b1ac" text-anchor="middle">seconden werk</text>
+  <text x="220" y="446" font-size="24" font-weight="700" fill="#ffffff" text-anchor="middle">Mountain climbers</text>
+
+  <!-- next up -->
+  <rect x="30" y="580" width="380" height="64" rx="18" fill="#3d3b39"/>
+  <text x="54" y="608" font-size="12" fill="#b6b1ac" letter-spacing="2">HIERNA · 15S WISSEL</text>
+  <text x="54" y="630" font-size="16" font-weight="700" fill="#ffffff">Kettlebell swings</text>
+
+  <!-- group strip -->
+  <g>
+    <rect x="30" y="672" width="120" height="88" rx="16" fill="#33312f"/>
+    <text x="50" y="700" font-size="12" font-weight="600" fill="#b6b1ac">Sophie</text>
+    <text x="50" y="730" font-size="22" font-weight="800" fill="#e6483d">172</text>
+    <text x="50" y="748" font-size="10" fill="#8a8683">ZONE 5</text>
+  </g>
+  <g>
+    <rect x="160" y="672" width="120" height="88" rx="16" fill="#33312f"/>
+    <text x="180" y="700" font-size="12" font-weight="600" fill="#b6b1ac">Daan</text>
+    <text x="180" y="730" font-size="22" font-weight="800" fill="#f2a93c">158</text>
+    <text x="180" y="748" font-size="10" fill="#8a8683">ZONE 4</text>
+  </g>
+  <g>
+    <rect x="290" y="672" width="120" height="88" rx="16" fill="#33312f"/>
+    <text x="310" y="700" font-size="12" font-weight="600" fill="#b6b1ac">Lisa</text>
+    <text x="310" y="730" font-size="22" font-weight="800" fill="#2eb861">141</text>
+    <text x="310" y="748" font-size="10" fill="#8a8683">ZONE 3</text>
+  </g>
+
+  <!-- controls -->
+  <rect x="120" y="800" width="200" height="52" rx="26" fill="#2eb861"/>
+  <text x="220" y="833" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Pauzeer blok</text>
+</svg>

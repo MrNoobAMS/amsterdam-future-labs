@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#ebe9e7"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#2b2a29">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#2b2a29" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#2b2a29" opacity="0.7"/>
+
+  <text x="30" y="104" font-size="13" fill="#8a8683" letter-spacing="2">LES AFGEROND · 45 MIN</text>
+  <text x="30" y="138" font-size="26" font-weight="800" fill="#2b2a29">Rapport — Sophie</text>
+
+  <!-- headline stats -->
+  <g>
+    <rect x="30" y="166" width="185" height="104" rx="20" fill="#ffffff"/>
+    <text x="52" y="198" font-size="12" fill="#8a8683">Gem. hartslag (werk)</text>
+    <text x="52" y="238" font-size="30" font-weight="800" fill="#2b2a29">162</text>
+  </g>
+  <g>
+    <rect x="225" y="166" width="185" height="104" rx="20" fill="#ffffff"/>
+    <text x="247" y="198" font-size="12" fill="#8a8683">Piek</text>
+    <text x="247" y="238" font-size="30" font-weight="800" fill="#e6483d">183</text>
+  </g>
+
+  <!-- zone breakdown -->
+  <rect x="30" y="286" width="380" height="230 " rx="20" fill="#ffffff"/>
+  <text x="52" y="320" font-size="15" font-weight="700" fill="#2b2a29">Tijd per zone</text>
+  <text x="52" y="352" font-size="12" fill="#8a8683">Zone 5</text>
+  <rect x="120" y="342" width="230" height="12" rx="6" fill="#f0edea"/>
+  <rect x="120" y="342" width="82" height="12" rx="6" fill="#e6483d"/>
+  <text x="398" y="352" font-size="12" font-weight="700" fill="#2b2a29" text-anchor="end">8:10</text>
+  <text x="52" y="388" font-size="12" fill="#8a8683">Zone 4</text>
+  <rect x="120" y="378" width="230" height="12" rx="6" fill="#f0edea"/>
+  <rect x="120" y="378" width="152" height="12" rx="6" fill="#f2a93c"/>
+  <text x="398" y="388" font-size="12" font-weight="700" fill="#2b2a29" text-anchor="end">15:05</text>
+  <text x="52" y="424" font-size="12" fill="#8a8683">Zone 3</text>
+  <rect x="120" y="414" width="230" height="12" rx="6" fill="#f0edea"/>
+  <rect x="120" y="414" width="120" height="12" rx="6" fill="#2eb861"/>
+  <text x="398" y="424" font-size="12" font-weight="700" fill="#2b2a29" text-anchor="end">12:00</text>
+  <text x="52" y="460" font-size="12" fill="#8a8683">Zone 1–2</text>
+  <rect x="120" y="450" width="230" height="12" rx="6" fill="#f0edea"/>
+  <rect x="120" y="450" width="96" height="12" rx="6" fill="#b6b1ac"/>
+  <text x="398" y="460" font-size="12" font-weight="700" fill="#2b2a29" text-anchor="end">9:45</text>
+  <text x="52" y="496" font-size="12" fill="#8a8683">Actieve gemiddelden tellen alleen werkfases mee</text>
+
+  <!-- standings -->
+  <text x="30" y="560" font-size="18" font-weight="800" fill="#2b2a29">Groepsklassement</text>
+  <g>
+    <rect x="30" y="580" width="380" height="64" rx="18" fill="#ffffff"/>
+    <text x="54" y="618" font-size="15" font-weight="800" fill="#2eb861">1</text>
+    <text x="84" y="618" font-size="15" font-weight="700" fill="#2b2a29">Sophie</text>
+    <text x="390" y="618" font-size="14" font-weight="700" fill="#2b2a29" text-anchor="end">1 480 pt</text>
+  </g>
+  <g>
+    <rect x="30" y="656" width="380" height="64" rx="18" fill="#ffffff"/>
+    <text x="54" y="694" font-size="15" font-weight="800" fill="#8a8683">2</text>
+    <text x="84" y="694" font-size="15" font-weight="700" fill="#2b2a29">Tom</text>
+    <text x="390" y="694" font-size="14" font-weight="700" fill="#2b2a29" text-anchor="end">1 395 pt</text>
+  </g>
+  <g>
+    <rect x="30" y="732" width="380" height="64" rx="18" fill="#ffffff"/>
+    <text x="54" y="770" font-size="15" font-weight="800" fill="#8a8683">3</text>
+    <text x="84" y="770" font-size="15" font-weight="700" fill="#2b2a29">Daan</text>
+    <text x="390" y="770" font-size="14" font-weight="700" fill="#2b2a29" text-anchor="end">1 310 pt</text>
+  </g>
+
+  <rect x="120" y="828" width="200" height="52" rx="26" fill="#2b2a29"/>
+  <text x="220" y="861" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Volgende deelnemer</text>
+</svg>

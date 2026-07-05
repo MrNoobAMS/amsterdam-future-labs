@@ -9,9 +9,9 @@ import { apps, SITE_URL } from '../../data/apps';
 
 // Studio facts for the hero strip — derived where possible so they never drift.
 const stats = [
-  { value: String(apps.length), label: 'iPhone apps' },
-  { value: '0', label: 'trackers & ads' },
-  { value: '100%', label: 'works offline' },
+  { value: String(apps.length), label: 'apps in the lab' },
+  { value: '0', label: 'accounts required' },
+  { value: '100%', label: 'crafted in-house' },
 ];
 
 const breadcrumbSchema = {
@@ -40,13 +40,13 @@ const itemListSchema = {
 
 <BaseLayout
   title="Apps — Amsterdam Future Labs"
-  description="Explore all Amsterdam Future Labs apps for iPhone: Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL. Private by design and offline first."
+  description="Explore all Amsterdam Future Labs apps — from Meal Planner, BreathWell and Kamado Companion to AI Trainer, MindFirst and Sudoku XL. Private by design and offline first."
   jsonLd={[breadcrumbSchema, itemListSchema]}
 >
   <PageHero
     eyebrow="Portfolio"
     title="The apps"
-    lead="Five iPhone apps, one philosophy: beautifully crafted, private by design and fully functional offline."
+    lead="One philosophy behind every app: beautifully crafted, private by design and built to work offline."
   >
     <dl class="hero-stats">
       {stats.map((stat) => (

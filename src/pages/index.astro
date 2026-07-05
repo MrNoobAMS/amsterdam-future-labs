@@ -46,24 +46,24 @@ const teaserFaq = [
   {
     question: 'Do the apps collect my data?',
     answer:
-      'No. None of our apps include analytics or tracking SDKs, and none require an account. Your data is stored on your device only.',
+      'No. Our apps require no account and we add no analytics — your data stays on your device. The one exception to our no-ads rule is the game MergeOrbit, which offers optional rewarded ads; its page explains exactly what that means.',
   },
   {
     question: 'Do the apps work offline?',
     answer:
-      'Yes — every app is built offline-first. Recipes, sessions, puzzles and timers all work without an internet connection.',
+      'Yes — every app is built offline-first. Recipes, sessions, puzzles, lessons and timers all work without an internet connection.',
   },
   {
     question: 'Which devices are supported?',
     answer:
-      'All apps are designed for iPhone and require iOS 17 or later (Meal Planner requires iOS 26). Several are localized in English and Dutch.',
+      'Almost all apps are designed for iPhone (HIITClub is iPad-only) and most require iOS 17 or later. Each app page lists its exact requirements and languages.',
   },
 ];
 ---
 
 <BaseLayout
   title="Amsterdam Future Labs — Thoughtfully crafted iPhone apps"
-  description="Amsterdam Future Labs is an independent studio crafting premium, private iPhone apps — Meal Planner, BreathWell, Kamado Companion, Airfryer Companion and Sudoku XL — and building apps and websites for clients. Offline first, made in Amsterdam."
+  description="Amsterdam Future Labs is an independent studio crafting premium, private iPhone apps — from Meal Planner and BreathWell to Kamado Companion and Sudoku XL — and building apps and websites for clients. Offline first, made in Amsterdam."
 >
   <!-- ======================= HERO (3D scroll) ======================= -->
   <ScrollPhone />
@@ -148,20 +148,24 @@ const teaserFaq = [
     <div class="container">
       <AnimatedSection class="section-head">
         <p class="eyebrow">Portfolio</p>
-        <h2 class="h2">Every app in the lab</h2>
+        <h2 class="h2">Fresh from the lab</h2>
         <p class="lead">
-          Five iPhone apps for cooking, calm and play — each one private, offline
-          and crafted end to end.
+          From cooking and calm to learning and play — every app private,
+          offline-first and crafted end to end.
         </p>
       </AnimatedSection>
 
       <div class="card-grid card-grid--2">
-        {apps.map((app, i) => (
+        {apps.slice(0, 6).map((app, i) => (
           <AnimatedSection delay={(i % 2) * 0.08}>
             <AppCard app={app} />
           </AnimatedSection>
         ))}
       </div>
+
+      <AnimatedSection class="portfolio-more">
+        <CTAButton href="/apps/" variant="ghost" arrow>See all {apps.length} apps</CTAButton>
+      </AnimatedSection>
     </div>
   </section>
 
@@ -264,6 +268,12 @@ const teaserFaq = [
     margin-top: 0.6rem;
     font-size: 0.93rem;
     color: var(--text-light-secondary);
+  }
+
+  .portfolio-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
   }
 
   /* ---------- Privacy split ---------- */

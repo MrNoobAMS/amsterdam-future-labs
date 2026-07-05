@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <rect width="440" height="956" fill="#f4f6f4"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#12312f">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#12312f" stroke-width="1.5" opacity="0.7"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#12312f" opacity="0.7"/>
+
+  <text x="30" y="108" font-size="15" fill="#5c7370">Bibliotheek</text>
+  <text x="30" y="140" font-size="27" font-weight="700" fill="#12312f">Prompts</text>
+
+  <!-- search -->
+  <rect x="30" y="162" width="380" height="44" rx="22" fill="#ffffff"/>
+  <circle cx="56" cy="184" r="7" fill="none" stroke="#8aa19d" stroke-width="2"/>
+  <line x1="61" y1="189" x2="67" y2="195" stroke="#8aa19d" stroke-width="2" stroke-linecap="round"/>
+  <text x="80" y="189" font-size="13" fill="#8aa19d">Zoek een prompt…</text>
+
+  <!-- category chips -->
+  <rect x="30" y="222" width="86" height="34" rx="17" fill="#216b6b"/>
+  <text x="73" y="244" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Alles</text>
+  <rect x="124" y="222" width="86" height="34" rx="17" fill="#ffffff"/>
+  <text x="167" y="244" font-size="12" font-weight="600" fill="#41544f" text-anchor="middle">Werk</text>
+  <rect x="218" y="222" width="86" height="34" rx="17" fill="#ffffff"/>
+  <text x="261" y="244" font-size="12" font-weight="600" fill="#41544f" text-anchor="middle">Thuis</text>
+  <rect x="312" y="222" width="98" height="34" rx="17" fill="#ffffff"/>
+  <text x="361" y="244" font-size="12" font-weight="600" fill="#41544f" text-anchor="middle">Creatief</text>
+
+  <!-- prompt cards -->
+  <g>
+    <rect x="30" y="276" width="380" height="108" rx="18" fill="#ffffff"/>
+    <rect x="46" y="292" width="70" height="24" rx="12" fill="#e2efed"/>
+    <text x="81" y="308" font-size="11" font-weight="600" fill="#216b6b" text-anchor="middle">Beginner</text>
+    <text x="46" y="340" font-size="15" font-weight="600" fill="#12312f">E-mail netter maken</text>
+    <text x="46" y="362" font-size="12" fill="#5c7370">Herschrijf een ruwe e-mail in een vriendelijke toon</text>
+    <rect x="330" y="336" width="64" height="30" rx="15" fill="#216b6b"/>
+    <text x="362" y="356" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Kopieer</text>
+  </g>
+  <g>
+    <rect x="30" y="396" width="380" height="108" rx="18" fill="#ffffff"/>
+    <rect x="46" y="412" width="70" height="24" rx="12" fill="#e2efed"/>
+    <text x="81" y="428" font-size="11" font-weight="600" fill="#216b6b" text-anchor="middle">Beginner</text>
+    <text x="46" y="460" font-size="15" font-weight="600" fill="#12312f">Samenvatten in 5 punten</text>
+    <text x="46" y="482" font-size="12" fill="#5c7370">Laat een lang stuk tekst kort en helder samenvatten</text>
+    <rect x="330" y="456" width="64" height="30" rx="15" fill="#216b6b"/>
+    <text x="362" y="476" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Kopieer</text>
+  </g>
+  <g>
+    <rect x="30" y="516" width="380" height="108" rx="18" fill="#ffffff"/>
+    <rect x="46" y="532" width="76" height="24" rx="12" fill="#fdeede"/>
+    <text x="84" y="548" font-size="11" font-weight="600" fill="#b46a2a" text-anchor="middle">Gevorderd</text>
+    <text x="46" y="580" font-size="15" font-weight="600" fill="#12312f">Stappenplan laten maken</text>
+    <text x="46" y="602" font-size="12" fill="#5c7370">Laat AI een groot doel opdelen in haalbare stappen</text>
+    <rect x="330" y="576" width="64" height="30" rx="15" fill="#216b6b"/>
+    <text x="362" y="596" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Kopieer</text>
+  </g>
+  <g>
+    <rect x="30" y="636" width="380" height="108" rx="18" fill="#ffffff"/>
+    <rect x="46" y="652" width="70" height="24" rx="12" fill="#e2efed"/>
+    <text x="81" y="668" font-size="11" font-weight="600" fill="#216b6b" text-anchor="middle">Beginner</text>
+    <text x="46" y="700" font-size="15" font-weight="600" fill="#12312f">Recept van restjes</text>
+    <text x="46" y="722" font-size="12" fill="#5c7370">Geef op wat er in je koelkast ligt en krijg een recept</text>
+    <rect x="330" y="696" width="64" height="30" rx="15" fill="#216b6b"/>
+    <text x="362" y="716" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Kopieer</text>
+  </g>
+
+  <rect x="0" y="868" width="440" height="88" fill="#ffffff"/>
+  <text x="42" y="932" font-size="10" fill="#8aa19d">Leerpad</text>
+  <circle cx="146" cy="904" r="4" fill="#216b6b"/>
+  <text x="126" y="932" font-size="10" fill="#216b6b">Prompts</text>
+  <text x="212" y="932" font-size="10" fill="#8aa19d">Opdrachten</text>
+  <text x="308" y="932" font-size="10" fill="#8aa19d">Voortgang</text>
+  <text x="388" y="932" font-size="10" fill="#8aa19d">Meer</text>
+</svg>

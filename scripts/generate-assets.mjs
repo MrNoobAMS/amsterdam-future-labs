@@ -136,6 +136,32 @@ await resizeTo(
   192
 );
 
+// ---------- AI Trainer / MindFirst / MergeOrbit / HIITClub: icons ----------
+
+await resizeTo(
+  path.join(appsRoot, 'AITrainer', 'AITrainer', 'AITrainer', 'Assets.xcassets', 'AppIcon.appiconset', 'AppIcon-Light.png'),
+  pub('images', 'apps', 'ai-trainer', 'icon.png'),
+  192
+);
+
+await resizeTo(
+  path.join(appsRoot, 'MindFirst', 'MindFirst', 'MindFirst', 'Assets.xcassets', 'AppIcon.appiconset', 'AppIcon-1024.png'),
+  pub('images', 'apps', 'mindfirst', 'icon.png'),
+  192
+);
+
+await resizeTo(
+  path.join(appsRoot, 'MergeMaster', 'MergeMaster', 'MergeOrbit', 'Assets.xcassets', 'AppIcon.appiconset', 'logo.png'),
+  pub('images', 'apps', 'mergeorbit', 'icon.png'),
+  192
+);
+
+await resizeTo(
+  path.join(appsRoot, 'HIITClub', 'HIITClub', 'HIITClub', 'Assets.xcassets', 'AppIcon.appiconset', 'AppIcon.png'),
+  pub('images', 'apps', 'hiitclub', 'icon.png'),
+  192
+);
+
 // ---------- Open Graph cards ----------
 
 const ogCards = [
@@ -185,6 +211,46 @@ const ogCards = [
     title: 'Plan smarter.',
     title2: 'Eat better.',
     accent: '#3BAE6E',
+    accent2: '#8ee0ae',
+  },
+  {
+    file: 'ai-trainer.png',
+    eyebrow: 'AI TRAINER',
+    title: 'Learn AI,',
+    title2: 'calmly.',
+    accent: '#216B6B',
+    accent2: '#7fc7c7',
+  },
+  {
+    file: 'mindfirst.png',
+    eyebrow: 'MINDFIRST',
+    title: 'Mental first aid,',
+    title2: 'in your pocket.',
+    accent: '#56C2B3',
+    accent2: '#a8e6dd',
+  },
+  {
+    file: 'supplementen-wijzer.png',
+    eyebrow: 'SUPPLEMENTEN WIJZER',
+    title: 'Understand what',
+    title2: 'you’re really taking.',
+    accent: '#199E94',
+    accent2: '#7fd4cc',
+  },
+  {
+    file: 'mergeorbit.png',
+    eyebrow: 'MERGEORBIT',
+    title: 'Launch. Bounce.',
+    title2: 'Merge.',
+    accent: '#6C8CFF',
+    accent2: '#A06CFF',
+  },
+  {
+    file: 'hiitclub.png',
+    eyebrow: 'HIITCLUB',
+    title: 'One screen,',
+    title2: 'live heart rate.',
+    accent: '#2EB861',
     accent2: '#8ee0ae',
   },
 ];

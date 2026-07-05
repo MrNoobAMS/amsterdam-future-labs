@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 956" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <radialGradient id="b1" cx="0.35" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#9db4ff"/><stop offset="1" stop-color="#4a63d8"/>
+    </radialGradient>
+    <radialGradient id="b2" cx="0.35" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#c9a9ff"/><stop offset="1" stop-color="#7a4fd8"/>
+    </radialGradient>
+    <radialGradient id="b3" cx="0.35" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#ffe29a"/><stop offset="1" stop-color="#d8a24a"/>
+    </radialGradient>
+  </defs>
+  <rect width="440" height="956" fill="#0b0e1a"/>
+  <text x="30" y="48" font-size="15" font-weight="600" fill="#e8ecff">9:41</text>
+  <rect x="360" y="36" width="24" height="12" rx="3" fill="none" stroke="#e8ecff" stroke-width="1.5" opacity="0.8"/>
+  <rect x="362" y="38" width="16" height="8" rx="1.5" fill="#e8ecff" opacity="0.8"/>
+
+  <!-- HUD -->
+  <text x="30" y="102" font-size="12" fill="#7c86b8">SCORE</text>
+  <text x="30" y="130" font-size="26" font-weight="700" fill="#e8ecff">48 120</text>
+  <rect x="300" y="92" width="110" height="42" rx="21" fill="#141930"/>
+  <circle cx="322" cy="113" r="10" fill="url(#b3)"/>
+  <text x="342" y="119" font-size="15" font-weight="700" fill="#ffd66b">312</text>
+
+  <!-- combo banner -->
+  <rect x="140" y="160" width="160" height="36" rx="18" fill="#1b2246"/>
+  <text x="220" y="184" font-size="14" font-weight="700" fill="#6c8cff" text-anchor="middle">COMBO ×3</text>
+
+  <!-- arena -->
+  <rect x="30" y="216" width="380" height="520" rx="26" fill="#101527" stroke="#232c54" stroke-width="2"/>
+  <!-- gliding balls with motion trails -->
+  <circle cx="120" cy="300" r="26" fill="url(#b1)"/>
+  <circle cx="120" cy="300" r="26" fill="none" stroke="#9db4ff" stroke-width="2" opacity="0.35"/>
+  <text x="120" y="307" font-size="15" font-weight="700" fill="#0b0e1a" text-anchor="middle">2</text>
+  <circle cx="86" cy="316" r="26" fill="#4a63d8" opacity="0.16"/>
+  <circle cx="300" cy="356" r="34" fill="url(#b2)"/>
+  <text x="300" y="364" font-size="17" font-weight="700" fill="#0b0e1a" text-anchor="middle">4</text>
+  <circle cx="342" cy="330" r="34" fill="#7a4fd8" opacity="0.14"/>
+  <circle cx="190" cy="470" r="44" fill="url(#b3)"/>
+  <text x="190" y="479" font-size="20" font-weight="700" fill="#0b0e1a" text-anchor="middle">6</text>
+  <circle cx="330" cy="560" r="22" fill="url(#b1)"/>
+  <text x="330" y="567" font-size="13" font-weight="700" fill="#0b0e1a" text-anchor="middle">2</text>
+  <!-- merge flash -->
+  <g opacity="0.85">
+    <circle cx="252" cy="430" r="8" fill="none" stroke="#6c8cff" stroke-width="2"/>
+    <circle cx="252" cy="430" r="16" fill="none" stroke="#6c8cff" stroke-width="1.4" opacity="0.5"/>
+  </g>
+
+  <!-- slingshot -->
+  <circle cx="220" cy="806" r="34" fill="url(#b2)"/>
+  <text x="220" y="814" font-size="17" font-weight="700" fill="#0b0e1a" text-anchor="middle">4</text>
+  <path d="M220 770 L192 700" stroke="#6c8cff" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>
+  <path d="M192 700l-6 14m6-14l14 5" stroke="#6c8cff" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M160 812 Q220 850 280 812" fill="none" stroke="#2a3462" stroke-width="5" stroke-linecap="round"/>
+</svg>
