@@ -35,6 +35,9 @@ export interface AppPrivacy {
   updated?: string;
   /** Optional in-app purchase / subscription clause for the full policy page. */
   purchases?: string;
+  /** Optional titled sections for app-specific topics (third-party services,
+   * health data, …) rendered after the standard sections on the policy page. */
+  extraSections?: { title: string; body: string }[];
   /** Extra app-specific clauses for the full policy page. */
   details: string[];
 }
@@ -592,9 +595,16 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included. We cannot see how you use the app.',
       account: 'No account or sign-up is required — the app works fully without one.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'July 5, 2026',
+      extraSections: [
+        {
+          title: 'Using AI apps alongside the course',
+          body: 'AI Trainer teaches you to work with AI chatbots, but it does not include one. Practice prompts are copied to your clipboard for use in the AI app of your choice; what you share with that app is governed by that provider’s privacy policy, not this one. The course explicitly teaches you what (not) to share with AI services.',
+        },
+      ],
       details: [
         'AI Trainer makes no network requests at all — the entire course works in airplane mode.',
-        'Practice prompts are copied to your clipboard for use in the AI app of your choice; nothing is sent anywhere by AI Trainer itself.',
+        'Your lesson progress, favorites and settings never leave your device.',
       ],
     },
     faq: [
@@ -676,9 +686,20 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included. What you do in the app stays private.',
       account: 'No account or sign-up is required — help is available the moment you open the app.',
       storage: 'All data is stored locally on your iPhone. Deleting the app deletes your data.',
+      updated: 'July 5, 2026',
+      extraSections: [
+        {
+          title: 'A note on sensitive information',
+          body: 'MindFirst deals with mental health, so we hold it to the strictest possible standard: your safety plan, check-ins and emergency contacts are stored only on your iPhone, are never transmitted anywhere, and are not visible to us or anyone else. When you tap SOS or call a contact, the phone number is handed to the iOS dialer — the call itself happens entirely outside the app, like any normal phone call.',
+        },
+        {
+          title: 'Not a medical device',
+          body: 'MindFirst offers self-help techniques for acute moments and makes it easier to reach your own contacts or a helpline. It does not diagnose, treat or replace professional care, and the app states this clearly during onboarding. If you are in immediate danger, contact local emergency services.',
+        },
+      ],
       details: [
-        'MindFirst makes no network requests. The only thing that leaves the app is a phone number handed to the iOS dialer when you tap SOS or call a contact.',
-        'MindFirst supplements professional care and is not a medical device; the app states this clearly during onboarding.',
+        'MindFirst makes no network requests — every protocol, your safety plan and your contacts work fully offline.',
+        'No third-party SDKs of any kind are included in the app.',
       ],
     },
     faq: [
@@ -762,10 +783,20 @@ export const apps: AppMeta[] = [
       storage: 'Saved products and notes are stored locally on your iPhone. Deleting the app deletes your data.',
       purchases:
         'Supplementen Wijzer offers an optional Pro upgrade — available as a monthly or yearly auto-renewing subscription or a one-time lifetime purchase. All payments are processed by Apple through the App Store; we never receive or store your payment details. Subscriptions renew automatically unless cancelled at least 24 hours before the end of the current period, and can be managed in your Apple Account settings.',
+      updated: 'July 5, 2026',
+      extraSections: [
+        {
+          title: 'Third-party services',
+          body: 'Two features talk to the network, both anonymously. Scanning an unknown barcode sends only the product code to the public Open Food Facts database (openfoodfacts.org) to identify the product — nothing about you or your device is included. Questions to the AI assistant are forwarded through our own server proxy to an AI model to generate the answer; questions are not linked to your identity, are not stored by us, and are never used to build a profile of you.',
+        },
+        {
+          title: 'Not medical advice',
+          body: 'Supplementen Wijzer is educational. Quality scores, evidence ratings and interaction flags summarize published research — they are not a diagnosis, treatment or personal medical advice. Always consult your doctor or pharmacist before changing what you take, especially if you use medication.',
+        },
+      ],
       details: [
-        'Scanning a barcode sends only the product code to the public Open Food Facts database to identify the product — never anything about you.',
-        'Questions to the AI assistant are forwarded anonymously through our secure server proxy and are not linked to you or stored by us.',
-        'Browsing the catalog, scores and encyclopedia works fully offline.',
+        'Browsing the catalog, quality scores and the ingredient encyclopedia works fully offline.',
+        'Your saved supplements, notes and favorites never leave your device.',
       ],
     },
     faq: [
@@ -847,9 +878,17 @@ export const apps: AppMeta[] = [
       analytics: 'MergeOrbit includes Google’s ads SDK to serve rewarded ads. Before any ad personalization, iOS asks your permission via App Tracking Transparency — decline it and ads stay non-personalized. We add no analytics of our own.',
       account: 'No account or sign-up is required.',
       storage: 'All game data is stored locally on your iPhone. Deleting the app deletes your progress.',
+      updated: 'July 5, 2026',
+      extraSections: [
+        {
+          title: 'Third-party advertising (Google AdMob)',
+          body: 'Rewarded ads are served by Google AdMob. When you choose to watch one, Google processes device information — such as your IP address and, only with your permission, the advertising identifier — to serve and measure the ad. On first use iOS shows the App Tracking Transparency prompt; if you decline, ads remain non-personalized and no advertising identifier is shared. Where required (for example under the GDPR), a consent form is shown before any personalized ads. Google’s handling of this data is described in its own privacy policy at policies.google.com/privacy.',
+        },
+      ],
       details: [
         'Gameplay is fully offline; a connection is only needed when you choose to watch a rewarded ad.',
-        'Watching ads is always optional — the full game is playable without ever watching one.',
+        'Watching ads is always optional and capped at three per day — the full game is playable without ever watching one.',
+        'We receive no personal data from Google about you — only aggregate, anonymous ad statistics.',
       ],
     },
     faq: [
@@ -931,9 +970,20 @@ export const apps: AppMeta[] = [
       analytics: 'No analytics or tracking SDKs are included.',
       account: 'No account or sign-up is required. Optional cross-iPad sync uses the studio’s own iCloud — we never see the data.',
       storage: 'Rosters and stats are stored locally on the iPad; deleting the app deletes them. iCloud sync, when enabled, is end-to-end between the studio’s own devices.',
+      updated: 'July 5, 2026',
+      extraSections: [
+        {
+          title: 'Heart-rate & health data',
+          body: 'Heart-rate readings from Bluetooth straps are processed live on the iPad to drive the class display, zones and report cards, and summarized results are stored locally per member. This data is never transmitted to us or to any third party — we run no servers and cannot see it. Studios using HIITClub are responsible for informing participants that their heart rate is shown on the shared class screen.',
+        },
+        {
+          title: 'iCloud sync between iPads',
+          body: 'Optionally, member rosters and cumulative stats can sync between a studio’s own iPads via Apple’s iCloud (key-value storage) under the studio’s own Apple account. The data stays within Apple’s infrastructure and the studio’s account; we have no access to it. Sync can be left off entirely, in which case everything stays on a single iPad.',
+        },
+      ],
       details: [
         'The only permission HIITClub asks for is Bluetooth, to read heart-rate straps during class.',
-        'Heart-rate data is processed live for the class display and report cards — it is never sent to us or any third party.',
+        'HIITClub contains no third-party SDKs — no analytics, no ads, no external services.',
       ],
     },
     faq: [

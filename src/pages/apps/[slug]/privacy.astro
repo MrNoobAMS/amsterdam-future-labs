@@ -32,6 +32,8 @@ const sections = [
   ...(app.privacy.purchases
     ? [{ title: 'Purchases & subscriptions', body: app.privacy.purchases }]
     : []),
+  // App-specific topics (third-party services, health data, …).
+  ...(app.privacy.extraSections ?? []),
 ];
 ---
 
@@ -76,6 +78,8 @@ const sections = [
           {app.name} does not collect personal data from anyone, including
           children. The app contains no social features, chat or user-generated
           content shared with others.
+          {app.privacy.hasAds &&
+            ' Ads shown in the app are non-personalized unless the iOS tracking permission is explicitly granted, and ad personalization is never enabled for child accounts.'}
         </p>
       </AnimatedSection>
 
