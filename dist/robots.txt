@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://amsterdamfuturelabs.com/sitemap-index.xml

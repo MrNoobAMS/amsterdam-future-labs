@@ -472,15 +472,18 @@ const panels = [
     /* Centered column: copy overlaps the phone (in front of it). */
     margin-inline: auto;
     pointer-events: auto;
-    /* Legibility comes from a soft dark halo that hugs the glyphs and fades
-       smoothly to transparent — layered blurs give a gradient-to-0% shadow
-       around the text itself, so there's no hard-edged box behind the copy. */
-    text-shadow:
-      0 0 1px rgba(3, 4, 8, 0.95),
-      0 1px 4px rgba(3, 4, 8, 0.9),
-      0 2px 14px rgba(3, 4, 8, 0.78),
-      0 4px 28px rgba(3, 4, 8, 0.5),
-      0 8px 52px rgba(3, 4, 8, 0.28);
+    /* Legibility: the copy sits on a dark frosted-glass card (same glass
+       language as the header and contact form), so it stays readable no
+       matter how bright the phone screen behind it is. */
+    width: fit-content;
+    padding: clamp(1.5rem, 4vw, 2.3rem) clamp(1.4rem, 4vw, 2.5rem);
+    border-radius: 1.9rem;
+    background: rgba(8, 9, 14, 0.68);
+    border: 1px solid rgba(245, 246, 250, 0.08);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    backdrop-filter: blur(20px) saturate(1.2);
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 1px 2px rgba(3, 4, 8, 0.45);
   }
 
   .phone-eyebrow {
