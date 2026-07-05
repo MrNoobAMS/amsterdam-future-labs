@@ -1,0 +1,70 @@
+---
+/**
+ * Closing call-to-action band: a dark rounded card with an accent glow, used
+ * at the end of sub-pages so every page resolves the way the homepage does.
+ * Wrap in an AnimatedSection at the call site for the scroll reveal; put the
+ * buttons in the default slot.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  lead?: string;
+  /** Glow tint; defaults to the brand violet. */
+  accent?: string;
+}
+
+const { eyebrow, title, lead, accent } = Astro.props;
+---
+
+<div class="cta-band section--dark" style={accent ? `--band-accent:${accent}` : undefined}>
+  <div class="cta-band-glow" aria-hidden="true"></div>
+  <div class="cta-band-inner">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 class="h2">{title}</h2>
+    {lead && <p class="lead cta-band-lead">{lead}</p>}
+    <div class="cta-band-actions">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 3rem);
+    text-align: center;
+    border: 1px solid rgba(245, 246, 250, 0.08);
+    box-shadow: 0 30px 60px -30px rgba(11, 12, 16, 0.55);
+  }
+
+  .cta-band-glow {
+    position: absolute;
+    inset: auto -25% -70% -25%;
+    height: 28rem;
+    background: radial-gradient(
+      ellipse at 50% 100%,
+      color-mix(in srgb, var(--band-accent, var(--brand-b)) 34%, transparent),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  .cta-band-inner {
+    position: relative;
+  }
+
+  .cta-band-lead {
+    margin: 1.1rem auto 0;
+    max-width: 46ch;
+  }
+
+  .cta-band-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+    margin-top: 2.2rem;
+  }
+</style>

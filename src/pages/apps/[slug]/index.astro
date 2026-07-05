@@ -86,6 +86,7 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
   <!-- ======================= HERO ======================= -->
   <section class="app-hero section--dark" style={`--app-accent:${app.accent}; --app-accent-soft:${app.accentSoft}`}>
     <div class="app-hero-glow" data-parallax="0.15" aria-hidden="true"></div>
+    <div class="app-hero-glow--b" data-parallax="0.08" aria-hidden="true"></div>
 
     <div class="container app-hero-grid">
       <div class="app-hero-copy">
@@ -315,6 +316,38 @@ const structuredData = [appSchema, faqSchema, breadcrumbSchema];
       transparent 65%
     );
     pointer-events: none;
+  }
+
+  /* Counter-glow low left so the dark field never reads flat (as PageHero). */
+  .app-hero-glow--b {
+    position: absolute;
+    bottom: -50%;
+    left: -18%;
+    width: 44rem;
+    height: 44rem;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--app-accent) 10%, transparent),
+      transparent 62%
+    );
+    pointer-events: none;
+  }
+
+  /* Hairline seam into the content below, tinted by the app accent. */
+  .app-hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--app-accent) 45%, transparent) 50%,
+      transparent
+    );
   }
 
   .app-hero-grid {

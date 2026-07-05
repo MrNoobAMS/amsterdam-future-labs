@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
+import CTABand from '../components/CTABand.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
 import { apps, SUPPORT_EMAIL, SITE_URL } from '../data/apps';
 
@@ -53,6 +54,7 @@ const principles = [
   <section class="section">
     <div class="container">
       <AnimatedSection class="section-head">
+        <p class="eyebrow">Our promise</p>
         <h2 class="h2">Four rules, every app</h2>
       </AnimatedSection>
       <div class="principles-grid">
@@ -70,6 +72,7 @@ const principles = [
   <section class="section section--soft">
     <div class="container">
       <AnimatedSection class="section-head">
+        <p class="eyebrow">The details</p>
         <h2 class="h2">Privacy per app</h2>
         <p class="lead">
           The summary below links to each app’s full privacy policy — the same
@@ -103,21 +106,23 @@ const principles = [
   </section>
 
   <section class="section">
-    <div class="container contact-block">
+    <div class="container">
       <AnimatedSection>
-        <h2 class="h2">Privacy questions?</h2>
-        <p class="lead contact-lead">
-          We answer every privacy question personally — usually within two
-          business days.
-        </p>
-        <CTAButton
-          href={`mailto:${SUPPORT_EMAIL}?subject=Privacy%20question`}
-          variant="primary"
-          arrow
-          class="btn--wrap"
+        <CTABand
+          eyebrow="Still curious?"
+          title="Privacy questions?"
+          lead="We answer every privacy question personally — in plain language, usually within two business days."
         >
-          {SUPPORT_EMAIL}
-        </CTAButton>
+          <CTAButton
+            href={`mailto:${SUPPORT_EMAIL}?subject=Privacy%20question`}
+            variant="gradient"
+            arrow
+            class="btn--wrap"
+          >
+            {SUPPORT_EMAIL}
+          </CTAButton>
+          <CTAButton href="/faq/" variant="ghost">Read the FAQ</CTAButton>
+        </CTABand>
       </AnimatedSection>
     </div>
   </section>
@@ -248,12 +253,4 @@ const principles = [
     margin-top: auto;
   }
 
-  .contact-block {
-    text-align: center;
-    max-width: 36rem;
-  }
-
-  .contact-lead {
-    margin: 1.2rem auto 2rem;
-  }
 </style>

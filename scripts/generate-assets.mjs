@@ -124,6 +124,18 @@ await resizeTo(
   192
 );
 
+// ---------- Meal Planner: icon from the app's asset catalog ----------
+
+await resizeTo(
+  path.join(
+    appsRoot,
+    'MealPlanner', 'MealPlanner', 'MealPlanner',
+    'Assets.xcassets', 'AppIcon.appiconset', 'icon-light.png'
+  ),
+  pub('images', 'apps', 'meal-planner', 'icon.png'),
+  192
+);
+
 // ---------- Open Graph cards ----------
 
 const ogCards = [

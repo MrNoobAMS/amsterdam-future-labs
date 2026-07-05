@@ -448,7 +448,7 @@ export const apps: AppMeta[] = [
     status: 'coming-soon',
     accent: '#3BAE6E',
     accentSoft: 'rgba(59, 174, 110, 0.16)',
-    icon: '/images/apps/meal-planner/icon.svg',
+    icon: '/images/apps/meal-planner/icon.png',
     screenshots: [
       { src: '/images/apps/meal-planner/screen-1.svg', alt: 'Meal Planner home dashboard with calories and protein remaining' },
       { src: '/images/apps/meal-planner/screen-2.svg', alt: 'Meal Planner week planner with four meal slots per day' },

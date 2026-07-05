@@ -8,6 +8,8 @@ import CTAButton from '../components/CTAButton.astro';
   description="The page you’re looking for doesn’t exist."
 >
   <section class="not-found section--dark">
+    <div class="nf-glow nf-glow--a" aria-hidden="true"></div>
+    <div class="nf-glow nf-glow--b" aria-hidden="true"></div>
     <div class="container nf-inner">
       <p class="nf-code gradient-text">404</p>
       <h1 class="h2">This page wandered off</h1>
@@ -22,13 +24,38 @@ import CTAButton from '../components/CTAButton.astro';
 
 <style>
   .not-found {
+    position: relative;
+    overflow: hidden;
     min-height: 80vh;
     display: grid;
     place-items: center;
     padding: 8rem 0 4rem;
   }
 
+  .nf-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .nf-glow--a {
+    top: -30%;
+    right: -12%;
+    width: 50rem;
+    height: 50rem;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.22), transparent 65%);
+  }
+
+  .nf-glow--b {
+    bottom: -40%;
+    left: -15%;
+    width: 44rem;
+    height: 44rem;
+    background: radial-gradient(circle, rgba(34, 211, 238, 0.12), transparent 62%);
+  }
+
   .nf-inner {
+    position: relative;
     text-align: center;
   }
 

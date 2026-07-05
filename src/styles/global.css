@@ -322,6 +322,12 @@ p {
   white-space: nowrap;
 }
 
+/* The space between words. In flex containers (e.g. nav links) a bare
+   collapsible space inside a span collapses to zero width — `pre` keeps it. */
+.split-space {
+  white-space: pre;
+}
+
 .split-char {
   display: inline-block;
   opacity: 0;

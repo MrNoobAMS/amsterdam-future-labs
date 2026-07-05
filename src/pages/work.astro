@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import AnimatedSection from '../components/AnimatedSection.astro';
 import CTAButton from '../components/CTAButton.astro';
+import CTABand from '../components/CTABand.astro';
 import FeatureIcon from '../components/FeatureIcon.astro';
 import { SUPPORT_EMAIL, SITE_URL, SITE_NAME } from '../data/apps';
 
@@ -202,17 +203,15 @@ const steps = [
   <!-- ===================== CTA ===================== -->
   <section class="section">
     <div class="container">
-      <AnimatedSection class="work-cta section--dark">
-        <p class="eyebrow">Let’s talk</p>
-        <h2 class="h2">Have a project in mind?</h2>
-        <p class="lead">
-          Tell us what you’re thinking — even a rough idea is enough to start. We reply within
-          two business days and we’ll be honest about whether we’re the right fit.
-        </p>
-        <div class="work-cta-actions">
+      <AnimatedSection>
+        <CTABand
+          eyebrow="Let’s talk"
+          title="Have a project in mind?"
+          lead="Tell us what you’re thinking — even a rough idea is enough to start. We reply within two business days and we’ll be honest about whether we’re the right fit."
+        >
           <CTAButton href={projectMail} variant="gradient" arrow class="btn--wrap">Email {SUPPORT_EMAIL}</CTAButton>
           <CTAButton href="/apps/" variant="ghost">See our own apps</CTAButton>
-        </div>
+        </CTABand>
       </AnimatedSection>
     </div>
   </section>
@@ -363,20 +362,23 @@ const steps = [
 
   .steps :global(.step) {
     display: flex;
-    gap: 1.2rem;
+    gap: 1.4rem;
     align-items: flex-start;
-    padding: 0.4rem 0;
+    /* Editorial hairline above each step gives the list its rhythm. */
+    border-top: 1px solid var(--line-dark);
+    padding: 1.5rem 0 0.6rem;
   }
 
   .step-n {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 1.6rem;
+    font-weight: 750;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
     /* Solid accessible indigo — the gradient's cyan stop is unreadable on
        white, so the step ordinals use the AA-safe brand ink instead. */
     color: var(--brand-ink);
     flex-shrink: 0;
-    padding-top: 0.15rem;
+    min-width: 2.6rem;
   }
 
   .step-body p {
@@ -385,23 +387,4 @@ const steps = [
     line-height: 1.6;
   }
 
-  /* ---------- CTA ---------- */
-  .work-cta {
-    border-radius: var(--radius-lg, 1.5rem);
-    padding: clamp(2.5rem, 6vw, 4rem);
-    text-align: center;
-  }
-
-  .work-cta .lead {
-    margin: 1rem auto 0;
-    max-width: 48ch;
-  }
-
-  .work-cta-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
-    justify-content: center;
-    margin-top: 2rem;
-  }
 </style>

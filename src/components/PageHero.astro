@@ -17,7 +17,9 @@ const { eyebrow, title, lead, accent } = Astro.props;
 ---
 
 <section class="page-hero section--dark" style={accent ? `--hero-accent:${accent}` : undefined}>
-  <div class="hero-glow" data-parallax="0.18" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow--a" data-parallax="0.18" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow--b" data-parallax="0.1" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
   <div class="container">
     <AnimatedSection>
       <p class="eyebrow">{eyebrow}</p>
@@ -32,25 +34,72 @@ const { eyebrow, title, lead, accent } = Astro.props;
   .page-hero {
     position: relative;
     overflow: hidden;
-    padding: clamp(8.5rem, 18vw, 12rem) 0 clamp(4rem, 8vw, 6rem);
+    padding: clamp(8.5rem, 18vw, 12rem) 0 clamp(4.5rem, 9vw, 7rem);
   }
 
   .hero-glow {
     position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Primary glow: page/app accent, top right — mirrors the homepage hero. */
+  .hero-glow--a {
     top: -30%;
     right: -15%;
     width: 60rem;
     height: 60rem;
-    border-radius: 50%;
     background: radial-gradient(
       circle,
-      color-mix(in srgb, var(--hero-accent, var(--brand-b)) 22%, transparent),
+      color-mix(in srgb, var(--hero-accent, var(--brand-b)) 24%, transparent),
       transparent 65%
     );
+  }
+
+  /* Counter-glow: cool cyan low left, so the dark field never reads flat. */
+  .hero-glow--b {
+    bottom: -55%;
+    left: -18%;
+    width: 46rem;
+    height: 46rem;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--brand-c) 13%, transparent),
+      transparent 62%
+    );
+  }
+
+  /* Faint blueprint grid, masked so it only whispers behind the headline. */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245, 246, 250, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245, 246, 250, 0.045) 1px, transparent 1px);
+    background-size: 3.25rem 3.25rem;
+    mask-image: radial-gradient(85% 90% at 50% 0%, black 20%, transparent 78%);
+    -webkit-mask-image: radial-gradient(85% 90% at 50% 0%, black 20%, transparent 78%);
     pointer-events: none;
   }
 
+  /* Hairline seam into the page content below. */
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--hero-accent, var(--brand-b)) 45%, transparent) 50%,
+      transparent
+    );
+  }
+
   .page-hero .display {
+    position: relative;
     max-width: 18ch;
   }
 

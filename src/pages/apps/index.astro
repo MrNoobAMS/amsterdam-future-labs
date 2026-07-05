@@ -3,7 +3,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import AnimatedSection from '../../components/AnimatedSection.astro';
 import AppCard from '../../components/AppCard.astro';
+import CTAButton from '../../components/CTAButton.astro';
+import CTABand from '../../components/CTABand.astro';
 import { apps, SITE_URL } from '../../data/apps';
+
+// Studio facts for the hero strip — derived where possible so they never drift.
+const stats = [
+  { value: String(apps.length), label: 'iPhone apps' },
+  { value: '0', label: 'trackers & ads' },
+  { value: '100%', label: 'works offline' },
+];
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -38,7 +47,16 @@ const itemListSchema = {
     eyebrow="Portfolio"
     title="The apps"
     lead="Five iPhone apps, one philosophy: beautifully crafted, private by design and fully functional offline."
-  />
+  >
+    <dl class="hero-stats">
+      {stats.map((stat) => (
+        <div class="hero-stat">
+          <dd>{stat.value}</dd>
+          <dt>{stat.label}</dt>
+        </div>
+      ))}
+    </dl>
+  </PageHero>
 
   <section class="section">
     <div class="container">
@@ -51,9 +69,61 @@ const itemListSchema = {
       </div>
     </div>
   </section>
+
+  <!-- Close the page the way the homepage does: with somewhere to go next. -->
+  <section class="section apps-cta">
+    <div class="container">
+      <AnimatedSection>
+        <CTABand
+          eyebrow="Beyond the portfolio"
+          title="Want something like this of your own?"
+          lead="The same design, engineering and privacy-first standards behind these apps are available for client work — apps and websites alike."
+        >
+          <CTAButton href="/work/" variant="gradient" arrow>Work with us</CTAButton>
+          <CTAButton href="/support/" variant="ghost">Questions? Support</CTAButton>
+        </CTABand>
+      </AnimatedSection>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
+  /* ---------- Hero stats strip ---------- */
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    margin: 2.6rem 0 0;
+  }
+
+  .hero-stat dd {
+    margin: 0;
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    font-weight: 720;
+    letter-spacing: var(--tracking-tight);
+    line-height: 1.1;
+    color: var(--text-light);
+  }
+
+  .hero-stat dt {
+    margin-top: 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 550;
+    letter-spacing: 0.02em;
+    color: var(--text-light-secondary);
+  }
+
+  /* Hairline between stats, homepage-eyebrow style. */
+  .hero-stat + .hero-stat {
+    padding-left: clamp(1.5rem, 5vw, 3.5rem);
+    border-left: 1px solid var(--line-light);
+  }
+
+  /* The band directly follows the grid — halve the doubled section gap. */
+  .apps-cta {
+    padding-top: 0;
+  }
+
   .apps-grid {
     display: grid;
     gap: 1.5rem;
