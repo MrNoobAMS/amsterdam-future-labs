@@ -142,7 +142,12 @@ const panels = [
       <article class="phone-panel" data-panel={i}>
         <div class="phone-panel-inner container">
           <p class="phone-eyebrow">{p.eyebrow}</p>
-          <h2 class="phone-title">{p.title}</h2>
+          {/* Panel 0 carries the page's only <h1>; the rest are sections. */}
+          {i === 0 ? (
+            <h1 class="phone-title">{p.title}</h1>
+          ) : (
+            <h2 class="phone-title">{p.title}</h2>
+          )}
           <p class="phone-body">{p.body}</p>
           {p.href && (
             <a class="phone-link" href={p.href}>
@@ -547,6 +552,7 @@ const panels = [
   import * as THREE from 'three';
   import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 
   const section = document.querySelector<HTMLElement>('[data-phone-scroll]');
   const canvas = document.querySelector<HTMLCanvasElement>('[data-phone-canvas]');
@@ -556,12 +562,24 @@ const panels = [
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (section && canvas && !reduceMotion) {
+  // Context creation throws on browsers/devices without WebGL — treat that the
+  // same as reduced motion (static fallback image + release the preloader)
+  // instead of letting the whole script die with the preloader stuck.
+  function createRenderer(el: HTMLCanvasElement): THREE.WebGLRenderer | null {
+    try {
+      return new THREE.WebGLRenderer({ canvas: el, antialias: true, alpha: true });
+    } catch {
+      return null;
+    }
+  }
+
+  const renderer = section && canvas && !reduceMotion ? createRenderer(canvas) : null;
+
+  if (section && canvas && renderer) {
     const screens: string[] = JSON.parse(section.dataset.screens || '[]');
     const faces = screens.length;
 
     // ---------- Renderer / scene / camera ----------
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -606,24 +624,32 @@ const panels = [
     scene.add(phone);
 
     // App-screen textures shown on the OLED. flipY=false to match glTF UVs.
+    // Loaded lazily: only the first competes with the GLB download; the rest
+    // start once the model is in, well before the user can scroll to them.
     const loader = new THREE.TextureLoader();
-    const textures = screens.map((src) => {
-      const t = loader.load(src);
+    const textures: (THREE.Texture | undefined)[] = [];
+    function loadScreen(i: number) {
+      if (textures[i] || !screens[i]) return;
+      const t = loader.load(screens[i]);
       t.colorSpace = THREE.SRGBColorSpace;
       t.flipY = false;
       // The OLED UVs read mirrored for our textures — flip horizontally.
       t.wrapS = THREE.RepeatWrapping;
       t.repeat.x = -1;
       t.offset.x = 1;
-      t.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      return t;
-    });
+      t.anisotropy = renderer!.capabilities.getMaxAnisotropy();
+      textures[i] = t;
+    }
+    loadScreen(0);
 
     // The screen ("OLED") material — resolved once the model has loaded.
     let oledMat: THREE.MeshStandardMaterial | null = null;
     let currentFace = -1;
 
     const gltfLoader = new GLTFLoader();
+    // The GLB is meshopt-compressed (EXT_meshopt_compression), ~2 MB instead
+    // of the 24 MB uncompressed export.
+    gltfLoader.setMeshoptDecoder(MeshoptDecoder);
     gltfLoader.load(
       '/models/iphone-17-pro-max.glb',
       (gltf) => {
@@ -636,9 +662,9 @@ const panels = [
         const mat = mesh.material as THREE.MeshStandardMaterial;
         if (mat && mat.name === 'OLED') {
           oledMat = mat;
-          mat.map = textures[0];
+          mat.map = textures[0] ?? null;
           mat.emissive = new THREE.Color(0xffffff);
-          mat.emissiveMap = textures[0];
+          mat.emissiveMap = textures[0] ?? null;
           mat.emissiveIntensity = 1;
           mat.toneMapped = false;
           mat.needsUpdate = true;
@@ -659,6 +685,8 @@ const panels = [
 
       phone.add(model);
       currentFace = -1; // force a screen refresh on the next frame
+      // Model is in — fetch the remaining screen textures in the background.
+      for (let i = 1; i < faces; i++) loadScreen(i);
       fallback?.style.setProperty('opacity', '0');
       window.dispatchEvent(new Event('phone:ready'));
       },
@@ -678,7 +706,7 @@ const panels = [
     function resize() {
       const w = canvas!.clientWidth;
       const h = canvas!.clientHeight;
-      renderer.setSize(w, h, false);
+      renderer!.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       // Frame the phone a touch smaller on narrow screens.
@@ -737,19 +765,34 @@ const panels = [
       // Swap the screen texture at the nearest panel — this lands on the
       // half-step where the phone faces away, so the change stays hidden.
       const face = Math.round(pp);
-      if (face !== currentFace && textures[face]) {
+      const screenTex = face !== currentFace ? textures[face] : undefined;
+      if (screenTex) {
         currentFace = face;
         if (oledMat) {
-          oledMat.map = textures[face];
-          oledMat.emissiveMap = textures[face];
+          oledMat.map = screenTex;
+          oledMat.emissiveMap = screenTex;
           oledMat.needsUpdate = true;
         }
       }
 
-      renderer.render(scene, camera);
-      requestAnimationFrame(render);
+      renderer!.render(scene, camera);
+      rafId = stageVisible ? requestAnimationFrame(render) : 0;
     }
-    render();
+
+    // Only run the loop while the hero is on screen — otherwise it keeps
+    // burning GPU/battery for the rest of the visit after scrolling past.
+    let rafId = 0;
+    let stageVisible = false;
+    const stageObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !stageVisible) {
+        stageVisible = true;
+        rafId = requestAnimationFrame(render);
+      } else if (!entry.isIntersecting && stageVisible) {
+        stageVisible = false;
+        cancelAnimationFrame(rafId);
+      }
+    });
+    stageObserver.observe(section);
   } else {
     // No WebGL / reduced motion: no model to wait for — release the loader.
     if (document.readyState === 'complete') {
@@ -776,10 +819,14 @@ const panels = [
     const email = scroll.dataset.contactEmail || 'support@amsterdamfuturelabs.com';
     let lastFocus: HTMLElement | null = null;
     let isOpen = false;
+    let hideTimer = 0;
 
     function openContact() {
       if (isOpen) return;
       isOpen = true;
+      // Cancel a still-pending hide from a close within the last 500ms —
+      // otherwise it would fire mid-open and leave the overlay stuck hidden.
+      window.clearTimeout(hideTimer);
       lastFocus = document.activeElement as HTMLElement;
 
       // Bring the phone to its forward-facing, centered pose and hold it there
@@ -810,7 +857,7 @@ const panels = [
       window.dispatchEvent(new Event('contact:close'));
 
       // Hide after the fade-out so it can't be tabbed to.
-      window.setTimeout(() => { overlay!.hidden = true; }, 500);
+      hideTimer = window.setTimeout(() => { overlay!.hidden = true; }, 500);
       lastFocus?.focus();
     }
 
@@ -822,8 +869,31 @@ const panels = [
     closers.forEach((b) => b.addEventListener('click', closeContact));
 
     // Escape closes; click on the backdrop (outside the card) closes too.
+    // Tab is trapped inside the dialog while open — aria-modal alone does
+    // not keep keyboard focus out of the page behind the overlay.
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) closeContact();
+      if (!isOpen) return;
+      if (e.key === 'Escape') {
+        closeContact();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const card = overlay!.querySelector<HTMLElement>('[data-contact-card]');
+      if (!card) return;
+      const focusables = Array.from(
+        card.querySelectorAll<HTMLElement>('button, input, select, textarea, a[href]')
+      ).filter((el) => el.offsetParent !== null); // skips the hidden form/done view
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && (active === first || !card.contains(active))) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && (active === last || !card.contains(active))) {
+        e.preventDefault();
+        first.focus();
+      }
     });
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) closeContact();

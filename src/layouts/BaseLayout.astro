@@ -77,6 +77,10 @@ const siteGraph = {
 };
 
 const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+// Escape "<" so a "</script>" inside the data can never break out of the
+// JSON-LD script tag (harmless to parsers, required for injection safety).
+const toJsonLd = (data: unknown) => JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -119,10 +123,25 @@ const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={imageAlt} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(siteGraph)} />
+    <script type="application/ld+json" set:html={toJsonLd(siteGraph)} />
     {pageJsonLd.map((entry) => (
-      <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+      <script type="application/ld+json" set:html={toJsonLd(entry)} />
     ))}
+
+    <!-- Without JS the preloader is never removed and .reveal content is
+         never shown — undo both so the page stays fully usable. -->
+    <noscript>
+      <style is:inline>
+        #preloader {
+          display: none;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <!-- Loading screen: centered logo + progress bar, hidden once ready. -->
@@ -306,27 +325,36 @@ const pageJsonLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
       }
 
       // ---------- FAQ accordion: smooth open/close ----------
-      document.querySelectorAll<HTMLElement>('[data-accordion] details').forEach((details) => {
+      document.querySelectorAll<HTMLDetailsElement>('[data-accordion] details').forEach((details) => {
         const summary = details.querySelector('summary');
         const content = details.querySelector<HTMLElement>('.faq-answer');
         if (!summary || !content) return;
+
+        // While the close animation runs, details.open is still true — track
+        // it so a click mid-close reopens instead of closing a second time.
+        let closing: Animation | null = null;
 
         summary.addEventListener('click', (e) => {
           if (reduceMotion) return; // let native toggle handle it
           e.preventDefault();
 
-          if (details.open) {
-            const closing = content.animate(
+          if (details.open && !closing) {
+            closing = content.animate(
               { height: [`${content.offsetHeight}px`, '0px'], opacity: [1, 0] },
               { duration: 280, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
             );
             closing.onfinish = () => {
+              closing = null;
               details.open = false;
             };
           } else {
+            // Reopen from the current rendered height if a close was running.
+            const from = closing ? `${content.offsetHeight}px` : '0px';
+            closing?.cancel();
+            closing = null;
             details.open = true;
             content.animate(
-              { height: ['0px', `${content.scrollHeight}px`], opacity: [0, 1] },
+              { height: [from, `${content.scrollHeight}px`], opacity: [0, 1] },
               { duration: 320, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
             );
           }

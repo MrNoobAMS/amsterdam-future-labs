@@ -22,7 +22,7 @@ const {
 // link that merely looks dimmed.
 const Tag = disabled ? 'button' : 'a';
 const tagProps = disabled
-  ? { type: 'button', disabled: true }
+  ? { type: 'button' as const, disabled: true }
   : { href };
 ---
 

@@ -522,6 +522,13 @@ export const apps: AppMeta[] = [
   },
 ];
 
-export function getApp(slug: string): AppMeta | undefined {
-  return apps.find((a) => a.slug === slug);
+/** Look up an app by slug; throws at build time on a typo instead of letting
+ * `undefined` surface as a cryptic error somewhere down the template. */
+export function getApp(slug: string): AppMeta {
+  const app = apps.find((a) => a.slug === slug);
+  if (!app) {
+    const known = apps.map((a) => a.slug).join(', ');
+    throw new Error(`Unknown app slug "${slug}" — known slugs: ${known}`);
+  }
+  return app;
 }
