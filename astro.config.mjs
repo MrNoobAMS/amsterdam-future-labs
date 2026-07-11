@@ -9,6 +9,9 @@ export default defineConfig({
   site: 'https://amsterdamfuturelabs.com',
   integrations: [
     sitemap({
+      // Unlisted app-privacy pages: reachable via direct URL (required by the
+      // App Store / AdMob) but not part of the public portfolio.
+      filter: (page) => !page.includes('/privacy/bo2-companion'),
       serialize(item) {
         item.lastmod = LASTMOD;
         // Home and app detail pages are the most important; legal/utility

@@ -1,0 +1,149 @@
+---
+// Standalone privacy policy for the BO2 Companion iOS app.
+// Deliberately NOT linked from anywhere on the site and excluded from the
+// sitemap (see astro.config.mjs): the app is not part of the public
+// portfolio, this page only exists as the privacy-policy URL required by
+// App Store Connect and Google AdMob.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SUPPORT_EMAIL } from '../../data/apps';
+
+const EFFECTIVE_DATE = 'July 11, 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy — BO2 Companion"
+  description="Privacy policy for the BO2 Companion iOS app: what is stored on your device, how advertising works, and the choices you have."
+>
+  <PageHero
+    eyebrow="Privacy Policy"
+    title="BO2 Companion"
+    lead={`How the BO2 Companion iOS app (“Companion for Black Ops 2”) handles your data. Effective ${EFFECTIVE_DATE}.`}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="legal-prose">
+        <h2 class="h2">Summary</h2>
+        <p>
+          BO2 Companion stores your tracking progress on your device and nowhere else. We — Amsterdam
+          Future Labs — do not operate servers for this app, do not require an account, and do not use
+          analytics. The free version shows advertising served by Google AdMob, which involves limited
+          data processing by Google as described below. A one-time in-app purchase removes all
+          advertising, and with it all ad-related data processing.
+        </p>
+
+        <h2 class="h2">Data stored on your device</h2>
+        <p>
+          Your camo challenge progress, theme and language preferences are saved locally on your device.
+          This data never leaves your device, is not visible to us, and is deleted completely when you
+          delete the app.
+        </p>
+
+        <h2 class="h2">Advertising (free version)</h2>
+        <p>
+          The free version of the app shows banner and interstitial ads served by Google AdMob, a
+          third-party advertising service provided by Google. To serve ads, measure their performance and
+          prevent fraud, Google may collect and process data from your device, including:
+        </p>
+        <ul>
+          <li>Device identifiers (such as the advertising identifier, where you have permitted this)</li>
+          <li>IP address and coarse, non-precise location derived from it</li>
+          <li>Ad interaction data (which ads were shown, viewed or tapped)</li>
+          <li>General device information (model, operating system version, language)</li>
+        </ul>
+        <p>
+          We do not receive or store any of this data ourselves. How Google uses this data is described in
+          the <a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a> and in
+          <a href="https://policies.google.com/technologies/partner-sites" rel="noopener"
+            >How Google uses information from sites or apps that use its services</a
+          >.
+        </p>
+
+        <h2 class="h2">Your consent choices (EEA, UK and Switzerland)</h2>
+        <p>
+          If you are in the European Economic Area, the United Kingdom or Switzerland, the app asks for
+          your consent before any advertising is loaded, using Google’s consent framework. You can choose
+          not to receive personalised advertising — the app then shows non-personalised ads instead. You
+          can review or change your choice at any time via <em>Profile → Ad preferences</em> inside the
+          app.
+        </p>
+
+        <h2 class="h2">Removing ads</h2>
+        <p>
+          The one-time “Remove ads” purchase permanently disables all advertising, including the
+          advertising data processing described above. The purchase is processed entirely by Apple through
+          the App Store; we do not receive your name, payment details or any other personal information.
+          The purchase can be restored on any device signed in to the same Apple Account.
+        </p>
+
+        <h2 class="h2">What we do not do</h2>
+        <ul>
+          <li>No accounts, sign-ups or passwords</li>
+          <li>No analytics or usage tracking by us</li>
+          <li>No servers of ours receiving your data</li>
+          <li>No selling or sharing of personal data by us</li>
+        </ul>
+
+        <h2 class="h2">Children</h2>
+        <p>
+          The app is not directed at children under 13, and we do not knowingly collect personal
+          information from children.
+        </p>
+
+        <h2 class="h2">Changes to this policy</h2>
+        <p>
+          If the app’s data practices change — for example in a future update — we will update this page
+          and the effective date above before the change takes effect.
+        </p>
+
+        <h2 class="h2">Contact</h2>
+        <p>
+          Questions about privacy? Email us at
+          <a href={`mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent('BO2 Companion privacy question')}`}
+            >{SUPPORT_EMAIL}</a
+          >. We answer personally, in plain language.
+        </p>
+
+        <p class="legal-note">
+          BO2 Companion is an unofficial fan app. It is not affiliated with, endorsed by, or sponsored by
+          Activision. Call of Duty and Black Ops are trademarks of Activision Publishing, Inc.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-prose {
+    max-width: 46rem;
+    margin-inline: auto;
+  }
+  .legal-prose .h2 {
+    font-size: 1.35rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-prose .h2:first-child {
+    margin-top: 0;
+  }
+  .legal-prose p,
+  .legal-prose li {
+    line-height: 1.7;
+  }
+  .legal-prose ul {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.4rem;
+    margin-block: 0.75rem;
+  }
+  .legal-prose a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-note {
+    margin-top: 3rem;
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+</style>
