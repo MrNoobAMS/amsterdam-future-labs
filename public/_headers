@@ -15,5 +15,17 @@
   Cache-Control: public, max-age=604800
 
 # HTML: always revalidate so content updates ship immediately.
+# Plus security hardening for every response:
+#  - CSP: alles komt van de eigen origin; inline scripts/styles zijn nodig
+#    (Astro inlinet CSS en de preloader/JSON-LD zijn inline scripts);
+#    'wasm-unsafe-eval' is nodig voor de meshopt-decoder van het 3D-model.
+#  - HSTS: dwing HTTPS af voor een jaar, inclusief subdomeinen.
+#  - frame-ancestors/X-Frame-Options: voorkom clickjacking via iframes.
 /*
   Cache-Control: public, max-age=0, must-revalidate
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
