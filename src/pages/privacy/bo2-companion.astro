@@ -8,7 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import { SUPPORT_EMAIL } from '../../data/apps';
 
-const EFFECTIVE_DATE = 'July 11, 2026';
+const EFFECTIVE_DATE = 'July 16, 2026';
 ---
 
 <BaseLayout
@@ -18,7 +18,7 @@ const EFFECTIVE_DATE = 'July 11, 2026';
   <PageHero
     eyebrow="Privacy Policy"
     title="BO2 Companion"
-    lead={`How the BO2 Companion iOS app (“Companion for Black Ops 2”) handles your data. Effective ${EFFECTIVE_DATE}.`}
+    lead={`How the BO2 Companion iOS app (“Camo Tracker for BO2”) handles your data. Effective ${EFFECTIVE_DATE}.`}
   />
 
   <section class="section">
@@ -35,7 +35,7 @@ const EFFECTIVE_DATE = 'July 11, 2026';
 
         <h2 class="h2">Data stored on your device</h2>
         <p>
-          Your camo challenge progress, theme and language preferences are saved locally on your device.
+          Your camo and challenge progress, theme and language preferences are saved locally on your device.
           This data never leaves your device, is not visible to us, and is deleted completely when you
           delete the app.
         </p>
@@ -60,13 +60,23 @@ const EFFECTIVE_DATE = 'July 11, 2026';
           >.
         </p>
 
+        <h2 class="h2">App Tracking Transparency (iOS)</h2>
+        <p>
+          Before any ads are loaded, iOS asks for your permission to track via Apple’s App Tracking
+          Transparency prompt. If you allow tracking, Google AdMob may use your device’s advertising
+          identifier (IDFA) to show ads that are more relevant to you and to measure ad performance
+          across apps and websites owned by other companies. If you decline, the app works exactly the
+          same and simply shows non-personalised ads. You can change your choice at any time in
+          <em>iOS Settings → Privacy &amp; Security → Tracking</em>.
+        </p>
+
         <h2 class="h2">Your consent choices (EEA, UK and Switzerland)</h2>
         <p>
           If you are in the European Economic Area, the United Kingdom or Switzerland, the app asks for
           your consent before any advertising is loaded, using Google’s consent framework. You can choose
           not to receive personalised advertising — the app then shows non-personalised ads instead. You
           can review or change your choice at any time via <em>Profile → Ad preferences</em> inside the
-          app.
+          app. Users in certain US states are shown a similar privacy choice.
         </p>
 
         <h2 class="h2">Removing ads</h2>
