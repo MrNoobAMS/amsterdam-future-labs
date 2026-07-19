@@ -4,11 +4,18 @@
 // zodat three.js (~560 KB) in een eigen chunk terechtkomt die alleen wordt
 // gedownload wanneer de scene ook echt gaat draaien. Bezoekers met
 // prefers-reduced-motion of zonder WebGL laden hem helemaal niet.
+//
+// De choreografie (hero → één rotatie → zoom de display in → fullscreen →
+// zoom uit → app-showcase) leeft in scroll-timeline.ts; dit bestand bouwt de
+// scene, voert de timeline uit en projecteert het scherm naar CSS-variabelen
+// zodat de DOM-laag (fullscreen slides + contactformulier) er pixel-precies
+// aan vast zit.
 
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
+import { boundaries, compute } from './scroll-timeline';
 
 // Context creation throws on browsers/devices without WebGL — treat that the
 // same as reduced motion (static fallback image + release the preloader)
@@ -40,6 +47,9 @@ export function initPhoneScene(
 
   const screens: string[] = JSON.parse(section.dataset.screens || '[]');
   const faces = screens.length;
+  const slideCount = parseInt(section.dataset.fsSlides || '0', 10);
+  // Face 0 is the company/hero screen; the rest are the showcase apps.
+  const B = boundaries(slideCount, faces - 1);
 
   // ---------- Renderer / scene / camera ----------
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -59,7 +69,8 @@ export function initPhoneScene(
   let contactZoom = 0;
   let zoomEase = 0;
   // Tell the CSS that WebGL is driving the phone, so the form scales from the
-  // live --contact-zoom value rather than its own fallback transition.
+  // live --contact-zoom value rather than its own fallback transition — and
+  // so the scroll spacers expand to the full cinematic length.
   section.dataset.phoneLive = 'true';
   window.addEventListener('contact:open', () => { contactZoom = 1; });
   window.addEventListener('contact:close', () => { contactZoom = 0; });
@@ -104,9 +115,27 @@ export function initPhoneScene(
   }
   loadScreen(0);
 
-  // The screen ("OLED") material — resolved once the model has loaded.
+  // The screen ("OLED") mesh + material — resolved once the model has loaded.
   let oledMat: THREE.MeshStandardMaterial | null = null;
+  let oledMesh: THREE.Mesh | null = null;
   let currentFace = -1;
+
+  // Display size in world units (measured from the OLED mesh at rest pose),
+  // used to compute how far the camera must dolly to fill the viewport.
+  let screenW = 0;
+  let screenH = 0;
+  let screenZ = 0; // world z of the display surface at rest pose
+  let fullZ = 1; // camera z at zoom = 1 (recomputed on resize)
+
+  function computeFullZ() {
+    if (!screenW) return;
+    const tanY = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+    // Distance at which the display covers the viewport in BOTH dimensions,
+    // then push 18% past it so bezels and Dynamic Island are fully off-screen
+    // before the DOM layer takes over.
+    const dFill = Math.min((screenW / 2) / (tanY * camera.aspect), (screenH / 2) / tanY);
+    fullZ = screenZ + Math.max(dFill * 0.82, camera.near + 0.2);
+  }
 
   const gltfLoader = new GLTFLoader();
   // The GLB is meshopt-compressed (EXT_meshopt_compression), ~2 MB instead
@@ -123,6 +152,7 @@ export function initPhoneScene(
       if (!mesh.isMesh) return;
       const mat = mesh.material as THREE.MeshStandardMaterial;
       if (mat && mat.name === 'OLED') {
+        oledMesh = mesh;
         oledMat = mat;
         mat.map = textures[0] ?? null;
         mat.emissive = new THREE.Color(0xffffff);
@@ -146,6 +176,21 @@ export function initPhoneScene(
     model.position.sub(post.getCenter(new THREE.Vector3()));
 
     phone.add(model);
+
+    // Measure the display at rest pose (group at identity) for the zoom
+    // target; the user may already have scrolled, so reset → measure → the
+    // next render frame restores the live pose anyway.
+    if (oledMesh) {
+      phone.rotation.set(0, 0, 0);
+      phone.position.set(0, 0, 0);
+      phone.updateWorldMatrix(true, true);
+      const box = new THREE.Box3().setFromObject(oledMesh);
+      screenW = box.max.x - box.min.x;
+      screenH = box.max.y - box.min.y;
+      screenZ = box.max.z;
+      computeFullZ();
+    }
+
     currentFace = -1; // force a screen refresh on the next frame
     // Model is in — fetch the remaining screen textures in the background.
     for (let i = 1; i < faces; i++) loadScreen(i);
@@ -173,6 +218,7 @@ export function initPhoneScene(
     camera.updateProjectionMatrix();
     // Frame the phone a touch smaller on narrow screens.
     baseZ = w / h < 0.7 ? 11.5 : 9;
+    computeFullZ();
   }
   resize();
   window.addEventListener('resize', resize);
@@ -181,55 +227,55 @@ export function initPhoneScene(
   fallback?.style.setProperty('transition', 'opacity 0.5s ease');
 
   // ---------- Scroll-driven animation ----------
-  // `pp` is a floating panel index: 0 when panel 0 is centered, 1 for panel
-  // 1, etc. Derived straight from the section's viewport offset, so the
-  // phone faces forward with the matching app exactly when a panel centers.
-  const N = faces;
-  let targetPP = 0;
-  let smoothPP = 0;
+  // `P` counts viewports scrolled into the section; the timeline module maps
+  // it to phone pose, camera zoom and DOM-layer state. Derived straight from
+  // the section's viewport offset, so scrolling up reverses everything and
+  // pausing/resuming the loop continues from the exact same progress.
+  let targetP = 0;
+  let smoothP = 0;
 
-  function computePP() {
+  function computeP() {
     const rect = section.getBoundingClientRect();
-    const pp = -rect.top / window.innerHeight;
-    return Math.min(Math.max(pp, 0), N - 1);
+    const p = -rect.top / window.innerHeight;
+    return Math.min(Math.max(p, 0), B.end);
   }
 
   function onScroll() {
-    targetPP = computePP();
-    if (hint) hint.classList.toggle('is-hidden', targetPP > 0.06);
-    if (heroCta) heroCta.classList.toggle('is-hidden', targetPP > 0.03);
+    targetP = computeP();
+    if (hint) hint.classList.toggle('is-hidden', targetP > 0.06);
+    if (heroCta) heroCta.classList.toggle('is-hidden', targetP > 0.03);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
-  smoothPP = targetPP;
+  smoothP = targetP;
+
+  // Screen → viewport projection scratch objects (no per-frame allocations).
+  const projBox = new THREE.Box3();
+  const projA = new THREE.Vector3();
+  const projB = new THREE.Vector3();
+  const layerStyle = section.style;
 
   function render() {
     // Inertia: ease toward the target for weight / momentum.
-    smoothPP += (targetPP - smoothPP) * 0.09;
-    const pp = smoothPP;
-    const norm = N > 1 ? pp / (N - 1) : 0; // 0..1 across the whole scroll
+    smoothP += (targetP - smoothP) * 0.09;
+    const tl = compute(smoothP, B, faces - 1);
 
-    // One full turn between adjacent panels → faces forward at each panel.
-    phone.rotation.y = pp * Math.PI * 2;
-    // Gentle secondary motion for depth.
-    phone.rotation.x = Math.sin(pp * Math.PI) * 0.1;
-    phone.rotation.z = Math.sin(pp * Math.PI * 0.5) * 0.05;
-    // Translate down + drift as you scroll through the section.
-    phone.position.y = 0.4 - norm * 1.0;
-    phone.position.x = Math.sin(norm * Math.PI) * 0.45;
+    phone.rotation.set(tl.rotX, tl.rotY, tl.rotZ);
+    phone.position.set(tl.posX, tl.posY, 0);
 
-    // Ease the camera toward the phone when the contact form opens (zoom in).
+    // Camera: scroll-driven dolly into the display, composed with the
+    // contact-form zoom (which only plays at the top, where tl.zoom is 0).
     zoomEase += (contactZoom - zoomEase) * 0.08;
-    camera.position.z = baseZ * (1 - zoomEase * 0.34);
+    camera.position.z =
+      (baseZ + (fullZ - baseZ) * tl.zoom) * (1 - zoomEase * 0.34);
     // Publish the zoom so the on-screen form can scale in lockstep with it.
-    section.style.setProperty('--contact-zoom', zoomEase.toFixed(3));
+    layerStyle.setProperty('--contact-zoom', zoomEase.toFixed(3));
 
-    // Swap the screen texture at the nearest panel — this lands on the
-    // half-step where the phone faces away, so the change stays hidden.
-    const face = Math.round(pp);
-    const screenTex = face !== currentFace ? textures[face] : undefined;
+    // Swap the OLED texture — the timeline only changes `face` while the
+    // screen is hidden (facing away, or covered by the fullscreen layer).
+    const screenTex = tl.face !== currentFace ? textures[tl.face] : undefined;
     if (screenTex) {
-      currentFace = face;
+      currentFace = tl.face;
       if (oledMat) {
         oledMat.map = screenTex;
         oledMat.emissiveMap = screenTex;
@@ -237,12 +283,58 @@ export function initPhoneScene(
       }
     }
 
-    renderer.render(scene, camera);
+    // ---------- DOM screen layer sync ----------
+    // During the zoom the phone is exactly forward, so the display projects
+    // to an axis-aligned rectangle; publish it as CSS vars and the fullscreen
+    // layer (ScrollPhone.astro) stays glued to the glass, both directions.
+    let covered = false;
+    if (tl.zoom > 0.3 && oledMesh) {
+      camera.updateMatrixWorld();
+      projBox.setFromObject(oledMesh);
+      projA.set(projBox.min.x, projBox.min.y, projBox.max.z).project(camera);
+      projB.set(projBox.max.x, projBox.max.y, projBox.max.z).project(camera);
+      const vw = canvas.clientWidth;
+      const vh = canvas.clientHeight;
+      const x1 = (projA.x * 0.5 + 0.5) * vw;
+      const x2 = (projB.x * 0.5 + 0.5) * vw;
+      const y1 = (-projA.y * 0.5 + 0.5) * vh; // bottom edge in px
+      const y2 = (-projB.y * 0.5 + 0.5) * vh; // top edge in px
+      const w = Math.abs(x2 - x1);
+      const h = Math.abs(y1 - y2);
+      layerStyle.setProperty('--screen-w', w.toFixed(1));
+      layerStyle.setProperty('--screen-h', h.toFixed(1));
+      layerStyle.setProperty('--screen-cx', ((x1 + x2) / 2).toFixed(1));
+      layerStyle.setProperty('--screen-cy', ((y1 + y2) / 2).toFixed(1));
+      // Display corner radius ≈ 5% of its width; corners scroll off-screen
+      // naturally once the rect outgrows the viewport.
+      layerStyle.setProperty('--screen-r', (w * 0.05).toFixed(1));
+      // Content is authored at viewport size and scaled down with the glass;
+      // it lands at exactly 1:1 the moment the display fills the width.
+      layerStyle.setProperty('--screen-k', Math.min(w / vw, 1).toFixed(4));
+      layerStyle.setProperty('--screen-o', tl.layerOpacity.toFixed(3));
+      layerStyle.setProperty(
+        '--fs-shift',
+        (-tl.fs * Math.max(slideCount - 1, 0) * vh).toFixed(1)
+      );
+      covered = tl.layerOpacity >= 1 && w >= vw && h >= vh;
+    } else {
+      layerStyle.setProperty('--screen-o', '0');
+    }
+
+    // While the DOM layer fully covers the viewport there is nothing of the
+    // 3D scene to see — skip the GPU work but keep the loop ticking so the
+    // scroll inertia and CSS vars stay live for the reverse journey.
+    if (!covered) renderer.render(scene, camera);
     rafId = stageVisible ? requestAnimationFrame(render) : 0;
   }
 
   // Only run the loop while the hero is on screen — otherwise it keeps
   // burning GPU/battery for the rest of the visit after scrolling past.
+  // On exit, snap the smoothed progress to the real scroll position and draw
+  // one last frame: the inertia may still be mid-journey (e.g. after a fast
+  // scroll out of the fullscreen stretch), and without this the fixed screen
+  // layer could freeze at a stale opacity over the content below. Re-entry
+  // resumes from this exact progress — never a restart.
   let rafId = 0;
   let stageVisible = false;
   const stageObserver = new IntersectionObserver(([entry]) => {
@@ -252,6 +344,9 @@ export function initPhoneScene(
     } else if (!entry.isIntersecting && stageVisible) {
       stageVisible = false;
       cancelAnimationFrame(rafId);
+      targetP = computeP();
+      smoothP = targetP;
+      render();
     }
   });
   stageObserver.observe(section);
